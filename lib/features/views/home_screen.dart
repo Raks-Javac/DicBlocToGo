@@ -92,7 +92,7 @@ class WordsList extends StatelessWidget {
               title: Text(e.word),
               subtitle: Text("Meaning count : ${e.meanings.length}"),
               onTap: () {
-                context.go(detailsRoute);
+                context.go(initialHomeRoute + detailsRoute);
               },
             );
           })
