@@ -17,7 +17,8 @@ class WordReposity {
             searchWordModelResponseFromJson(searchWordRequest.body);
         return Right(wordresponse);
       }
-      return Left(CustomRequestErrorHandler(""));
+      return Left(CustomRequestErrorHandler(
+          "Sorry pal, we couldn't find definitions for the word you were looking for."));
     } catch (e) {
       return Left(CustomRequestErrorHandler(e.toString()));
     }

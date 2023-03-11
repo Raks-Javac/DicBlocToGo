@@ -119,7 +119,13 @@ class ErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text(erroMessage ?? "Word not found"));
+    return Center(
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              erroMessage ?? "Word not found",
+              textAlign: TextAlign.center,
+            )));
   }
 }
 
@@ -138,6 +144,9 @@ class NoWordsSearchedYet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-        child: Text("Type in the word you would like to search"));
+        child: Text(
+      "Type in the word you would like to search",
+      textAlign: TextAlign.center,
+    ));
   }
 }

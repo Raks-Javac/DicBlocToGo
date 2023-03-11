@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 const String initialHomeRoute = '/';
-const String detailsRoute = '/details';
+const String detailsRoute = 'details';
 
 class DRouterClass {
   DRouterClass._();
