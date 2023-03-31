@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1078975904840-rfbb62nmacko4foj7bol4fv3a40vhkh7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1078975904840-rfbb62nmacko4foj7bol4fv3a40vhkh7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAKE4a-_nkrt7QndwMJNI0f67Z58pvsOoI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1078975904840</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>rushpathdriver.appId.com</string>
+	<key>PROJECT_ID</key>
+	<string>rushpath-7564e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>rushpath-7564e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1078975904840:ios:b7b679c219e08b122d2c7d</string>
+	<key>DATABASE_URL</key>
+	<string>https://rushpath-7564e-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
