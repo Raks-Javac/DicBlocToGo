@@ -40,13 +40,13 @@ flutter:
 
 
   fonts:
-    - family: PBold
+    - family: RBold
       fonts:
-        - asset: assets/fonts/Poppins-Bold.ttf
-    - family: PMedium
+        - asset: assets/fonts/Roboto-Bold.ttf
+    - family: RMedium
       fonts:
-        - asset: assets/fonts/Poppins-Medium.ttf
-    - family: PLight
+        - asset: assets/fonts/Roboto-Medium.ttf
+    - family: RLight
       fonts:
-        - asset: assets/fonts/Poppins-Light.ttf
+        - asset: assets/fonts/Roboto-Light.ttf
  
