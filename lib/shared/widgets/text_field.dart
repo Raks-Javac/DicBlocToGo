@@ -32,72 +32,68 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (label != null)
-            Text(
-              label ?? "",
-              style: theme.textTheme.bodyMedium,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (label != null)
+          Text(
+            label ?? "",
+            style: context.appTheme.textTheme.bodyMedium,
+          ),
+        addVerticalSpacing(4),
+        SizedBox(
+          // height: maxLength != null ? 9.h : 7.h,
+          width: double.infinity,
+          child: TextFormField(
+            controller: textEditingController,
+            maxLength: maxLength,
+            onTap: onTap,
+            onChanged: (text) {
+              if (onChanged != null) onChanged!(text);
+            },
+            cursorColor: DColors.white,
+            keyboardType: keyboardType,
+            obscureText: obscureText,
+            inputFormatters: [
+              formatter ?? FilteringTextInputFormatter.singleLineFormatter
+            ],
+            maxLengthEnforcement: MaxLengthEnforcement.enforced,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: validator,
+            style: context.appTheme.textTheme.bodyMedium!.copyWith(
+              color: DColors.white,
+              fontSize: 12.0,
             ),
-          addVerticalSpacing(4),
-          SizedBox(
-            // height: maxLength != null ? 9.h : 7.h,
-            width: double.infinity,
-            child: TextFormField(
-              controller: textEditingController,
-              maxLength: maxLength,
-              onTap: onTap,
-              onChanged: (text) {
-                if (onChanged != null) onChanged!(text);
-              },
-              cursorColor: DColors.white,
-              keyboardType: keyboardType,
-              obscureText: obscureText,
-              inputFormatters: [
-                formatter ?? FilteringTextInputFormatter.singleLineFormatter
-              ],
-              maxLengthEnforcement: MaxLengthEnforcement.enforced,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: validator,
-              style: theme.textTheme.bodyMedium!.copyWith(
-                color: DColors.white,
-                fontSize: 12.0,
-              ),
-              readOnly: shouldReadOnly,
-              decoration: InputDecoration(
-                  fillColor: Colors.grey.withOpacity(0.20),
-                  filled: true,
-                  counterText: "",
-                  hintText: hintText,
-                  hintStyle: theme.textTheme.bodyMedium!
-                      .copyWith(color: DColors.white.withOpacity(0.4)),
-                  contentPadding: const EdgeInsets.only(
-                    left: 8.0,
-                    top: 19.0,
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: DColors.white, width: 1.5),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: DColors.white.withOpacity(0), width: 0),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(5.0))),
-                  focusedErrorBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: DColors.redAccent, width: 1.5),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                  errorBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: DColors.redAccent, width: 1.5),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)))),
-            ),
-          )
-        ],
-      ),
+            readOnly: shouldReadOnly,
+            decoration: InputDecoration(
+                fillColor: Colors.grey.withOpacity(0.20),
+                filled: true,
+                counterText: "",
+                hintText: hintText,
+                hintStyle: context.appTheme.textTheme.bodyMedium!
+                    .copyWith(color: DColors.white.withOpacity(0.4)),
+                contentPadding: const EdgeInsets.only(
+                  left: 8.0,
+                  top: 19.0,
+                ),
+                focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: DColors.white, width: 1.5),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: DColors.white.withOpacity(0), width: 0),
+                    borderRadius: const BorderRadius.all(Radius.circular(5.0))),
+                focusedErrorBorder: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: DColors.redAccent, width: 1.5),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                errorBorder: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: DColors.redAccent, width: 1.5),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)))),
+          ),
+        )
+      ],
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:dict_app/core/navigation/go_router.dart';
-import 'package:dict_app/features/blocs/words_bloc.dart';
-import 'package:dict_app/features/data/models/search_word_model.dart';
+import 'package:dict_app/features/home/blocs/words_bloc.dart';
+import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class DictionaryHome extends StatelessWidget {
-  const DictionaryHome({super.key});
+class DictionaryHomeView extends StatelessWidget {
+  const DictionaryHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +92,7 @@ class WordsList extends StatelessWidget {
               title: Text(e.word),
               subtitle: Text("Meaning count : ${e.meanings.length}"),
               onTap: () {
-                context.go(initialHomeRoute + detailsRoute);
+                context.go("$dictionaryHomeRoute/$detailsRoute");
               },
             );
           })

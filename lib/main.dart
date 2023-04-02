@@ -1,6 +1,6 @@
 import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/navigation/go_router.dart';
-import 'package:dict_app/features/blocs/words_bloc.dart';
+import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +23,7 @@ class DictionaryApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
+        scaffoldMessengerKey: DRouterClass.scaffoldMessengerKey,
         title: PStrings.appName,
         theme: DictTheme.lightMode,
         routerConfig: DRouterClass.routerInstance.router,

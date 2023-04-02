@@ -1,5 +1,5 @@
-import 'package:dict_app/features/data/models/search_word_model.dart';
-import 'package:dict_app/features/repository/words_repository.dart';
+import 'package:dict_app/features/home/data/models/search_word_model.dart';
+import 'package:dict_app/features/home/repository/words_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,6 +1,6 @@
 import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/network/custom_error_handler.dart';
-import 'package:dict_app/features/data/models/search_word_model.dart';
+import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:either_option/either_option.dart';
 
 class WordReposity {
