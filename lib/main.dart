@@ -7,11 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'shared/res/res.dart';
 
 void main() {
-  runApp(const DictionaryApp());
+  runApp(const KnowMoreApp());
 }
 
-class DictionaryApp extends StatelessWidget {
-  const DictionaryApp({super.key});
+class KnowMoreApp extends StatelessWidget {
+  const KnowMoreApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,7 @@ class DictionaryApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         scaffoldMessengerKey: DRouterClass.scaffoldMessengerKey,
         title: PStrings.appName,
         theme: DictTheme.lightMode,

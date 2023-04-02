@@ -1,4 +1,5 @@
 import 'package:dict_app/core/navigation/go_router.dart';
+import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/shared/res/res.dart';
@@ -20,40 +21,55 @@ class DictionaryHomeView extends StatelessWidget {
         bloc: cubit,
         builder: (context, state) {
           return Scaffold(
-              body: Column(
-            children: [
-              Container(
-                color: Colors.black,
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    addVerticalSpacing(25),
-                    const Text(
-                      "Search word",
-                      style: TextStyle(
-                        color: DColors.white,
-                        fontSize: 20,
-                      ),
+              appBar: PWidgetsAppBar(
+                title: "Home",
+                leadingWidget: const SizedBox(),
+                trailingWidgets: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: Image.asset(
+                      nABookMarkIcon,
+                      width: 18,
+                      height: 18,
                     ),
-                    addVerticalSpacing(20),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: PWidgetTextFieldInDarkState(
-                        label: "Enter search word",
-                        onChanged: (val) {
-                          cubit.searchWordOnUI();
-                        },
-                        textEditingController:
-                            cubit.wordSearchTextFieldController,
-                      ),
+                  ),
+                  addHorizontalSpacing(19),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: Image.asset(
+                      nADarkModeIcon,
+                      width: 18,
+                      height: 18,
                     ),
-                    addVerticalSpacing(20),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Expanded(child: returnOnState(state)),
-            ],
-          ));
+              body: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0,
+                      vertical: 10,
+                    ),
+                    child: PWidgetTextFieldInDarkState(
+                      label: "Word",
+                      hintText: "Enter the word you want to search",
+                      onChanged: (val) {
+                        cubit.searchWordOnUI();
+                      },
+                      suffixIcon: UnconstrainedBox(
+                          child: Image.asset(
+                        nASendIcon,
+                        width: 20,
+                        height: 20,
+                      )),
+                      textEditingController:
+                          cubit.wordSearchTextFieldController,
+                    ),
+                  ),
+                  Expanded(child: returnOnState(state)),
+                ],
+              ));
         });
   }
 
@@ -143,10 +159,48 @@ class NoWordsSearchedYet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-        child: Text(
-      "Type in the word you would like to search",
-      textAlign: TextAlign.center,
-    ));
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        children: [
+          addVerticalSpacing(10),
+          Row(
+            children: [
+              const Expanded(child: Text("Recent words")),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  "clear all",
+                  style: context.appTextTheme.bodyMedium?.copyWith(
+                      fontSize: 15,
+                      color: context.appTextTheme.bodyMedium?.color
+                          ?.withOpacity(0.5)),
+                ),
+              )
+            ],
+          ),
+          addVerticalSpacing(6),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  nANoWordFoundHereYet,
+                  width: 200,
+                  height: 200,
+                ),
+                addVerticalSpacing(8),
+                Text(
+                  "You have no word here yet",
+                  style: context.appTextTheme.bodyMedium?.copyWith(
+                    fontSize: 15,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

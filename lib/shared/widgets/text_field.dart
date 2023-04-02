@@ -12,6 +12,7 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
   final TextEditingController? textEditingController;
   final dynamic validator;
   final bool shouldReadOnly;
+  final Widget? suffixIcon;
 
   const PWidgetTextFieldInDarkState({
     super.key,
@@ -26,8 +27,7 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
     this.textEditingController,
     this.validator,
     this.shouldReadOnly = false,
-    trailing,
-    suffixIcon,
+    this.suffixIcon,
   });
 
   @override
@@ -40,7 +40,7 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
             label ?? "",
             style: context.appTheme.textTheme.bodyMedium,
           ),
-        addVerticalSpacing(4),
+        addVerticalSpacing(9),
         SizedBox(
           // height: maxLength != null ? 9.h : 7.h,
           width: double.infinity,
@@ -51,7 +51,8 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
             onChanged: (text) {
               if (onChanged != null) onChanged!(text);
             },
-            cursorColor: DColors.white,
+            cursorColor:
+                context.appTheme.textTheme.bodyMedium!.color!.withOpacity(0.4),
             keyboardType: keyboardType,
             obscureText: obscureText,
             inputFormatters: [
@@ -61,36 +62,46 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: validator,
             style: context.appTheme.textTheme.bodyMedium!.copyWith(
-              color: DColors.white,
+              color: context.appTheme.textTheme.bodyMedium!.color!,
               fontSize: 12.0,
             ),
             readOnly: shouldReadOnly,
             decoration: InputDecoration(
-                fillColor: Colors.grey.withOpacity(0.20),
+                suffixIcon: suffixIcon,
+                fillColor: context.appTheme.scaffoldBackgroundColor,
                 filled: true,
                 counterText: "",
                 hintText: hintText,
-                hintStyle: context.appTheme.textTheme.bodyMedium!
-                    .copyWith(color: DColors.white.withOpacity(0.4)),
+                hintStyle: context.appTheme.textTheme.bodyMedium!.copyWith(
+                  color: context.appTheme.textTheme.bodyMedium?.color
+                      ?.withOpacity(0.5),
+                  fontSize: 12,
+                ),
                 contentPadding: const EdgeInsets.only(
-                  left: 8.0,
+                  left: 15.0,
                   top: 19.0,
                 ),
-                focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: DColors.white, width: 1.5),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: context.appTheme.textTheme.bodyMedium!.color!
+                            .withOpacity(0.4),
+                        width: 1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: DColors.white.withOpacity(0), width: 0),
-                    borderRadius: const BorderRadius.all(Radius.circular(5.0))),
+                        color: context.appTheme.textTheme.bodyMedium!.color!
+                            .withOpacity(0.4),
+                        width: 1.0),
+                    borderRadius:
+                        const BorderRadius.all(Radius.circular(10.0))),
                 focusedErrorBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(color: DColors.redAccent, width: 1.5),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 errorBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(color: DColors.redAccent, width: 1.5),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)))),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)))),
           ),
         )
       ],

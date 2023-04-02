@@ -9,6 +9,7 @@ class PWidgetsButton extends StatelessWidget {
   final TextStyle? textStyle;
 
   const PWidgetsButton({
+    super.key,
     required this.label,
     required this.onPressed,
     this.isEnabled = true,
@@ -36,7 +37,7 @@ class PWidgetsButton extends StatelessWidget {
                         context.appTheme.primaryColor.withOpacity(0.4)
                     : dynamicColor ?? context.appTheme.primaryColor,
                 elevation: 0,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)))),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,10 +46,10 @@ class PWidgetsButton extends StatelessWidget {
                     child: leftIconPath == null
                         ? null
                         : Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Image.asset(leftIconPath!))),
                 Visibility(
-                  replacement: CircularProgressIndicator(
+                  replacement: const CircularProgressIndicator(
                     color: Colors.white,
                   ),
                   visible: true,
