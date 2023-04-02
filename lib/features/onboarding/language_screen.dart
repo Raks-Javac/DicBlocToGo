@@ -1,7 +1,9 @@
+import 'package:dict_app/core/navigation/go_router.dart';
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LanguageView extends StatefulWidget {
   const LanguageView({super.key});
@@ -61,10 +63,32 @@ class _LanguageViewState extends State<LanguageView> {
               ),
               addVerticalSpacing(9),
               PWidgetsDropDown(
-                items: const ["English"],
+                items: const [
+                  "English",
+                  "Chinese",
+                  "Portugese",
+                ],
+                suffixIcon: UnconstrainedBox(
+                  child: Image.asset(
+                    nADropDownIcon,
+                    width: 17,
+                    height: 17,
+                  ),
+                ),
                 hintText: "Select your preferred language",
                 onChanged: (dynamic val) {},
-              )
+              ),
+
+              addVerticalSpacing(40),
+
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: PWidgetsButton(
+                    label: "Done",
+                    onPressed: () {
+                      GoRouter.of(context).pushReplacement(dictionaryHomeRoute);
+                    }),
+              ),
             ],
           ),
         ),

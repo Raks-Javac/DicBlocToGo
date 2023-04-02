@@ -29,6 +29,7 @@ class PWidgetsDropDown extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         DropdownButtonFormField<dynamic>(
+          isExpanded: true,
           icon: const SizedBox(),
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
@@ -36,23 +37,26 @@ class PWidgetsDropDown extends StatelessWidget {
             contentPadding: const EdgeInsets.symmetric(horizontal: 15),
             border: OutlineInputBorder(
               gapPadding: 2,
-              borderSide: BorderSide(
-                width: 1.5,
-                color: context.appTextTheme.bodyLarge!.color!,
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                width: 1,
+                color: DColors.primaryColor,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               gapPadding: 0,
-              borderSide: BorderSide(
-                width: 1.5,
-                color: context.appTextTheme.bodyLarge!.color!,
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                width: 1,
+                color: DColors.primaryColor,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               gapPadding: 0,
-              borderSide: BorderSide(
-                width: 1.5,
-                color: context.appTextTheme.bodyLarge!.color!,
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                width: 1,
+                color: DColors.primaryColor,
               ),
             ),
           ),

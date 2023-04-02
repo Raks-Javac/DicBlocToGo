@@ -5,11 +5,11 @@ abstract class PTypo {
 
   static TextStyle smallTextStyle = const TextStyle(
     fontFamily: PStrings.mediumFontName,
-    fontSize: 9,
+    fontSize: 11,
   );
   static TextStyle mediumTextStyle = const TextStyle(
     fontFamily: PStrings.mediumFontName,
-    fontSize: 12,
+    fontSize: 15,
   );
   static TextStyle largeTextStyle = const TextStyle(
     fontFamily: PStrings.mediumFontName,

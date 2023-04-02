@@ -16,7 +16,8 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-      context.go("$initialHomeRoute$languageViewRoute");
+      GoRouter.maybeOf(context)
+          ?.pushReplacement("$initialHomeRoute$languageViewRoute");
     });
     super.initState();
   }
