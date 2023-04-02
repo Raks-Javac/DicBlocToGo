@@ -26,7 +26,7 @@ class KnowMoreApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         scaffoldMessengerKey: DRouterClass.scaffoldMessengerKey,
         title: PStrings.appName,
-        theme: DictTheme.lightMode,
+        theme: DictTheme.darkMode,
         routerConfig: DRouterClass.routerInstance.router,
       ),
     );

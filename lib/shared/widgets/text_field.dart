@@ -86,7 +86,8 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
                         color: context.appTheme.textTheme.bodyMedium!.color!
                             .withOpacity(0.4),
                         width: 1.0),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                    borderRadius:
+                        const BorderRadius.all(Radius.circular(10.0))),
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                         color: context.appTheme.textTheme.bodyMedium!.color!

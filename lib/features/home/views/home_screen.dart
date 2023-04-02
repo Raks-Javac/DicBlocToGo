@@ -1,4 +1,4 @@
-import 'package:dict_app/core/navigation/go_router.dart';
+import 'package:dict_app/core/utils/constants.dart';
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
@@ -7,7 +7,6 @@ import 'package:dict_app/shared/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class DictionaryHomeView extends StatelessWidget {
   const DictionaryHomeView({super.key});
@@ -22,17 +21,23 @@ class DictionaryHomeView extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
               appBar: PWidgetsAppBar(
-                title: "Home",
-                leadingWidget: const SizedBox(),
+                title: cubit.wordSearchTextFieldController.text.isNotEmpty
+                    ? "Search"
+                    : "Home",
+                leadingWidget:
+                    cubit.wordSearchTextFieldController.text.isNotEmpty
+                        ? null
+                        : const SizedBox(),
                 trailingWidgets: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10.0),
-                    child: Image.asset(
-                      nABookMarkIcon,
-                      width: 18,
-                      height: 18,
+                  if (cubit.wordSearchTextFieldController.text.isEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Image.asset(
+                        nABookMarkIcon,
+                        width: 18,
+                        height: 18,
+                      ),
                     ),
-                  ),
                   addHorizontalSpacing(19),
                   Padding(
                     padding: const EdgeInsets.only(right: 20.0),
@@ -44,31 +49,39 @@ class DictionaryHomeView extends StatelessWidget {
                   ),
                 ],
               ),
-              body: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 10,
-                    ),
-                    child: PWidgetTextFieldInDarkState(
-                      label: "Word",
-                      hintText: "Enter the word you want to search",
-                      onChanged: (val) {
-                        cubit.searchWordOnUI();
-                      },
-                      suffixIcon: UnconstrainedBox(
-                          child: Image.asset(
-                        nASendIcon,
-                        width: 20,
-                        height: 20,
-                      )),
-                      textEditingController:
-                          cubit.wordSearchTextFieldController,
-                    ),
+              body: SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0,
+                          vertical: 10,
+                        ),
+                        child: PWidgetTextFieldInDarkState(
+                          label: "Word",
+                          hintText: "Enter the word you want to search",
+                          onChanged: (val) {
+                            cubit.searchWordOnUI();
+                          },
+                          suffixIcon: UnconstrainedBox(
+                              child: ImageIcon(
+                            const AssetImage(
+                              nASendIcon,
+                            ),
+                            size: 18,
+                            color: context.appTextTheme.bodyLarge!.color,
+                          )),
+                          textEditingController:
+                              cubit.wordSearchTextFieldController,
+                        ),
+                      ),
+                      returnOnState(state)
+                    ],
                   ),
-                  Expanded(child: returnOnState(state)),
-                ],
+                ),
               ));
         });
   }
@@ -99,18 +112,20 @@ class WordsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
       child: Column(
         children: [
           ...words.map((e) {
-            return ListTile(
-              leading: const Icon(Icons.book),
-              title: Text(e.word),
-              subtitle: Text("Meaning count : ${e.meanings.length}"),
-              onTap: () {
-                context.go("$dictionaryHomeRoute/$detailsRoute");
-              },
-            );
+            // return ListTile(
+            //   leading: const Icon(Icons.book),
+            //   title: Text(e.word),
+            //   subtitle: Text("Meaning count : ${e.meanings.length}"),
+            //   onTap: () {
+            //     context.go("$dictionaryHomeRoute/$detailsRoute");
+            //   },
+            // );
+            return PWidgetsWordTile(onTap: () {}, title: e.word.toString());
           })
         ],
       ),
@@ -123,8 +138,13 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: CupertinoActivityIndicator(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 90),
+      child: Center(
+        child: CupertinoActivityIndicator(
+          color: context.appTextTheme.bodyLarge!.color!,
+        ),
+      ),
     );
   }
 }
@@ -137,7 +157,7 @@ class ErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 90),
             child: Text(
               erroMessage ?? "Word not found",
               textAlign: TextAlign.center,
@@ -167,21 +187,22 @@ class NoWordsSearchedYet extends StatelessWidget {
           Row(
             children: [
               const Expanded(child: Text("Recent words")),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  "clear all",
-                  style: context.appTextTheme.bodyMedium?.copyWith(
-                      fontSize: 15,
-                      color: context.appTextTheme.bodyMedium?.color
-                          ?.withOpacity(0.5)),
-                ),
-              )
+              if (AppConstants.recentWordList.isNotEmpty)
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "clear all",
+                    style: context.appTextTheme.bodyMedium?.copyWith(
+                        fontSize: 15,
+                        color: context.appTextTheme.bodyMedium?.color
+                            ?.withOpacity(0.5)),
+                  ),
+                )
             ],
           ),
-          addVerticalSpacing(6),
-          Expanded(
-            child: Column(
+          if (AppConstants.recentWordList.isEmpty) addVerticalSpacing(40),
+          if (AppConstants.recentWordList.isEmpty)
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
@@ -198,7 +219,13 @@ class NoWordsSearchedYet extends StatelessWidget {
                 )
               ],
             ),
-          ),
+          if (AppConstants.recentWordList.isNotEmpty)
+            ...AppConstants.recentWordList.map((e) {
+              return PWidgetsWordTile(
+                title: e.word.toString(),
+                onTap: () {},
+              );
+            })
         ],
       ),
     );

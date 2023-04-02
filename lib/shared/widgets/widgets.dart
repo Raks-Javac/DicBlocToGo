@@ -8,3 +8,4 @@ part 'app_bar.dart';
 part 'button.dart';
 part "drop_down.dart";
 part 'text_field.dart';
+part 'word_tile.dart';
