@@ -38,7 +38,7 @@ abstract class DictTheme {
   static ThemeData get darkMode {
     return ThemeData(
         primaryColor: DColors.primaryColor,
-        scaffoldBackgroundColor: DColors.white,
+        scaffoldBackgroundColor: DColors.darkBAckgroundColor,
         primaryColorDark: DColors.primaryColor,
         fontFamily: PStrings.mediumFontName,
         bottomSheetTheme: const BottomSheetThemeData(
@@ -48,24 +48,21 @@ abstract class DictTheme {
           topRight: Radius.circular(20),
         ))),
         textTheme: TextTheme(
-          bodySmall: PTypo.smallTextStyle,
-          bodyMedium: PTypo.mediumTextStyle,
-          bodyLarge: PTypo.largeTextStyle,
+          bodySmall: PTypo.smallTextStyle.copyWith(color: DColors.white),
+          bodyMedium: PTypo.mediumTextStyle.copyWith(color: DColors.white),
+          bodyLarge: PTypo.largeTextStyle.copyWith(color: DColors.white),
           labelSmall: PTypo.smallTextStyle.copyWith(
-            fontFamily: PStrings.boldFontName,
-          ),
+              fontFamily: PStrings.boldFontName, color: DColors.white),
           labelMedium: PTypo.mediumTextStyle.copyWith(
-            fontFamily: PStrings.boldFontName,
-          ),
+              fontFamily: PStrings.boldFontName, color: DColors.white),
           labelLarge: PTypo.largeTextStyle.copyWith(
-            fontFamily: PStrings.boldFontName,
-          ),
-          displaySmall:
-              PTypo.smallTextStyle.copyWith(fontFamily: PStrings.lightFontName),
-          displayMedium: PTypo.mediumTextStyle
-              .copyWith(fontFamily: PStrings.lightFontName),
-          displayLarge:
-              PTypo.largeTextStyle.copyWith(fontFamily: PStrings.lightFontName),
+              fontFamily: PStrings.boldFontName, color: DColors.white),
+          displaySmall: PTypo.smallTextStyle.copyWith(
+              fontFamily: PStrings.lightFontName, color: DColors.white),
+          displayMedium: PTypo.mediumTextStyle.copyWith(
+              fontFamily: PStrings.lightFontName, color: DColors.white),
+          displayLarge: PTypo.largeTextStyle.copyWith(
+              fontFamily: PStrings.lightFontName, color: DColors.white),
         ));
   }
 }

@@ -22,6 +22,7 @@ class _LanguageViewState extends State<LanguageView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              addVerticalSpacing(10),
               Align(
                 alignment: Alignment.center,
                 child: Column(
