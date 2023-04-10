@@ -13,6 +13,7 @@ class DictionaryHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeBloc = BlocProvider.of<ThemeBloc>(context);
     // final cubit = context.watch<DictionaryBloc>();
     final cubit = BlocProvider.of<DictionaryBloc>(context);
     return BlocConsumer<DictionaryBloc, DictionaryState>(
@@ -39,12 +40,19 @@ class DictionaryHomeView extends StatelessWidget {
                       ),
                     ),
                   addHorizontalSpacing(19),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20.0),
-                    child: Image.asset(
-                      nADarkModeIcon,
-                      width: 18,
-                      height: 18,
+                  GestureDetector(
+                    onTap: () {
+                      context.read<ThemeBloc>().changeTheme();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: Image.asset(
+                        themeBloc.isDarkMode == false
+                            ? nADarkModeIcon
+                            : nALightModeIcon,
+                        width: 18,
+                        height: 18,
+                      ),
                     ),
                   ),
                 ],

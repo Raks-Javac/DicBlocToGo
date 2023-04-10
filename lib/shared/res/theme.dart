@@ -1,5 +1,7 @@
 part of 'res.dart';
 
+enum ThemeEvent { toggleTheme }
+
 abstract class DictTheme {
   static ThemeData get lightMode {
     return ThemeData(
@@ -64,5 +66,20 @@ abstract class DictTheme {
           displayLarge: PTypo.largeTextStyle.copyWith(
               fontFamily: PStrings.lightFontName, color: DColors.white),
         ));
+  }
+}
+
+//cubit
+
+class ThemeBloc extends Bloc<ThemeEvent, ThemeData> {
+  ThemeBloc() : super(DictTheme.lightMode);
+
+  bool isDarkMode = false;
+
+  changeTheme() {
+    isDarkMode = !isDarkMode;
+    // ignore: invalid_use_of_visible_for_testing_member
+
+    emit(isDarkMode == true ? DictTheme.darkMode : DictTheme.lightMode);
   }
 }

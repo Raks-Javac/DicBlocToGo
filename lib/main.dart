@@ -21,14 +21,19 @@ class KnowMoreApp extends StatelessWidget {
           create: (BuildContext context) =>
               DictionaryBloc(wordRepositoryInstance),
         ),
+        BlocProvider(create: (BuildContext context) => ThemeBloc())
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        scaffoldMessengerKey: DRouterClass.scaffoldMessengerKey,
-        title: PStrings.appName,
-        theme: DictTheme.darkMode,
-        routerConfig: DRouterClass.routerInstance.router,
-      ),
+      child: BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          scaffoldMessengerKey: DRouterClass.scaffoldMessengerKey,
+          title: PStrings.appName,
+          theme: theme == DictTheme.lightMode
+              ? DictTheme.lightMode
+              : DictTheme.darkMode,
+          routerConfig: DRouterClass.routerInstance.router,
+        );
+      }),
     );
   }
 }
