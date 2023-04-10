@@ -13,9 +13,13 @@ class DictionaryHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //theme bloc
     final themeBloc = BlocProvider.of<ThemeBloc>(context);
-    // final cubit = context.watch<DictionaryBloc>();
+
+    //dictionary cubit
     final cubit = BlocProvider.of<DictionaryBloc>(context);
+
+    //
     return BlocConsumer<DictionaryBloc, DictionaryState>(
         listener: (context, state) {},
         bloc: cubit,
