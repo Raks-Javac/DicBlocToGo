@@ -5,6 +5,8 @@ import 'package:dict_app/features/onboarding/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/home/data/models/search_word_model.dart';
+
 const String initialHomeRoute = '/';
 const String dictionaryHomeRoute = '/home';
 const String languageViewRoute = 'lang';
@@ -12,8 +14,9 @@ const String detailsRoute = 'details';
 
 class DRouterClass {
   DRouterClass._();
+
   static GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
+  GlobalKey<ScaffoldMessengerState>();
   static DRouterClass routerInstance = DRouterClass._();
   final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -37,9 +40,14 @@ class DRouterClass {
         },
         routes: <RouteBase>[
           GoRoute(
+            name: 'detail',
             path: detailsRoute,
             builder: (BuildContext context, GoRouterState state) {
-              return const DictionaryWordDetailsScreen();
+              SearchWordModelResponse wordResponse =
+              state.extra as SearchWordModelResponse;
+              return DictionaryWordDetailsScreen(
+                object: wordResponse,
+              );
             },
           ),
         ],

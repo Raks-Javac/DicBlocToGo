@@ -15,35 +15,31 @@ class SearchWordModelResponse {
   SearchWordModelResponse({
     required this.word,
     required this.phonetic,
-    required this.phonetics,
-    required this.origin,
     required this.meanings,
   });
 
   String word;
   dynamic phonetic;
-  List<Phonetic> phonetics;
   dynamic origin;
-  List<Meaning> meanings;
+  List<Meaning>? meanings;
 
   factory SearchWordModelResponse.fromJson(Map<String, dynamic> json) =>
       SearchWordModelResponse(
         word: json["word"],
         phonetic: json["phonetic"],
-        phonetics: List<Phonetic>.from(
-            json["phonetics"].map((x) => Phonetic.fromJson(x))),
-        origin: json["origin"],
         meanings: List<Meaning>.from(
             json["meanings"].map((x) => Meaning.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "word": word,
-        "phonetic": phonetic,
-        "phonetics": List<dynamic>.from(phonetics.map((x) => x.toJson())),
-        "origin": origin,
-        "meanings": List<dynamic>.from(meanings.map((x) => x.toJson())),
-      };
+    "word": word,
+    "phonetic": phonetic,
+    "origin": origin,
+    "meanings": List<dynamic>.from(meanings!.map((x) => x.toJson())),
+  };
+
+  @override
+  String toString() => toJson().toString();
 }
 
 class Meaning {
@@ -56,15 +52,18 @@ class Meaning {
   List<Definition> definitions;
 
   factory Meaning.fromJson(Map<String, dynamic> json) => Meaning(
-        partOfSpeech: json["partOfSpeech"],
-        definitions: List<Definition>.from(
-            json["definitions"].map((x) => Definition.fromJson(x))),
-      );
+    partOfSpeech: json["partOfSpeech"],
+    definitions: List<Definition>.from(
+        json["definitions"].map((x) => Definition.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "partOfSpeech": partOfSpeech,
-        "definitions": List<dynamic>.from(definitions.map((x) => x.toJson())),
-      };
+    "partOfSpeech": partOfSpeech,
+    "definitions": List<dynamic>.from(definitions.map((x) => x.toJson())),
+  };
+
+  @override
+  String toString() => toJson().toString();
 }
 
 class Definition {
@@ -81,18 +80,21 @@ class Definition {
   List<dynamic> antonyms;
 
   factory Definition.fromJson(Map<String, dynamic> json) => Definition(
-        definition: json["definition"],
-        example: json["example"],
-        synonyms: List<dynamic>.from(json["synonyms"].map((x) => x)),
-        antonyms: List<dynamic>.from(json["antonyms"].map((x) => x)),
-      );
+    definition: json["definition"],
+    example: json["example"],
+    synonyms: List<dynamic>.from(json["synonyms"].map((x) => x)),
+    antonyms: List<dynamic>.from(json["antonyms"].map((x) => x)),
+  );
 
   Map<String, dynamic> toJson() => {
-        "definition": definition,
-        "example": example,
-        "synonyms": List<dynamic>.from(synonyms.map((x) => x)),
-        "antonyms": List<dynamic>.from(antonyms.map((x) => x)),
-      };
+    "definition": definition,
+    "example": example,
+    "synonyms": List<dynamic>.from(synonyms.map((x) => x)),
+    "antonyms": List<dynamic>.from(antonyms.map((x) => x)),
+  };
+
+  @override
+  String toString() => toJson().toString();
 }
 
 class Phonetic {
@@ -105,12 +107,12 @@ class Phonetic {
   String? audio;
 
   factory Phonetic.fromJson(Map<String, dynamic> json) => Phonetic(
-        text: json["text"],
-        audio: json["audio"],
-      );
+    text: json["text"],
+    audio: json["audio"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "text": text,
-        "audio": audio,
-      };
+    "text": text,
+    "audio": audio,
+  };
 }

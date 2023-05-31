@@ -6,8 +6,6 @@ class AppConstants {
     SearchWordModelResponse(
         word: "",
         phonetic: "",
-        phonetics: [Phonetic(text: "")],
-        origin: "",
         meanings: [
           Meaning(partOfSpeech: "", definitions: [
             Definition(
