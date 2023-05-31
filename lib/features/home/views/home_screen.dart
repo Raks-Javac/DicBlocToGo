@@ -7,6 +7,9 @@ import 'package:dict_app/shared/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../core/navigation/go_router.dart';
 
 class DictionaryHomeView extends StatelessWidget {
   const DictionaryHomeView({super.key});
@@ -30,9 +33,9 @@ class DictionaryHomeView extends StatelessWidget {
                     ? "Search"
                     : "Home",
                 leadingWidget:
-                    cubit.wordSearchTextFieldController.text.isNotEmpty
-                        ? null
-                        : const SizedBox(),
+                cubit.wordSearchTextFieldController.text.isNotEmpty
+                    ? null
+                    : const SizedBox(),
                 trailingWidgets: [
                   if (cubit.wordSearchTextFieldController.text.isEmpty)
                     Padding(
@@ -80,14 +83,14 @@ class DictionaryHomeView extends StatelessWidget {
                           },
                           suffixIcon: UnconstrainedBox(
                               child: ImageIcon(
-                            const AssetImage(
-                              nASendIcon,
-                            ),
-                            size: 18,
-                            color: context.appTextTheme.bodyLarge!.color,
-                          )),
+                                const AssetImage(
+                                  nASendIcon,
+                                ),
+                                size: 18,
+                                color: context.appTextTheme.bodyLarge!.color,
+                              )),
                           textEditingController:
-                              cubit.wordSearchTextFieldController,
+                          cubit.wordSearchTextFieldController,
                         ),
                       ),
                       returnOnState(state)
@@ -117,10 +120,11 @@ class DictionaryHomeView extends StatelessWidget {
 
 class WordsList extends StatelessWidget {
   final List<SearchWordModelResponse> words;
+
   const WordsList(
-    this.words, {
-    super.key,
-  });
+      this.words, {
+        super.key,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -129,15 +133,17 @@ class WordsList extends StatelessWidget {
       child: Column(
         children: [
           ...words.map((e) {
-            // return ListTile(
-            //   leading: const Icon(Icons.book),
-            //   title: Text(e.word),
-            //   subtitle: Text("Meaning count : ${e.meanings.length}"),
-            //   onTap: () {
-            //     context.go("$dictionaryHomeRoute/$detailsRoute");
-            //   },
-            // );
-            return PWidgetsWordTile(onTap: () {}, title: e.word.toString());
+            return ListTile(
+              leading: const Icon(Icons.book),
+              title: Text(e.word),
+              subtitle: Text("Meaning count : ${e.meanings!.length}"),
+              onTap: () {
+                SearchWordModelResponse wordModel = SearchWordModelResponse(
+                    word: e.word, phonetic: e.phonetic, meanings: e.meanings);
+                context.goNamed('detail', extra: wordModel);
+              },
+            );
+            // return PWidgetsWordTile(onTap: () {}, title: e.word.toString());
           })
         ],
       ),
@@ -163,6 +169,7 @@ class LoadingWidget extends StatelessWidget {
 
 class ErrorWidget extends StatelessWidget {
   final String? erroMessage;
+
   const ErrorWidget({super.key, this.erroMessage});
 
   @override
