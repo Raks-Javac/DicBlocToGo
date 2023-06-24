@@ -1,5 +1,6 @@
 import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/navigation/go_router.dart';
+import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,8 @@ class KnowMoreApp extends StatelessWidget {
           create: (BuildContext context) =>
               DictionaryBloc(wordRepositoryInstance),
         ),
-        BlocProvider(create: (BuildContext context) => ThemeBloc())
+        BlocProvider(create: (BuildContext context) => ThemeBloc()),
+        BlocProvider(create: (BuildContext context) => HomeActivityBloc())
       ],
       child: BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
         return MaterialApp.router(

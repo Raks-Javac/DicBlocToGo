@@ -1,4 +1,4 @@
-import 'package:dict_app/features/home/views/details_screen.dart';
+import 'package:dict_app/features/home/views/widgets/details_screen.dart';
 import 'package:dict_app/features/home/views/home_screen.dart';
 import 'package:dict_app/features/onboarding/language_screen.dart';
 import 'package:dict_app/features/onboarding/splash_screen.dart';

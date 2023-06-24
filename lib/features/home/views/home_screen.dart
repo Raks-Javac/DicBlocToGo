@@ -1,7 +1,9 @@
 import 'package:dict_app/core/utils/constants.dart';
 import 'package:dict_app/core/utils/extensions.dart';
+import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
+import 'package:dict_app/features/home/views/widgets/home_app_bar.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,54 +15,15 @@ class DictionaryHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //theme bloc
-    final themeBloc = BlocProvider.of<ThemeBloc>(context);
-
     //dictionary cubit
     final cubit = BlocProvider.of<DictionaryBloc>(context);
-
-    //
+    final homeBloc = BlocProvider.of<HomeActivityBloc>(context);
     return BlocConsumer<DictionaryBloc, DictionaryState>(
         listener: (context, state) {},
         bloc: cubit,
         builder: (context, state) {
           return Scaffold(
-              appBar: PWidgetsAppBar(
-                title: cubit.wordSearchTextFieldController.text.isNotEmpty
-                    ? "Search"
-                    : "Home",
-                leadingWidget:
-                    cubit.wordSearchTextFieldController.text.isNotEmpty
-                        ? null
-                        : const SizedBox(),
-                trailingWidgets: [
-                  if (cubit.wordSearchTextFieldController.text.isEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      child: Image.asset(
-                        nABookMarkIcon,
-                        width: 18,
-                        height: 18,
-                      ),
-                    ),
-                  addHorizontalSpacing(19),
-                  GestureDetector(
-                    onTap: () {
-                      context.read<ThemeBloc>().changeTheme();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      child: Image.asset(
-                        themeBloc.isDarkMode == false
-                            ? nADarkModeIcon
-                            : nALightModeIcon,
-                        width: 18,
-                        height: 18,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              appBar: const HomeAppBar(),
               body: SizedBox(
                 width: double.infinity,
                 height: double.infinity,
@@ -77,6 +40,7 @@ class DictionaryHomeView extends StatelessWidget {
                           hintText: "Enter the word you want to search",
                           onChanged: (val) {
                             cubit.searchWordOnUI();
+                            homeBloc.changeStateBasedOnInput(val);
                           },
                           suffixIcon: UnconstrainedBox(
                               child: ImageIcon(
