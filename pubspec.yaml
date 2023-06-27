@@ -46,11 +46,11 @@ flutter:
   fonts:
     - family: RBold
       fonts:
-        - asset: assets/fonts/Roboto-Bold.ttf
+        - asset: assets/fonts/greyCliff-bold.ttf
     - family: RMedium
       fonts:
-        - asset: assets/fonts/Roboto-Medium.ttf
+        - asset: assets/fonts/greyCliff-regular.ttf
     - family: RLight
       fonts:
-        - asset: assets/fonts/Roboto-Light.ttf
+        - asset: assets/fonts/greyCliff-regular.ttf
  
