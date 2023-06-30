@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:dict_app/core/navigation/go_router.dart';
+import 'package:dict_app/core/navigation/navigation_1.0.dart';
+import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreenView extends StatefulWidget {
   const SplashScreenView({super.key});
@@ -15,9 +16,8 @@ class SplashScreenView extends StatefulWidget {
 class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 3), () {
-      GoRouter.maybeOf(context)
-          ?.pushReplacement("$initialHomeRoute$languageViewRoute");
+    Timer(const Duration(seconds: 5), () {
+      WNavigator.pushNamedReplacement(WRoutes.onboardUsername);
     });
     super.initState();
   }
@@ -25,11 +25,12 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: WColors.primaryColor,
       body: Center(
         child: Image.asset(
-          nALogo,
-          width: 200,
-          height: 160,
+          nALightGreenLogo,
+          width: 76.w,
+          height: 76.h,
         ),
       ),
     );

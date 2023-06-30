@@ -1,18 +1,18 @@
 part of "res.dart";
 
-abstract class PTypo {
-  PTypo._();
+abstract class WTypo {
+  WTypo._();
 
-  static TextStyle smallTextStyle = const TextStyle(
-    fontFamily: PStrings.mediumFontName,
-    fontSize: 11,
+  static TextStyle smallTextStyle = TextStyle(
+    fontFamily: WStrings.mediumFontName,
+    fontSize: 14.sp,
   );
-  static TextStyle mediumTextStyle = const TextStyle(
-    fontFamily: PStrings.mediumFontName,
-    fontSize: 15,
+  static TextStyle mediumTextStyle = TextStyle(
+    fontFamily: WStrings.mediumFontName,
+    fontSize: 16.sp,
   );
-  static TextStyle largeTextStyle = const TextStyle(
-    fontFamily: PStrings.mediumFontName,
-    fontSize: 18,
+  static TextStyle largeTextStyle = TextStyle(
+    fontFamily: WStrings.mediumFontName,
+    fontSize: 20.sp,
   );
 }

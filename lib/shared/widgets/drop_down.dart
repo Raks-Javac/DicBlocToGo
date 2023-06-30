@@ -40,7 +40,7 @@ class PWidgetsDropDown extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
                 width: 1,
-                color: DColors.primaryColor,
+                color: WColors.primaryColor,
               ),
             ),
             enabledBorder: OutlineInputBorder(
@@ -48,7 +48,7 @@ class PWidgetsDropDown extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
                 width: 1,
-                color: DColors.primaryColor,
+                color: WColors.primaryColor,
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -56,7 +56,7 @@ class PWidgetsDropDown extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
                 width: 1,
-                color: DColors.primaryColor,
+                color: WColors.primaryColor,
               ),
             ),
           ),

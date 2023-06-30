@@ -97,11 +97,11 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
                         const BorderRadius.all(Radius.circular(10.0))),
                 focusedErrorBorder: const OutlineInputBorder(
                     borderSide:
-                        BorderSide(color: DColors.redAccent, width: 1.5),
+                        BorderSide(color: WColors.redAccent, width: 1.5),
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 errorBorder: const OutlineInputBorder(
                     borderSide:
-                        BorderSide(color: DColors.redAccent, width: 1.5),
+                        BorderSide(color: WColors.redAccent, width: 1.5),
                     borderRadius: BorderRadius.all(Radius.circular(10.0)))),
           ),
         )

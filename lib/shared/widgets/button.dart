@@ -57,7 +57,7 @@ class PWidgetsButton extends StatelessWidget {
                     label,
                     style: textStyle ??
                         context.appTextTheme.bodyMedium
-                            ?.copyWith(color: DColors.white),
+                            ?.copyWith(color: WColors.white),
                   ),
                 ),
               ],

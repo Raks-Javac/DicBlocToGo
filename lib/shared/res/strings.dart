@@ -1,7 +1,7 @@
 part of "res.dart";
 
-abstract class PStrings {
-  static String appName = 'Know More';
+abstract class WStrings {
+  static String appName = 'WordWise';
 
   static const String boldFontName = "RBold";
   static const String mediumFontName = "RMedium";

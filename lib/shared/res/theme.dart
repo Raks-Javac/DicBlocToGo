@@ -5,10 +5,10 @@ enum ThemeEvent { toggleTheme }
 abstract class DictTheme {
   static ThemeData get lightMode {
     return ThemeData(
-        primaryColor: DColors.primaryColor,
-        scaffoldBackgroundColor: DColors.white,
-        primaryColorDark: DColors.primaryColor,
-        fontFamily: PStrings.mediumFontName,
+        primaryColor: WColors.primaryColor,
+        scaffoldBackgroundColor: WColors.white,
+        primaryColorDark: WColors.primaryColor,
+        fontFamily: WStrings.mediumFontName,
         bottomSheetTheme: const BottomSheetThemeData(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -16,33 +16,33 @@ abstract class DictTheme {
           topRight: Radius.circular(20),
         ))),
         textTheme: TextTheme(
-          bodySmall: PTypo.smallTextStyle,
-          bodyMedium: PTypo.mediumTextStyle,
-          bodyLarge: PTypo.largeTextStyle,
-          labelSmall: PTypo.smallTextStyle.copyWith(
-            fontFamily: PStrings.boldFontName,
+          bodySmall: WTypo.smallTextStyle,
+          bodyMedium: WTypo.mediumTextStyle,
+          bodyLarge: WTypo.largeTextStyle,
+          labelSmall: WTypo.smallTextStyle.copyWith(
+            fontFamily: WStrings.boldFontName,
           ),
-          labelMedium: PTypo.mediumTextStyle.copyWith(
-            fontFamily: PStrings.boldFontName,
+          labelMedium: WTypo.mediumTextStyle.copyWith(
+            fontFamily: WStrings.boldFontName,
           ),
-          labelLarge: PTypo.largeTextStyle.copyWith(
-            fontFamily: PStrings.boldFontName,
+          labelLarge: WTypo.largeTextStyle.copyWith(
+            fontFamily: WStrings.boldFontName,
           ),
           displaySmall:
-              PTypo.smallTextStyle.copyWith(fontFamily: PStrings.lightFontName),
-          displayMedium: PTypo.mediumTextStyle
-              .copyWith(fontFamily: PStrings.lightFontName),
+              WTypo.smallTextStyle.copyWith(fontFamily: WStrings.lightFontName),
+          displayMedium: WTypo.mediumTextStyle
+              .copyWith(fontFamily: WStrings.lightFontName),
           displayLarge:
-              PTypo.largeTextStyle.copyWith(fontFamily: PStrings.lightFontName),
+              WTypo.largeTextStyle.copyWith(fontFamily: WStrings.lightFontName),
         ));
   }
 
   static ThemeData get darkMode {
     return ThemeData(
-        primaryColor: DColors.primaryColor,
-        scaffoldBackgroundColor: DColors.darkBAckgroundColor,
-        primaryColorDark: DColors.primaryColor,
-        fontFamily: PStrings.mediumFontName,
+        primaryColor: WColors.primaryColor,
+        scaffoldBackgroundColor: WColors.darkBAckgroundColor,
+        primaryColorDark: WColors.primaryColor,
+        fontFamily: WStrings.mediumFontName,
         bottomSheetTheme: const BottomSheetThemeData(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -50,21 +50,21 @@ abstract class DictTheme {
           topRight: Radius.circular(20),
         ))),
         textTheme: TextTheme(
-          bodySmall: PTypo.smallTextStyle.copyWith(color: DColors.white),
-          bodyMedium: PTypo.mediumTextStyle.copyWith(color: DColors.white),
-          bodyLarge: PTypo.largeTextStyle.copyWith(color: DColors.white),
-          labelSmall: PTypo.smallTextStyle.copyWith(
-              fontFamily: PStrings.boldFontName, color: DColors.white),
-          labelMedium: PTypo.mediumTextStyle.copyWith(
-              fontFamily: PStrings.boldFontName, color: DColors.white),
-          labelLarge: PTypo.largeTextStyle.copyWith(
-              fontFamily: PStrings.boldFontName, color: DColors.white),
-          displaySmall: PTypo.smallTextStyle.copyWith(
-              fontFamily: PStrings.lightFontName, color: DColors.white),
-          displayMedium: PTypo.mediumTextStyle.copyWith(
-              fontFamily: PStrings.lightFontName, color: DColors.white),
-          displayLarge: PTypo.largeTextStyle.copyWith(
-              fontFamily: PStrings.lightFontName, color: DColors.white),
+          bodySmall: WTypo.smallTextStyle.copyWith(color: WColors.white),
+          bodyMedium: WTypo.mediumTextStyle.copyWith(color: WColors.white),
+          bodyLarge: WTypo.largeTextStyle.copyWith(color: WColors.white),
+          labelSmall: WTypo.smallTextStyle.copyWith(
+              fontFamily: WStrings.boldFontName, color: WColors.white),
+          labelMedium: WTypo.mediumTextStyle.copyWith(
+              fontFamily: WStrings.boldFontName, color: WColors.white),
+          labelLarge: WTypo.largeTextStyle.copyWith(
+              fontFamily: WStrings.boldFontName, color: WColors.white),
+          displaySmall: WTypo.smallTextStyle.copyWith(
+              fontFamily: WStrings.lightFontName, color: WColors.white),
+          displayMedium: WTypo.mediumTextStyle.copyWith(
+              fontFamily: WStrings.lightFontName, color: WColors.white),
+          displayLarge: WTypo.largeTextStyle.copyWith(
+              fontFamily: WStrings.lightFontName, color: WColors.white),
         ));
   }
 }
@@ -72,7 +72,7 @@ abstract class DictTheme {
 //cubit
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeData> {
-  ThemeBloc() : super(DictTheme.lightMode);
+  ThemeBloc() : super(DictTheme.darkMode);
 
   bool isDarkMode = false;
 
