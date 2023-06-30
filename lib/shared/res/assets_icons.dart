@@ -15,3 +15,4 @@ const String nADarkModeIconPng = "assets/images/word_wise_dart_png_logo.png";
 const String nAHomeIcon = "assets/icons/home_icon.png";
 
 const String nASettingsIcon = "assets/icons/settings_icon.png";
+const String nAdeleteIcon = "assets/icons/delete_icon.svg";

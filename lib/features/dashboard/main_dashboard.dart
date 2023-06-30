@@ -1,6 +1,5 @@
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/book_mark/views/bookmark_view.dart';
-import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/views/home_screen.dart';
 import 'package:dict_app/features/settings/views/settings_view.dart';
 import 'package:dict_app/shared/res/res.dart';
@@ -64,7 +63,6 @@ class _MainDashBoardScreenState extends State<MainDashboardScreen>
 
   @override
   Widget build(BuildContext context) {
-    final homeBloc = BlocProvider.of<HomeActivityBloc>(context);
     return Scaffold(
       body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
@@ -76,24 +74,19 @@ class _MainDashBoardScreenState extends State<MainDashboardScreen>
         return SizedBox(
           height: 65.h,
           child: TabBar(
-            indicator: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: context.appTheme.primaryColor,
-                  width: 3.0,
+              indicator: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: context.appTheme.primaryColor,
+                    width: 3.0,
+                  ),
                 ),
               ),
-            ),
-            labelStyle: context.appTextTheme.bodySmall,
-            controller: _tabController,
-            tabs: tabs(themeBloc: themeBloc),
-            labelColor: themeBloc.isDarkMode == false
-                ? WColors.primaryColor
-                : WColors.white,
-            unselectedLabelColor: themeBloc.isDarkMode == false
-                ? WColors.barBlackColor
-                : WColors.white,
-          ),
+              labelStyle: context.appTextTheme.bodySmall,
+              controller: _tabController,
+              tabs: tabs(themeBloc: themeBloc),
+              labelColor: WColors.primaryColor,
+              unselectedLabelColor: WColors.white),
         );
       }),
     );

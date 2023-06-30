@@ -40,21 +40,21 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                 addHorizontalSpacing(19),
-                GestureDetector(
-                  onTap: () {
-                    context.read<ThemeBloc>().changeTheme();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 20.0),
-                    child: Image.asset(
-                      themeBloc.isDarkMode == false
-                          ? nADarkModeIcon
-                          : nALightModeIcon,
-                      width: 18,
-                      height: 18,
-                    ),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     context.read<ThemeBloc>().changeTheme();
+                //   },
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(right: 20.0),
+                //     child: Image.asset(
+                //       themeBloc.isDarkMode == false
+                //           ? nADarkModeIcon
+                //           : nALightModeIcon,
+                //       width: 18,
+                //       height: 18,
+                //     ),
+                //   ),
+                // ),
               ],
             );
           });
