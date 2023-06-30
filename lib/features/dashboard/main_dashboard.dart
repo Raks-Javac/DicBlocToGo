@@ -2,6 +2,7 @@ import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/book_mark/views/bookmark_view.dart';
 import 'package:dict_app/features/home/views/home_screen.dart';
 import 'package:dict_app/features/settings/views/settings_view.dart';
+import 'package:dict_app/shared/res/res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,23 +19,26 @@ class _MainDashBoardScreenState extends State<MainDashboardScreen>
   late TabController _tabController;
 
   final List<Tab> _tabs = [
-    Tab(
-      iconMargin: EdgeInsets.zero,
-      height: 40.h,
-      icon: const Icon(Icons.home),
-      text: 'Home',
+    const Tab(
+      iconMargin: EdgeInsets.only(top: 10),
+      icon: ImageIcon(
+        AssetImage(nAHomeIcon),
+      ),
+      text: '',
     ),
-    Tab(
-      height: 40.h,
-      iconMargin: EdgeInsets.zero,
-      icon: const Icon(Icons.favorite),
-      text: 'Favorites',
+    const Tab(
+      iconMargin: EdgeInsets.only(top: 10),
+      icon: ImageIcon(
+        AssetImage(nABookMarkIcon),
+      ),
+      text: '',
     ),
-    Tab(
-      height: 40.h,
-      iconMargin: EdgeInsets.zero,
-      icon: const Icon(Icons.person),
-      text: 'Profile',
+    const Tab(
+      iconMargin: EdgeInsets.only(top: 10),
+      icon: ImageIcon(
+        AssetImage(nASettingsIcon),
+      ),
+      text: '',
     ),
   ];
 
@@ -60,11 +64,12 @@ class _MainDashBoardScreenState extends State<MainDashboardScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: _tabController,
         children: _views,
       ),
       bottomNavigationBar: SizedBox(
-        height: 60.h,
+        height: 65.h,
         child: TabBar(
           indicator: BoxDecoration(
             border: Border(
@@ -80,7 +85,7 @@ class _MainDashBoardScreenState extends State<MainDashboardScreen>
           labelColor: Colors.white,
           unselectedLabelColor: Colors.grey,
         ),
-      ).marginOnly(bottom: 10),
+      ),
     );
   }
 }

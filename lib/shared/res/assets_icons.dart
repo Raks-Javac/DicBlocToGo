@@ -11,3 +11,7 @@ const String nALightModeIcon = "assets/icons/light_mode_icon.png";
 const String nADarkModeIconSvg = "assets/icons/word_wise_dark_sv_logo.svg";
 
 const String nADarkModeIconPng = "assets/images/word_wise_dart_png_logo.png";
+
+const String nAHomeIcon = "assets/icons/home_icon.png";
+
+const String nASettingsIcon = "assets/icons/settings_icon.png";
