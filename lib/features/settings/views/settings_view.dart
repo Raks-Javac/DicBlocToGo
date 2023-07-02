@@ -1,6 +1,7 @@
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
+import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:flutter/material.dart';
 
 class SettingsMainView extends StatelessWidget {
@@ -31,8 +32,14 @@ class SettingsMainView extends StatelessWidget {
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text("Hello"),
+                children: [
+                  Row(
+                    children: [
+                      const WWidgetsRenderSvg(svgPath: nAThemeIcon),
+                      addHorizontalSpacing(10),
+                      const Text("Theme"),
+                    ],
+                  ),
                 ],
               ).marginSymmetric(horizontal: 20, vertical: 20),
             )

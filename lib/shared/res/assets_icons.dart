@@ -16,3 +16,8 @@ const String nAHomeIcon = "assets/icons/home_icon.png";
 
 const String nASettingsIcon = "assets/icons/settings_icon.png";
 const String nAdeleteIcon = "assets/icons/delete_icon.svg";
+const String nAarrowForward = "assets/icons/arrow_forward_icon.svg";
+const String nAEmailIcon = "assets/icons/email_icon.svg";
+const String nAPhoneNumber = "assets/icons/phone_number_icon.svg";
+const String nAThemeIcon = "assets/icons/theme_icon.svg";
+const String nAUsernameIcon = "assets/icons/username_icon.svg";
