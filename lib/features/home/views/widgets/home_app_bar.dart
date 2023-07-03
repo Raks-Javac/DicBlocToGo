@@ -1,6 +1,5 @@
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/home/blocs/home_bloc.dart';
-import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +12,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final homeBloc = BlocProvider.of<HomeActivityBloc>(context);
     return Builder(builder: (context) {
-      final themeBloc = context.watch<ThemeBloc>();
-      final cubit = context.watch<DictionaryBloc>();
-
       return BlocConsumer<HomeActivityBloc, HomeState>(
           listener: (context, state) {},
           builder: (context, state) {

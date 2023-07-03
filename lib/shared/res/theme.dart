@@ -9,6 +9,7 @@ abstract class DictTheme {
         scaffoldBackgroundColor: WColors.white,
         primaryColorDark: WColors.primaryColor,
         fontFamily: WStrings.mediumFontName,
+        checkboxTheme: customCheckboxThemeDatawhiteMode,
         bottomSheetTheme: const BottomSheetThemeData(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -43,6 +44,7 @@ abstract class DictTheme {
         scaffoldBackgroundColor: WColors.darkBAckgroundColor,
         primaryColorDark: WColors.primaryColor,
         fontFamily: WStrings.mediumFontName,
+        checkboxTheme: customCheckboxThemeDataDaarkMode,
         bottomSheetTheme: const BottomSheetThemeData(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -67,6 +69,26 @@ abstract class DictTheme {
               fontFamily: WStrings.lightFontName, color: WColors.white),
         ));
   }
+
+  static CheckboxThemeData customCheckboxThemeDataDaarkMode = CheckboxThemeData(
+    side: const BorderSide(color: WColors.white), // s
+    shape: RoundedRectangleBorder(
+      side: const BorderSide(
+          color: WColors.white), // Set the desired border color here
+      borderRadius:
+          BorderRadius.circular(5.0), // Set the desired border radius if needed
+    ),
+  );
+
+  static CheckboxThemeData customCheckboxThemeDatawhiteMode = CheckboxThemeData(
+    side: const BorderSide(color: WColors.white), //
+    shape: RoundedRectangleBorder(
+      side: const BorderSide(
+          color: WColors.white), // Set the desired border color here
+      borderRadius:
+          BorderRadius.circular(5.0), // Set the desired border radius if needed
+    ),
+  );
 }
 
 //cubit

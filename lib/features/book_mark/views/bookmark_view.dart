@@ -26,7 +26,53 @@ class BookMarkMainView extends StatelessWidget {
           ),
         ],
       ).paddingOnly(top: 29),
-      extendedBody: Container(),
+      extendedBody: SingleChildScrollView(
+        child: Column(
+          children: [for (int i = 0; i < 20; i++) const BookMarkTile()],
+        ),
+      ).marginSymmetric(horizontal: 20, vertical: 30),
+    );
+  }
+}
+
+class BookMarkTile extends StatelessWidget {
+  const BookMarkTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 1,
+          ),
+          title: Row(
+            children: [
+              Expanded(
+                flex: 10,
+                child: Text(
+                  'Boy',
+                  style: context.appTextTheme.bodyLarge!
+                      .copyWith(fontFamily: WStrings.boldFontName),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          trailing: Checkbox(
+            activeColor: context.appTheme.primaryColor,
+            value: false,
+            onChanged: (bool? newValue) {
+              // Implement the logic for checkbox change here
+            },
+          ),
+        ),
+        Divider(
+          color: WColors.white.withOpacity(0.4),
+        ),
+      ],
     );
   }
 }

@@ -13,7 +13,7 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
   final dynamic validator;
   final bool shouldReadOnly;
   final Widget? suffixIcon;
-
+  final Widget? prefixIcon;
   const PWidgetTextFieldInDarkState({
     super.key,
     this.label,
@@ -28,6 +28,7 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
     this.validator,
     this.shouldReadOnly = false,
     this.suffixIcon,
+    this.prefixIcon,
   });
 
   @override
@@ -36,11 +37,15 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (label != null)
-          Text(
-            label ?? "",
-            style: context.appTheme.textTheme.bodyMedium,
+          Column(
+            children: [
+              Text(
+                label ?? "",
+                style: context.appTheme.textTheme.bodyMedium,
+              ),
+              addVerticalSpacing(9),
+            ],
           ),
-        addVerticalSpacing(9),
         SizedBox(
           // height: maxLength != null ? 9.h : 7.h,
           width: double.infinity,
@@ -67,7 +72,10 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
             ),
             readOnly: shouldReadOnly,
             decoration: InputDecoration(
+                prefixIconConstraints:
+                    BoxConstraints(maxWidth: 20, maxHeight: 20),
                 suffixIcon: suffixIcon,
+                prefix: prefixIcon,
                 fillColor: context.appTheme.scaffoldBackgroundColor,
                 filled: true,
                 counterText: "",
@@ -83,21 +91,17 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: context.appTheme.textTheme.bodyMedium!.color!
-                            .withOpacity(0.4),
-                        width: 1.0),
+                        color: context.appTheme.primaryColor, width: 1.0),
                     borderRadius:
                         const BorderRadius.all(Radius.circular(10.0))),
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: context.appTheme.textTheme.bodyMedium!.color!
-                            .withOpacity(0.4),
-                        width: 1.0),
+                        color: context.appTheme.primaryColor, width: 1.0),
                     borderRadius:
                         const BorderRadius.all(Radius.circular(10.0))),
                 focusedErrorBorder: const OutlineInputBorder(
                     borderSide:
-                        BorderSide(color: WColors.redAccent, width: 1.5),
+                        BorderSide(color: WColors.redAccent, width: 1.0),
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 errorBorder: const OutlineInputBorder(
                     borderSide:

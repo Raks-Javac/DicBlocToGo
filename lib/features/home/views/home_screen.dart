@@ -3,8 +3,9 @@ import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
-import 'package:dict_app/features/home/views/widgets/home_app_bar.dart';
 import 'package:dict_app/shared/res/res.dart';
+import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
+import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:dict_app/shared/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,43 +23,58 @@ class DictionaryHomeView extends StatelessWidget {
         listener: (context, state) {},
         bloc: cubit,
         builder: (context, state) {
-          return Scaffold(
-              appBar: const HomeAppBar(),
-              body: SizedBox(
-                width: double.infinity,
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15.0,
-                          vertical: 10,
-                        ),
-                        child: PWidgetTextFieldInDarkState(
-                          label: "Word",
-                          hintText: "Enter the word you want to search",
-                          onChanged: (val) {
-                            cubit.searchWordOnUI();
-                            homeBloc.changeStateBasedOnInput(val);
-                          },
-                          suffixIcon: UnconstrainedBox(
-                              child: ImageIcon(
-                            const AssetImage(
-                              nASendIcon,
-                            ),
-                            size: 18,
-                            color: context.appTextTheme.bodyLarge!.color,
-                          )),
-                          textEditingController:
-                              cubit.wordSearchTextFieldController,
-                        ),
-                      ),
-                      returnOnState(state)
-                    ],
+          return CustomPageWithAppBar(
+            appBarBody: Column(
+              children: [
+                Text(
+                  "Hi Bossman",
+                  style: context.appTextTheme.bodyLarge!.copyWith(
+                    fontFamily: WStrings.boldFontName,
                   ),
                 ),
-              ));
+                addVerticalSpacing(20),
+                PWidgetTextFieldInDarkState(
+                  prefixIcon: const WWidgetsRenderSvg(
+                    svgPath: nASearchIcon,
+                  ),
+                  hintText: "Enter the word you want to search",
+                  onChanged: (val) {
+                    cubit.searchWordOnUI();
+                    homeBloc.changeStateBasedOnInput(val);
+                  },
+                  suffixIcon: UnconstrainedBox(
+                    child: Row(
+                      children: [
+                        const WWidgetsRenderSvg(
+                          svgPath: nACancelIcon,
+                        ),
+                        addHorizontalSpacing(10),
+                        const WWidgetsRenderSvg(
+                          svgPath: nASendIcon,
+                        ),
+                      ],
+                    ).marginOnly(right: 15),
+                  ),
+                  textEditingController: cubit.wordSearchTextFieldController,
+                ).marginSymmetric(
+                  horizontal: 10,
+                ),
+              ],
+            ).marginOnly(top: 20),
+            extendedBody: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15.0,
+                      vertical: 10,
+                    ),
+                  ),
+                  returnOnState(state)
+                ],
+              ),
+            ),
+          );
         });
   }
 
