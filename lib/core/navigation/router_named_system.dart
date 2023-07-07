@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/features/dashboard/main_dashboard.dart';
 import 'package:dict_app/features/home/views/home_screen.dart';
+import 'package:dict_app/features/home/views/widgets/details_screen.dart';
 import 'package:dict_app/features/onboarding/onboard_username.dart';
 import 'package:dict_app/features/onboarding/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,6 +31,11 @@ abstract class WRouter {
         return getPageRoute(
           settings: settings,
           view: const DictionaryHomeView(),
+        );
+      case WRoutes.detailsRoute:
+        return getPageRoute(
+          settings: settings,
+          view: const DictionaryWordDetailsScreen(),
         );
 
       default:

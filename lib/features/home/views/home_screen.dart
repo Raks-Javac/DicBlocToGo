@@ -1,6 +1,7 @@
+import 'package:dict_app/core/navigation/navigation_1.0.dart';
+import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/utils/constants.dart';
 import 'package:dict_app/core/utils/extensions.dart';
-import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/shared/res/res.dart';
@@ -17,7 +18,7 @@ class DictionaryHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     //dictionary cubit
     final cubit = BlocProvider.of<DictionaryBloc>(context);
-    final homeBloc = BlocProvider.of<HomeActivityBloc>(context);
+
     return BlocConsumer<DictionaryBloc, DictionaryState>(
         listener: (context, state) {
           returnOnState(state);
@@ -42,18 +43,29 @@ class DictionaryHomeView extends StatelessWidget {
                   ),
                   hintText: "Enter the word you want to search",
                   onChanged: (val) {
-                    cubit.searchWordOnUI();
-                    homeBloc.changeStateBasedOnInput(val);
+                    if (val.isNotEmpty) {
+                      cubit.searchWordOnUI();
+                    }
                   },
                   suffixIcon: UnconstrainedBox(
                     child: Row(
                       children: [
-                        const WWidgetsRenderSvg(
-                          svgPath: nACancelIcon,
+                        GestureDetector(
+                          onTap: () {
+                            cubit.clearTextField();
+                          },
+                          child: const WWidgetsRenderSvg(
+                            svgPath: nACancelIcon,
+                          ),
                         ),
                         addHorizontalSpacing(10),
-                        const WWidgetsRenderSvg(
-                          svgPath: nASendIcon,
+                        GestureDetector(
+                          onTap: () {
+                            cubit.searchWordOnUI();
+                          },
+                          child: const WWidgetsRenderSvg(
+                            svgPath: nASendIcon,
+                          ),
                         ),
                       ],
                     ).marginOnly(right: 15),
@@ -120,7 +132,11 @@ class WordsList extends StatelessWidget {
             //     context.go("$dictionaryHomeRoute/$detailsRoute");
             //   },
             // );
-            return PWidgetsWordTile(onTap: () {}, title: e.word.toString());
+            return PWidgetsWordTile(
+                onTap: () {
+                  WNavigator.pushNamed(WRoutes.detailsRoute);
+                },
+                title: e.word.toString());
           })
         ],
       ),

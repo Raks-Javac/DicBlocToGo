@@ -45,4 +45,10 @@ class DictionaryBloc extends Cubit<DictionaryState> {
       });
     }
   }
+
+  clearTextField() {
+    emit(NotSearchingWordState());
+
+    wordSearchTextFieldController.clear();
+  }
 }
