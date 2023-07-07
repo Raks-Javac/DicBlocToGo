@@ -53,22 +53,11 @@ class _OnBoardUserNameState extends State<OnBoardUserName> {
                 style: context.appTextTheme.bodySmall
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
-              addVerticalSpacing(9),
-              PWidgetsDropDown(
-                items: const [
-                  "English",
-                  "Chinese",
-                  "Portugese",
-                ],
-                suffixIcon: UnconstrainedBox(
-                  child: Image.asset(
-                    nADropDownIcon,
-                    width: 17,
-                    height: 17,
-                  ),
-                ),
-                hintText: "Select your preferred language",
-                onChanged: (dynamic val) {},
+              addVerticalSpacing(15),
+              PWidgetTextFieldInDarkState(
+                hintText: "Username",
+                onChanged: (val) {},
+                textEditingController: TextEditingController(),
               ),
 
               addVerticalSpacing(40),

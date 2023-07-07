@@ -24,6 +24,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_screenutil: ^5.7.0
   flutter_svg: ^2.0.5
+  lottie: ^1.4.0
 
 
 
@@ -43,6 +44,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/animation/
 
 
   fonts:

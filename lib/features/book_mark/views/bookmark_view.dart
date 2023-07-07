@@ -28,7 +28,13 @@ class BookMarkMainView extends StatelessWidget {
       ).paddingOnly(top: 29),
       extendedBody: SingleChildScrollView(
         child: Column(
-          children: [for (int i = 0; i < 20; i++) const BookMarkTile()],
+          children: [
+            // for (int i = 0; i < 20; i++) const BookMarkTile(),
+            WWidgetsRenderLottie(
+              lottiePath: "assets/animation/searching_animation.json",
+              isContinous: true,
+            )
+          ],
         ),
       ).marginSymmetric(horizontal: 20, vertical: 30),
     );

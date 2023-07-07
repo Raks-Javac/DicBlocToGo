@@ -7,7 +7,6 @@ import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
 import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:dict_app/shared/widgets/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +19,9 @@ class DictionaryHomeView extends StatelessWidget {
     final cubit = BlocProvider.of<DictionaryBloc>(context);
     final homeBloc = BlocProvider.of<HomeActivityBloc>(context);
     return BlocConsumer<DictionaryBloc, DictionaryState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          returnOnState(state);
+        },
         bloc: cubit,
         builder: (context, state) {
           return CustomPageWithAppBar(
@@ -34,8 +35,10 @@ class DictionaryHomeView extends StatelessWidget {
                 ),
                 addVerticalSpacing(20),
                 PWidgetTextFieldInDarkState(
-                  prefixIcon: const WWidgetsRenderSvg(
-                    svgPath: nASearchIcon,
+                  prefixIcon: const UnconstrainedBox(
+                    child: WWidgetsRenderSvg(
+                      svgPath: nASearchIcon,
+                    ),
                   ),
                   hintText: "Enter the word you want to search",
                   onChanged: (val) {
@@ -131,11 +134,25 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 90),
-      child: Center(
-        child: CupertinoActivityIndicator(
-          color: context.appTextTheme.bodyLarge!.color!,
-        ),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 200,
+            width: 200,
+            child: Center(
+                child: WWidgetsRenderLottie(
+              lottiePath: "assets/animation/searching_animation.json",
+              isContinous: true,
+            )),
+          ),
+          addVerticalSpacing(10),
+          const Text(
+            "Please wait a moment while we retrieve the information for your searched word. Thank you for your patience!",
+            textAlign: TextAlign.center,
+          )
+        ],
       ),
     );
   }

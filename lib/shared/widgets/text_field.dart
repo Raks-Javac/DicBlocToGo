@@ -72,10 +72,8 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
             ),
             readOnly: shouldReadOnly,
             decoration: InputDecoration(
-                prefixIconConstraints:
-                    BoxConstraints(maxWidth: 20, maxHeight: 20),
                 suffixIcon: suffixIcon,
-                prefix: prefixIcon,
+                prefixIcon: prefixIcon,
                 fillColor: context.appTheme.scaffoldBackgroundColor,
                 filled: true,
                 counterText: "",

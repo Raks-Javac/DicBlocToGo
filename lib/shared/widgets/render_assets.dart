@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 
 class WWidgetsRenderSvg extends StatelessWidget {
   final String svgPath;
@@ -39,5 +40,52 @@ class WWidgetsRenderAssetImage extends StatelessWidget {
         height: height,
       );
     }
+  }
+}
+
+//write an extension of the add function in the List class that also adds to the list
+//render lottie files
+class WWidgetsRenderLottie extends StatefulWidget {
+  final String lottiePath;
+  bool isContinous;
+  WWidgetsRenderLottie(
+      {super.key, required this.lottiePath, this.isContinous = false});
+
+  @override
+  State<WWidgetsRenderLottie> createState() => _WWidgetsRenderLottieState();
+}
+
+class _WWidgetsRenderLottieState extends State<WWidgetsRenderLottie>
+    with TickerProviderStateMixin {
+  late AnimationController _lottieController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _lottieController = AnimationController(vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _lottieController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Lottie.asset(widget.lottiePath,
+        controller: _lottieController,
+        repeat: widget.isContinous,
+        reverse: widget.isContinous,
+        animate: widget.isContinous, onLoaded: (composition) {
+      _lottieController.duration = composition.duration;
+      _lottieController.forward();
+      _lottieController.addStatusListener((status) async {
+        if (status == AnimationStatus.completed) {
+          _lottieController.repeat();
+        }
+      });
+    });
   }
 }
