@@ -30,9 +30,12 @@ class BookMarkMainView extends StatelessWidget {
         child: Column(
           children: [
             // for (int i = 0; i < 20; i++) const BookMarkTile(),
-            WWidgetsRenderLottie(
-              lottiePath: "assets/animation/searching_animation.json",
-              isContinous: true,
+            Align(
+              alignment: Alignment.center,
+              child: WWidgetsRenderLottie(
+                lottiePath: nASarchNotFound,
+                isContinous: true,
+              ),
             )
           ],
         ),
