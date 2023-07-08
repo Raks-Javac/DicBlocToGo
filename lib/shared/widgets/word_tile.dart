@@ -19,6 +19,11 @@ class PWidgetsWordTile extends StatelessWidget {
           onTap: () {
             onTap();
           },
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: context.appTextTheme.bodyMedium?.color?.withOpacity(0.4),
+            size: 18,
+          ),
         ),
         Divider(
           color: context.appTextTheme.bodyMedium?.color,

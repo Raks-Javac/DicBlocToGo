@@ -47,8 +47,8 @@ class WWidgetsRenderAssetImage extends StatelessWidget {
 //render lottie files
 class WWidgetsRenderLottie extends StatefulWidget {
   final String lottiePath;
-  bool isContinous;
-  WWidgetsRenderLottie(
+  final bool isContinous;
+  const WWidgetsRenderLottie(
       {super.key, required this.lottiePath, this.isContinous = false});
 
   @override

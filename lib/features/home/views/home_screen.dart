@@ -122,16 +122,17 @@ class WordsList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            "Suggestions",
+            style: context.appTextTheme.titleMedium?.copyWith(
+              fontFamily: WStrings.boldFontName,
+              color: context.appTextTheme.bodyLarge?.color,
+            ),
+          ),
+          addVerticalSpacing(10),
           ...words.map((e) {
-            // return ListTile(
-            //   leading: const Icon(Icons.book),
-            //   title: Text(e.word),
-            //   subtitle: Text("Meaning count : ${e.meanings.length}"),
-            //   onTap: () {
-            //     context.go("$dictionaryHomeRoute/$detailsRoute");
-            //   },
-            // );
             return PWidgetsWordTile(
                 onTap: () {
                   WNavigator.pushNamed(WRoutes.detailsRoute);
@@ -154,7 +155,7 @@ class LoadingWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 200,
             width: 200,
             child: Center(
