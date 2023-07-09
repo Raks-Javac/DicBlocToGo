@@ -1,4 +1,5 @@
 import 'package:dict_app/core/utils/extensions.dart';
+import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,8 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final wordInformation =
+        ModalRoute.of(context)!.settings.arguments as SearchWordModelResponse;
     return CustomPageWithAppBar(
       appBarBody: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,7 +23,7 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  "Boy".toUpperCase(),
+                  wordInformation.word.toUpperCase(),
                   style: context.appTextTheme.titleLarge!.copyWith(
                     color: context.appTheme.primaryColor,
                     fontFamily: WStrings.boldFontName,
@@ -49,24 +52,41 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
               color: WColors.barBlackColor,
               child: Column(
                 children: [
-                  for (int i = 0; i < 3; i++)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  for (int i = 0; i < wordInformation.meanings.length; i++)
+                    Column(
                       children: [
-                        Text(
-                          "${i + 1}. ",
-                          style: context.appTextTheme.titleMedium!.copyWith(
-                            color: context.appTheme.primaryColor,
-                            fontFamily: WStrings.boldFontName,
-                          ),
-                        ),
-                        addHorizontalSpacing(5),
-                        const Expanded(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${i + 1}.  As a (${wordInformation.meanings[i].partOfSpeech}) ",
+                              style: context.appTextTheme.titleMedium!.copyWith(
+                                color: context.appTheme.primaryColor,
+                                fontFamily: WStrings.boldFontName,
+                              ),
+                            ),
+                          ],
+                        ).marginOnly(top: 3),
+                        addVerticalSpacing(10),
+                        ...wordInformation.meanings[i].definitions.map((e) {
+                          return Align(
+                            alignment: Alignment.centerLeft,
                             child: Text(
-                                "Lorem ipsum dolor sit amet consectetur. Nisl nibh cras nunc blandit quis. Mi felis malesuada vel enim consectetur id sed pellentesque. Adipiscing lorem at rutrum turpis purus venenatis etiam sit consectetur. Est adipiscing donec in ut. Quis eu tincidunt massa eget id est consequat blandit felis.")),
+                              "- ${e.definition.toString()}",
+                              textAlign: TextAlign.left,
+                            ).marginSymmetric(horizontal: 10, vertical: 6),
+                          );
+                        }).toList(),
+                        addVerticalSpacing(3),
+                        Divider(
+                          color: context.appTheme.textTheme.bodyLarge?.color
+                              ?.withOpacity(0.5),
+                        )
                       ],
-                    ).marginOnly(bottom: 20)
+                    ).marginOnly(
+                      bottom: 20,
+                    )
                 ],
               ).paddingSymmetric(horizontal: 15, vertical: 10),
             ),

@@ -135,7 +135,7 @@ class WordsList extends StatelessWidget {
           ...words.map((e) {
             return PWidgetsWordTile(
                 onTap: () {
-                  WNavigator.pushNamed(WRoutes.detailsRoute);
+                  WNavigator.pushNamed(WRoutes.detailsRoute, arguments: e);
                 },
                 title: e.word.toString());
           })
@@ -160,7 +160,7 @@ class LoadingWidget extends StatelessWidget {
             width: 200,
             child: Center(
                 child: WWidgetsRenderLottie(
-              lottiePath: "assets/animation/searching_animation.json",
+              lottiePath: nAsearchingAnimation,
               isContinous: true,
             )),
           ),
