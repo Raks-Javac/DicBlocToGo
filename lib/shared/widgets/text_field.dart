@@ -68,7 +68,7 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
             validator: validator,
             style: context.appTheme.textTheme.bodyMedium!.copyWith(
               color: context.appTheme.textTheme.bodyMedium!.color!,
-              fontSize: 12.0,
+              fontSize: 16.sp,
             ),
             readOnly: shouldReadOnly,
             decoration: InputDecoration(
@@ -94,7 +94,8 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
                         const BorderRadius.all(Radius.circular(10.0))),
                 enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: context.appTheme.primaryColor, width: 1.0),
+                        color: context.appTheme.textTheme.bodyMedium!.color!,
+                        width: 1.0),
                     borderRadius:
                         const BorderRadius.all(Radius.circular(10.0))),
                 focusedErrorBorder: const OutlineInputBorder(
