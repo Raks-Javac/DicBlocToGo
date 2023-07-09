@@ -4,6 +4,7 @@ import 'package:dict_app/core/navigation/router_named_system.dart';
 import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/utils/bloc_observer.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
+import 'package:dict_app/features/onboarding/bloc/onboarding_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,6 +33,7 @@ class KnowMoreApp extends StatelessWidget {
                     DictionaryBloc(wordRepositoryInstance),
               ),
               BlocProvider(create: (BuildContext context) => ThemeBloc()),
+              BlocProvider(create: (BuildContext context) => OnBoardingCubit()),
             ],
             child: BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
               return MaterialApp(
