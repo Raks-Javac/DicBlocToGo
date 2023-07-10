@@ -4,7 +4,12 @@ abstract class LocalDataBaseInterface {
   Future readFromDb();
 }
 
-class LocalDatabaseIsar implements LocalDataBaseInterface {
+class WLocalDatabase implements LocalDataBaseInterface {
+  WLocalDatabase._();
+
+  factory WLocalDatabase() {
+    return WLocalDatabase._();
+  }
   @override
   Future readFromDb() {
     throw UnimplementedError();
