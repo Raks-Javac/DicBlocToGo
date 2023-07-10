@@ -5,7 +5,7 @@ abstract class UserRepositoryInterface {
 }
 
 class UserRepository implements UserRepositoryInterface {
-  LocalDatabaseIsar localDatabaseIsar;
+  WLocalDatabase localDatabaseIsar;
   UserRepository(this.localDatabaseIsar) : super();
   @override
   Future getUsername() async {
