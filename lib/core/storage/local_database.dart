@@ -1,5 +1,5 @@
 import 'package:dict_app/core/utils/logger.dart';
-import 'package:dict_app/features/onboarding/data/username_model.dart';
+import 'package:dict_app/features/onboarding/entities/username_model.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
