@@ -57,11 +57,12 @@ class OnBoardUserName extends StatelessWidget {
                 ),
                 //lan
                 addVerticalSpacing(60),
-                Text(
-                  "Username",
-                  style: context.appTextTheme.bodySmall
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
+                if (onBoardingInstance.enableButton == true)
+                  Text(
+                    "Username",
+                    style: context.appTextTheme.bodySmall
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
                 addVerticalSpacing(15),
                 PWidgetTextFieldInDarkState(
                   hintText: "Username",

@@ -2,6 +2,7 @@ import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/router_named_system.dart';
 import 'package:dict_app/core/navigation/routes.dart';
+import 'package:dict_app/core/storage/local_database.dart';
 import 'package:dict_app/core/utils/bloc_observer.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/onboarding/bloc/onboarding_provider.dart';
@@ -13,6 +14,7 @@ import 'shared/res/res.dart';
 
 void main() {
   AppBlocObserver.internal();
+  WLocalDatabase().initializeDatabase();
   runApp(const KnowMoreApp());
 }
 

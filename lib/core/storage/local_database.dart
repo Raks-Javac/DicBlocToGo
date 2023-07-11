@@ -1,3 +1,7 @@
+import 'package:dict_app/core/utils/logger.dart';
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
+
 abstract class LocalDataBaseInterface {
   initializeDatabase();
   Future writeToDb();
@@ -5,11 +9,8 @@ abstract class LocalDataBaseInterface {
 }
 
 class WLocalDatabase implements LocalDataBaseInterface {
-  WLocalDatabase._();
+  Isar? isarDBInstance;
 
-  factory WLocalDatabase() {
-    return WLocalDatabase._();
-  }
   @override
   Future readFromDb() {
     throw UnimplementedError();
@@ -21,7 +22,15 @@ class WLocalDatabase implements LocalDataBaseInterface {
   }
 
   @override
-  initializeDatabase() {
-    throw UnimplementedError();
+  initializeDatabase() async {
+    final dir = await getApplicationDocumentsDirectory();
+    isarDBInstance = await Isar.open(
+      //UsernameSchema, RecentWord Schema and BookMarkSchema
+      [],
+      directory: dir.path,
+    );
+
+    Logger.logInfo(isarDBInstance);
+    Logger.logInfo(dir.path);
   }
 }
