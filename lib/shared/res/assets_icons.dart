@@ -28,3 +28,4 @@ const String nASearchIcon = "assets/icons/search_icon.svg";
 const String nAsearchingAnimation = "assets/animation/searching_animation.json";
 const String nASarchNotFound = "assets/animation/search_not_found.json";
 const String nABookMarkAnimation = "assets/animation/book_mark_animation.json";
+const String nAPrivacyPolicyIcon = "assets/icons/privacy_policy_icon.svg";

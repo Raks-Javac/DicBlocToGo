@@ -46,6 +46,16 @@ class SettingsMainView extends StatelessWidget {
                   ),
                   addVerticalSpacing(20),
                   SettingsTile(
+                    iconPathSvg: nAPrivacyPolicyIcon,
+                    onTap: () {},
+                    tileTitle: 'Privacy policy',
+                    preText: "",
+                  ),
+                  Divider(
+                    color: WColors.white.withOpacity(0.4),
+                  ),
+                  addVerticalSpacing(20),
+                  SettingsTile(
                     iconPathSvg: nAAboutIcon,
                     onTap: () {},
                     tileTitle: 'About',
