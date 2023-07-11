@@ -1,6 +1,5 @@
 import 'package:dict_app/core/utils/constants.dart';
 import 'package:dict_app/core/utils/extensions.dart';
-import 'package:dict_app/features/onboarding/bloc/onboarding_provider.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

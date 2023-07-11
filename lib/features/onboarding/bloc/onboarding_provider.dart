@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/routes.dart';
+import 'package:dict_app/core/storage/local_database.dart';
 import 'package:dict_app/core/utils/logger.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,8 @@ class EnableButtonFroNewUser extends OnBoardingState {}
 class DisEnableButtonFroNewUser extends OnBoardingState {}
 
 class OnBoardingCubit extends Cubit<OnBoardingState> {
-  OnBoardingCubit() : super(NewUser());
+  WLocalDatabase wLocalDatabase;
+  OnBoardingCubit(this.wLocalDatabase) : super(NewUser());
 
   TextEditingController userNameFieldController = TextEditingController();
 
@@ -55,5 +57,6 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
   addUserNameToDB() {
     emit(ExistingUser());
+    Logger.logInfo(wLocalDatabase.isarDBInstance ?? "");
   }
 }

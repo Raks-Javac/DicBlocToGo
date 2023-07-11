@@ -4,8 +4,6 @@ import 'package:dict_app/core/navigation/router_named_system.dart';
 import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/storage/local_database.dart';
 import 'package:dict_app/core/utils/bloc_observer.dart';
-import 'package:dict_app/features/home/blocs/words_bloc.dart';
-import 'package:dict_app/features/onboarding/bloc/onboarding_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'shared/res/res.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   AppBlocObserver.internal();
   WLocalDatabase().initializeDatabase();
   runApp(const KnowMoreApp());
@@ -29,14 +28,7 @@ class KnowMoreApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return MultiBlocProvider(
-            providers: [
-              BlocProvider<DictionaryBloc>(
-                create: (BuildContext context) =>
-                    DictionaryBloc(wordRepositoryInstance),
-              ),
-              BlocProvider(create: (BuildContext context) => ThemeBloc()),
-              BlocProvider(create: (BuildContext context) => OnBoardingCubit()),
-            ],
+            providers: blocproviders(),
             child: BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
               return MaterialApp(
                 onGenerateRoute: WRouter.generateRoutes,

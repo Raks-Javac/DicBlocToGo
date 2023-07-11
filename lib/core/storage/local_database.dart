@@ -1,4 +1,5 @@
 import 'package:dict_app/core/utils/logger.dart';
+import 'package:dict_app/features/onboarding/data/username_model.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -10,6 +11,13 @@ abstract class LocalDataBaseInterface {
 
 class WLocalDatabase implements LocalDataBaseInterface {
   Isar? isarDBInstance;
+  WLocalDatabase._();
+
+  static WLocalDatabase instance = WLocalDatabase._();
+
+  factory WLocalDatabase() {
+    return instance;
+  }
 
   @override
   Future readFromDb() {
@@ -26,7 +34,7 @@ class WLocalDatabase implements LocalDataBaseInterface {
     final dir = await getApplicationDocumentsDirectory();
     isarDBInstance = await Isar.open(
       //UsernameSchema, RecentWord Schema and BookMarkSchema
-      [],
+      [UserSchema],
       directory: dir.path,
     );
 
