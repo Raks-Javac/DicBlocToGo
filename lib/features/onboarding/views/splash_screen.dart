@@ -1,9 +1,7 @@
-import 'dart:async';
-
-import 'package:dict_app/core/navigation/navigation_1.0.dart';
-import 'package:dict_app/core/navigation/routes.dart';
+import 'package:dict_app/features/onboarding/bloc/onboarding_provider.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreenView extends StatefulWidget {
@@ -16,9 +14,7 @@ class SplashScreenView extends StatefulWidget {
 class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 5), () {
-      WNavigator.pushNamedReplacement(WRoutes.onboardUsername);
-    });
+    BlocProvider.of<OnBoardingCubit>(context).runInit();
     super.initState();
   }
 

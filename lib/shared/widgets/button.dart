@@ -56,8 +56,11 @@ class PWidgetsButton extends StatelessWidget {
                   child: Text(
                     label,
                     style: textStyle ??
-                        context.appTextTheme.bodyMedium
-                            ?.copyWith(color: WColors.white),
+                        context.appTextTheme.bodyMedium?.copyWith(
+                          color: isEnabled == false
+                              ? WColors.white.withOpacity(0.6)
+                              : WColors.white,
+                        ),
                   ),
                 ),
               ],

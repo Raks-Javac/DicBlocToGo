@@ -4,6 +4,7 @@ class PWidgetTextFieldInDarkState extends StatelessWidget {
   final String? label;
   final TextInputType? keyboardType;
   final bool obscureText;
+
   final String? hintText;
   final TextInputFormatter? formatter;
   final Function(String)? onChanged;
