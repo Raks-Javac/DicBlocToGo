@@ -4,6 +4,7 @@ import 'package:dict_app/core/utils/constants.dart';
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
+import 'package:dict_app/features/onboarding/repository/user_repo.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
 import 'package:dict_app/shared/widgets/render_assets.dart';
@@ -11,8 +12,21 @@ import 'package:dict_app/shared/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DictionaryHomeView extends StatelessWidget {
+class DictionaryHomeView extends StatefulWidget {
   const DictionaryHomeView({super.key});
+
+  @override
+  State<DictionaryHomeView> createState() => _DictionaryHomeViewState();
+}
+
+class _DictionaryHomeViewState extends State<DictionaryHomeView> {
+  @override
+  void initState() {
+    UserRepository().getUsers()?.listen((event) {
+      print(event);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

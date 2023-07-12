@@ -23,4 +23,7 @@ class WordReposity {
       return Left(CustomRequestErrorHandler(e.toString()));
     }
   }
+
+//store recent words
+  storeRecentWords() {}
 }

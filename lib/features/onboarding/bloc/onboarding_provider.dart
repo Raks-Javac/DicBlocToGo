@@ -1,9 +1,12 @@
 import 'dart:async';
 
+import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/storage/local_database.dart';
 import 'package:dict_app/core/utils/logger.dart';
+import 'package:dict_app/features/onboarding/entities/username_model.dart';
+import 'package:dict_app/features/onboarding/repository/user_repo.dart';
 import 'package:dict_app/shared/widgets/loading_state.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,16 +33,19 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
   bool enableButton = false;
 
-  runInit() {
+  runInit() async {
     //check if user exist in the dataBase
-    Logger.logInfo(state);
-
-    Timer(const Duration(seconds: 5), () {
-      if (state is NewUser) {
-        WNavigator.pushNamedAndClear(WRoutes.onboardUsername);
-      } else {
-        WNavigator.pushNamedAndClear(WRoutes.mainDashBoardView);
-      }
+    Timer(const Duration(seconds: 3), () async {
+      UserRepository().getCurrentUserName().then((value) {
+        if (value.isNotEmpty) emit(ExistingUser());
+        if (state is NewUser) {
+          WNavigator.pushNamedAndClear(WRoutes.onboardUsername);
+        } else {
+          WNavigator.pushNamedAndClear(WRoutes.mainDashBoardView);
+        }
+        Logger.logInfo(state);
+        Logger.logInfo("Current username $value");
+      });
     });
   }
 
@@ -58,15 +64,16 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
   addUserNameToDB() async {
     LoadingDialog.showLoadingState(true);
-    await Future.delayed(const Duration(seconds: 4));
-    // final users = wLocalDatabase.isarDBInstance?.collection<User>();
-    // final saveUser = User()..username = userNameFieldController.text;
-    // await UserRepository().saveUsername(saveUser);
-    LoadingDialog.showLoadingState(false);
-    // emit(ExistingUser());
-    // localNotificationsInstance.showFlutterNotification(
-    //     "Welcome onBoard, raks", "HHHH");
 
-    // Logger.logInfo(wLocalDatabase.isarDBInstance ?? "");
+    final saveUser = User()..username = userNameFieldController.text;
+    await UserRepository().saveUsername(saveUser);
+
+    await Future.delayed(const Duration(seconds: 2));
+    localNotificationsInstance.showFlutterNotification(
+        "Unlock the Power of Words with WordWise! 🎉📚",
+        "Welcome aboard, ${saveUser.username}! Your Personalized Dictionary Experience");
+    LoadingDialog.showLoadingState(false);
+
+    emit(ExistingUser());
   }
 }
