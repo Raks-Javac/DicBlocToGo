@@ -2,7 +2,6 @@ import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/router_named_system.dart';
 import 'package:dict_app/core/navigation/routes.dart';
-import 'package:dict_app/core/storage/local_database.dart';
 import 'package:dict_app/core/utils/bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +12,8 @@ import 'shared/res/res.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   AppBlocObserver.internal();
-  WLocalDatabase().initializeDatabase();
+  localNotificationsInstance.setupFlutterNotifications();
+  localDatabaseInstance.initializeDatabase();
   runApp(const KnowMoreApp());
 }
 

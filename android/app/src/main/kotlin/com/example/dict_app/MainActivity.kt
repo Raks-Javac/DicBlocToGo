@@ -1,4 +1,4 @@
-package com.example.dict_app
+package wordwise.mobile.app
 
 import io.flutter.embedding.android.FlutterActivity
 

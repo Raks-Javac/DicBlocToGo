@@ -1,5 +1,7 @@
+import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/features/home/repository/words_repository.dart';
+import 'package:dict_app/features/onboarding/entities/username_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,6 +29,16 @@ class DictionaryBloc extends Cubit<DictionaryState> {
   DictionaryBloc(this.wordReposity) : super(NotSearchingWordState());
   final TextEditingController wordSearchTextFieldController =
       TextEditingController();
+
+//run Init
+
+  runInit() {}
+
+  getCurrentUserName() async {
+    final currentUser =
+        await localDatabaseInstance.isarDBInstance?.collection<User>().get(1);
+    return currentUser?.username ?? "";
+  }
 
   //search word passed fromUI
   searchWordOnUI() async {

@@ -1,23 +1,34 @@
-// import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// abstract class HomeState {}
+class HomeActivityBloc extends Cubit<HomeState> {
+  HomeActivityBloc() : super(HomeState.initialState());
 
-// class IsTypingState extends HomeState {}
+  //run init
+  runInit() {}
 
-// class NotTypingState extends HomeState {}
+  //get currrent user username
 
-// class HomeActivityBloc extends Cubit<HomeState> {
-//   HomeActivityBloc() : super(NotTypingState());
+  getCurrentUserName() {}
 
-//   changeStateBasedOnInput(String value) {
-//     if (value.isNotEmpty) {
-//       emit(IsTypingState());
-//     } else {
-//       emit(NotTypingState());
-//     }
-//   }
+  // add current username to DB
 
-//   reset() {
-//     emit(NotTypingState());
-//   }
-// }
+  addUserNameToDB() {}
+}
+
+class HomeState {
+  String? username;
+
+  HomeState({this.username = ""});
+
+  factory HomeState.initialState() {
+    return HomeState();
+  }
+
+  HomeState copyWith({
+    String? username,
+  }) {
+    return HomeState(
+      username: username ?? this.username,
+    );
+  }
+}

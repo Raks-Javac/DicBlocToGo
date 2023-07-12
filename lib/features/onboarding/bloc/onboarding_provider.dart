@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/storage/local_database.dart';
@@ -55,8 +56,16 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     }
   }
 
-  addUserNameToDB() {
-    emit(ExistingUser());
-    Logger.logInfo(wLocalDatabase.isarDBInstance ?? "");
+  addUserNameToDB() async {
+    // LoadingDialog.showLoadingState(true);
+    // // final users = wLocalDatabase.isarDBInstance?.collection<User>();
+    // final saveUser = User()..username = userNameFieldController.text;
+    // await UserRepository().saveUsername(saveUser);
+    // LoadingDialog.showLoadingState(false);
+    // emit(ExistingUser());
+    localNotificationsInstance.showFlutterNotification(
+        "Welcome onBoard, raks", "HHHH");
+
+    // Logger.logInfo(wLocalDatabase.isarDBInstance ?? "");
   }
 }

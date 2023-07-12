@@ -1,15 +1,21 @@
-import 'package:dict_app/core/storage/local_database.dart';
+import 'package:dict_app/app_level_locator.dart';
+import 'package:dict_app/features/onboarding/entities/username_model.dart';
 
 abstract class UserRepositoryInterface {
-  Future getUsername();
+  Future saveUsername(User saveUser);
 }
 
 class UserRepository implements UserRepositoryInterface {
-  WLocalDatabase localDatabaseIsar;
-  UserRepository(this.localDatabaseIsar) : super();
+  UserRepository._();
+
+  static UserRepository instance = UserRepository._();
+  factory UserRepository() {
+    return instance;
+  }
   @override
-  Future getUsername() async {
-    final userName = await localDatabaseIsar.readFromDb();
-    return userName;
+  Future<void> saveUsername(User saveUser) async {
+    await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
+      await localDatabaseInstance.isarDBInstance?.users.put(saveUser);
+    });
   }
 }
