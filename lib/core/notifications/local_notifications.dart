@@ -1,4 +1,5 @@
 import 'package:dict_app/core/utils/logger.dart';
+import 'package:dict_app/shared/res/res.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -54,6 +55,8 @@ class LocalNotifications {
         android: AndroidNotificationDetails(
           channel.id,
           channel.name,
+          icon: '@drawable/word_wise_logo',
+          color: WColors.primaryColor,
           channelDescription: channel.description,
         ),
         iOS: const DarwinNotificationDetails(),
@@ -117,7 +120,6 @@ class LocalNotifications {
       // You can proceed with sending notifications
       return true;
     } else {
-      openAppSettings();
       return false;
     }
   }
