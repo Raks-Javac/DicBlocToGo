@@ -52,7 +52,14 @@ const SearchWordModelResponseSchema = CollectionSchema(
   deserializeProp: _searchWordModelResponseDeserializeProp,
   idName: r'id',
   indexes: {},
-  links: {},
+  links: {
+    r'bookMark': LinkSchema(
+      id: 6795094238566783982,
+      name: r'bookMark',
+      target: r'BookMarkEntity',
+      single: true,
+    )
+  },
   embeddedSchemas: {
     r'Phonetic': PhoneticSchema,
     r'Meaning': MeaningSchema,
@@ -194,12 +201,14 @@ Id _searchWordModelResponseGetId(SearchWordModelResponse object) {
 
 List<IsarLinkBase<dynamic>> _searchWordModelResponseGetLinks(
     SearchWordModelResponse object) {
-  return [];
+  return [object.bookMark];
 }
 
 void _searchWordModelResponseAttach(
     IsarCollection<dynamic> col, Id id, SearchWordModelResponse object) {
   object.id = id;
+  object.bookMark
+      .attach(col, col.isar.collection<BookMarkEntity>(), r'bookMark', id);
 }
 
 extension SearchWordModelResponseQueryWhereSort
@@ -988,7 +997,21 @@ extension SearchWordModelResponseQueryObject on QueryBuilder<
 }
 
 extension SearchWordModelResponseQueryLinks on QueryBuilder<
-    SearchWordModelResponse, SearchWordModelResponse, QFilterCondition> {}
+    SearchWordModelResponse, SearchWordModelResponse, QFilterCondition> {
+  QueryBuilder<SearchWordModelResponse, SearchWordModelResponse,
+      QAfterFilterCondition> bookMark(FilterQuery<BookMarkEntity> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'bookMark');
+    });
+  }
+
+  QueryBuilder<SearchWordModelResponse, SearchWordModelResponse,
+      QAfterFilterCondition> bookMarkIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'bookMark', 0, true, 0, true);
+    });
+  }
+}
 
 extension SearchWordModelResponseQuerySortBy
     on QueryBuilder<SearchWordModelResponse, SearchWordModelResponse, QSortBy> {

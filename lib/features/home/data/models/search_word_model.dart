@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:isar/isar.dart';
 
 part 'search_word_model.g.dart';
@@ -30,6 +31,7 @@ class SearchWordModelResponse {
   List<Phonetic> phonetics;
   String? origin;
   List<Meaning> meanings;
+  final bookMark = IsarLink<BookMarkEntity>();
 
   factory SearchWordModelResponse.fromJson(Map<String, dynamic> json) =>
       SearchWordModelResponse(
