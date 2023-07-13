@@ -39,4 +39,13 @@ class WordReposity {
         .where()
         .watch(fireImmediately: true);
   }
+
+  //delete all recent
+  Future<void> deleteAllRecent() async {
+    await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
+      await localDatabaseInstance.isarDBInstance?.searchWordModelResponses
+          .where()
+          .deleteAll();
+    });
+  }
 }

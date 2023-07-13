@@ -1,7 +1,7 @@
 import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/routes.dart';
-import 'package:dict_app/core/utils/constants.dart';
 import 'package:dict_app/core/utils/extensions.dart';
+import 'package:dict_app/core/utils/helper_functions.dart';
 import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
@@ -31,78 +31,85 @@ class _DictionaryHomeViewState extends State<DictionaryHomeView> {
     //dictionary cubit
     final cubit = BlocProvider.of<DictionaryBloc>(context);
     final homeBloc = BlocProvider.of<HomeActivityBloc>(context, listen: true);
-    return BlocConsumer<DictionaryBloc, DictionaryState>(
-        listener: (context, state) {
-          returnOnState(state);
-        },
-        bloc: cubit,
-        builder: (context, state) {
-          return CustomPageWithAppBar(
-            appBarBody: Column(
-              children: [
-                Text(
-                  "Hi ${homeBloc.state.username ?? "Pal"}",
-                  style: context.appTextTheme.bodyLarge!.copyWith(
-                    fontFamily: WStrings.boldFontName,
-                  ),
-                ),
-                addVerticalSpacing(20),
-                PWidgetTextFieldInDarkState(
-                  prefixIcon: const UnconstrainedBox(
-                    child: WWidgetsRenderSvg(
-                      svgPath: nASearchIcon,
-                    ),
-                  ),
-                  hintText: "Enter the word you want to search",
-                  onChanged: (val) {
-                    if (val.isNotEmpty) {
-                      cubit.searchWordOnUI();
-                    }
-                  },
-                  suffixIcon: UnconstrainedBox(
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            cubit.clearTextField();
-                          },
-                          child: const WWidgetsRenderSvg(
-                            svgPath: nACancelIcon,
-                          ),
-                        ),
-                        addHorizontalSpacing(10),
-                        GestureDetector(
-                          onTap: () {
-                            cubit.searchWordOnUI();
-                          },
-                          child: const WWidgetsRenderSvg(
-                            svgPath: nASendIcon,
-                          ),
-                        ),
-                      ],
-                    ).marginOnly(right: 15),
-                  ),
-                  textEditingController: cubit.wordSearchTextFieldController,
-                ).marginSymmetric(
-                  horizontal: 10,
-                ),
-              ],
-            ).marginOnly(top: 20),
-            extendedBody: SingleChildScrollView(
-              child: Column(
+    return GestureDetector(
+      onTap: () {
+        dissmissKeyboard();
+      },
+      child: BlocConsumer<DictionaryBloc, DictionaryState>(
+          listener: (context, state) {
+            returnOnState(state);
+          },
+          bloc: cubit,
+          builder: (context, state) {
+            return CustomPageWithAppBar(
+              appBarBody: Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 10,
+                  Text(
+                    "Hi ${homeBloc.state.username ?? "Pal"}",
+                    style: context.appTextTheme.bodyLarge!.copyWith(
+                      fontFamily: WStrings.boldFontName,
                     ),
                   ),
-                  returnOnState(state)
+                  addVerticalSpacing(20),
+                  PWidgetTextFieldInDarkState(
+                    prefixIcon: const UnconstrainedBox(
+                      child: WWidgetsRenderSvg(
+                        svgPath: nASearchIcon,
+                      ),
+                    ),
+                    hintText: "Enter the word you want to search",
+                    onChanged: (val) {
+                      if (val.isNotEmpty) {
+                        cubit.searchWordOnUI();
+                      }
+                    },
+                    suffixIcon: UnconstrainedBox(
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              cubit.clearTextField();
+                            },
+                            child: const WWidgetsRenderSvg(
+                              svgPath: nACancelIcon,
+                            ),
+                          ),
+                          addHorizontalSpacing(10),
+                          GestureDetector(
+                            onTap: () {
+                              cubit.searchWordOnUI();
+                              dissmissKeyboard();
+                            },
+                            child: const WWidgetsRenderSvg(
+                              svgPath: nASendIcon,
+                            ),
+                          ),
+                        ],
+                      ).marginOnly(right: 15),
+                    ),
+                    textEditingController: cubit.wordSearchTextFieldController,
+                  ).marginSymmetric(
+                    horizontal: 10,
+                  ),
                 ],
+              ).marginOnly(top: 20),
+              extendedBody: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.0,
+                        vertical: 10,
+                      ),
+                    ),
+                    returnOnState(state)
+                  ],
+                ),
               ),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 
   Widget returnOnState(DictionaryState state) {
@@ -229,17 +236,23 @@ class NoWordsSearchedYet extends StatelessWidget {
           Row(
             children: [
               const Expanded(child: Text("Recent words")),
-              if (AppConstants.recentWordList.isNotEmpty)
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "clear all",
-                    style: context.appTextTheme.bodyMedium?.copyWith(
-                        fontSize: 15,
-                        color: context.appTextTheme.bodyMedium?.color
-                            ?.withOpacity(0.5)),
-                  ),
-                )
+              if (homeBloc.state.recentWordList != null)
+                homeBloc.state.recentWordList!.isNotEmpty
+                    ? TextButton(
+                        onPressed: () {
+                          context
+                              .read<HomeActivityBloc>()
+                              .clearAllRecentWords();
+                        },
+                        child: Text(
+                          "clear all",
+                          style: context.appTextTheme.bodyMedium?.copyWith(
+                              fontSize: 15,
+                              color: context.appTextTheme.bodyMedium?.color
+                                  ?.withOpacity(0.5)),
+                        ),
+                      )
+                    : const SizedBox.shrink()
             ],
           ),
           if (homeBloc.state.recentWordList == null)
@@ -249,13 +262,13 @@ class NoWordsSearchedYet extends StatelessWidget {
                         height: 100,
                         child: WWidgetsRenderLottie(
                             lottiePath: nALoadingAnimation)))
-                .marginOnly(top: 30),
+                .marginOnly(top: 100),
           if (homeBloc.state.recentWordList != null)
             homeBloc.state.recentWordList!.isEmpty
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      addVerticalSpacing(40),
+                      addVerticalSpacing(50),
                       Image.asset(
                         nANoWordFoundHereYet,
                         width: 200,

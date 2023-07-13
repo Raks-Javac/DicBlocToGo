@@ -24,10 +24,6 @@ class HomeActivityBloc extends Cubit<HomeState> {
     });
   }
 
-  //get currrent user username
-
-  getCurrentUserName() {}
-
   // add current username to DB
 
   addUserNameToDB() {}
@@ -40,6 +36,12 @@ class HomeActivityBloc extends Cubit<HomeState> {
     // await Future.delayed(const Duration(seconds: 1));
     // localNotificationsInstance.showFlutterNotification(
     //     "New Bookmark Added! 🎉📚", "You've successfully saved a new word");
+  }
+
+//clear all recent words
+  clearAllRecentWords() async {
+    await wordRepositoryInstance.deleteAllRecent();
+    emit(state.copyWith(recentWordList: []));
   }
 }
 
