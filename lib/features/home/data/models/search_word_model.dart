@@ -4,6 +4,10 @@
 
 import 'dart:convert';
 
+import 'package:isar/isar.dart';
+
+part 'search_word_model.g.dart';
+
 List<SearchWordModelResponse> searchWordModelResponseFromJson(String str) =>
     List<SearchWordModelResponse>.from(
         json.decode(str).map((x) => SearchWordModelResponse.fromJson(x)));
@@ -11,6 +15,7 @@ List<SearchWordModelResponse> searchWordModelResponseFromJson(String str) =>
 String searchWordModelResponseToJson(List<SearchWordModelResponse> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+@collection
 class SearchWordModelResponse {
   SearchWordModelResponse({
     required this.word,
@@ -19,11 +24,11 @@ class SearchWordModelResponse {
     required this.origin,
     required this.meanings,
   });
-
+  Id id = Isar.autoIncrement;
   String word;
-  dynamic phonetic;
+  String? phonetic;
   List<Phonetic> phonetics;
-  dynamic origin;
+  String? origin;
   List<Meaning> meanings;
 
   factory SearchWordModelResponse.fromJson(Map<String, dynamic> json) =>
@@ -46,14 +51,15 @@ class SearchWordModelResponse {
       };
 }
 
+@embedded
 class Meaning {
   Meaning({
-    required this.partOfSpeech,
-    required this.definitions,
+    this.partOfSpeech,
+    this.definitions,
   });
 
-  String partOfSpeech;
-  List<Definition> definitions;
+  String? partOfSpeech;
+  List<Definition>? definitions;
 
   factory Meaning.fromJson(Map<String, dynamic> json) => Meaning(
         partOfSpeech: json["partOfSpeech"],
@@ -63,45 +69,47 @@ class Meaning {
 
   Map<String, dynamic> toJson() => {
         "partOfSpeech": partOfSpeech,
-        "definitions": List<dynamic>.from(definitions.map((x) => x.toJson())),
+        "definitions": List<dynamic>.from(definitions!.map((x) => x.toJson())),
       };
 }
 
+@embedded
 class Definition {
   Definition({
-    required this.definition,
-    required this.example,
-    required this.synonyms,
-    required this.antonyms,
+    this.definition,
+    this.example,
+    this.synonyms,
+    this.antonyms,
   });
 
-  String definition;
+  String? definition;
   String? example;
-  List<dynamic> synonyms;
-  List<dynamic> antonyms;
+  List<String>? synonyms;
+  List<String>? antonyms;
 
   factory Definition.fromJson(Map<String, dynamic> json) => Definition(
         definition: json["definition"],
         example: json["example"],
-        synonyms: List<dynamic>.from(json["synonyms"].map((x) => x)),
-        antonyms: List<dynamic>.from(json["antonyms"].map((x) => x)),
+        synonyms: List<String>.from(json["synonyms"].map((x) => x)),
+        antonyms: List<String>.from(json["antonyms"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
         "definition": definition,
         "example": example,
-        "synonyms": List<dynamic>.from(synonyms.map((x) => x)),
-        "antonyms": List<dynamic>.from(antonyms.map((x) => x)),
+        "synonyms": List<dynamic>.from(synonyms!.map((x) => x)),
+        "antonyms": List<dynamic>.from(antonyms!.map((x) => x)),
       };
 }
 
+@embedded
 class Phonetic {
   Phonetic({
-    required this.text,
+    this.text,
     this.audio,
   });
 
-  String text;
+  String? text;
   String? audio;
 
   factory Phonetic.fromJson(Map<String, dynamic> json) => Phonetic(

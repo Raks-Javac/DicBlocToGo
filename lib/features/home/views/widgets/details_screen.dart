@@ -69,7 +69,7 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
                           ],
                         ).marginOnly(top: 3),
                         addVerticalSpacing(10),
-                        ...wordInformation.meanings[i].definitions.map((e) {
+                        ...wordInformation.meanings[i].definitions!.map((e) {
                           return Align(
                             alignment: Alignment.centerLeft,
                             child: Text(

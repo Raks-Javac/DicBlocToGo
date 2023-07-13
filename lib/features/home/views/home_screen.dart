@@ -2,6 +2,7 @@ import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/utils/constants.dart';
 import 'package:dict_app/core/utils/extensions.dart';
+import 'package:dict_app/core/utils/logger.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/features/onboarding/repository/user_repo.dart';
@@ -23,7 +24,7 @@ class _DictionaryHomeViewState extends State<DictionaryHomeView> {
   @override
   void initState() {
     UserRepository().getUsers()?.listen((event) {
-      print(event);
+      Logger.logInfo(event);
     });
     super.initState();
   }

@@ -1,4 +1,5 @@
 import 'package:dict_app/core/utils/logger.dart';
+import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/features/onboarding/entities/username_model.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -34,7 +35,10 @@ class WLocalDatabase implements LocalDataBaseInterface {
     final dir = await getApplicationDocumentsDirectory();
     isarDBInstance = await Isar.open(
       //UsernameSchema, RecentWord Schema and BookMarkSchema
-      [UserSchema],
+      [
+        UserSchema,
+        SearchWordModelResponseSchema,
+      ],
       directory: dir.path,
     );
 
