@@ -1,7 +1,6 @@
 import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/utils/logger.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
-import 'package:dict_app/features/onboarding/repository/user_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeActivityBloc extends Cubit<HomeState> {
@@ -10,7 +9,7 @@ class HomeActivityBloc extends Cubit<HomeState> {
   //run init
   runInit() {
     //listen to user repository
-    UserRepository().getUsers()?.listen((event) {
+    userRepositoryInstance.getUsers()?.listen((event) {
       Logger.logInfo(event);
       emit(state.copyWith(username: event[0].username));
     });

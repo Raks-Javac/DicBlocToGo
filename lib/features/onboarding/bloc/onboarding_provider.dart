@@ -6,7 +6,6 @@ import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/storage/local_database.dart';
 import 'package:dict_app/core/utils/logger.dart';
 import 'package:dict_app/features/onboarding/entities/username_model.dart';
-import 'package:dict_app/features/onboarding/repository/user_repo.dart';
 import 'package:dict_app/shared/widgets/loading_state.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +35,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   runInit() async {
     //check if user exist in the dataBase
     Timer(const Duration(seconds: 3), () async {
-      UserRepository().getCurrentUserName().then((value) {
+      userRepositoryInstance.getCurrentUserName().then((value) {
         if (value.isNotEmpty) emit(ExistingUser());
         if (state is NewUser) {
           WNavigator.pushNamedAndClear(WRoutes.onboardUsername);
@@ -66,7 +65,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     LoadingDialog.showLoadingState(true);
 
     final saveUser = User()..username = userNameFieldController.text;
-    await UserRepository().saveUsername(saveUser);
+    await userRepositoryInstance.saveUsername(saveUser);
 
     await Future.delayed(const Duration(seconds: 2));
     localNotificationsInstance.showFlutterNotification(
