@@ -1,6 +1,7 @@
 import 'package:dict_app/core/network/http_helpers.dart';
 import 'package:dict_app/core/notifications/local_notifications.dart';
 import 'package:dict_app/core/storage/local_database.dart';
+import 'package:dict_app/features/book_mark/repository/book_mark_repo.dart';
 import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/repository/words_repository.dart';
@@ -17,6 +18,7 @@ final httpHelperInstance = HttpCustomHandler.httpInstance;
 final localDatabaseInstance = WLocalDatabase.instance;
 final localNotificationsInstance = LocalNotifications.instance;
 final userRepositoryInstance = UserRepository();
+final bookMarkRepositoryInstance = BookMarkRepository();
 
 List<SingleChildWidget> blocproviders() {
   return [

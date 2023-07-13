@@ -288,7 +288,9 @@ class NoWordsSearchedYet extends StatelessWidget {
             ...homeBloc.state.recentWordList!.map((e) {
               return PWidgetsWordTile(
                 title: e.word.toString(),
-                onTap: () {},
+                onTap: () {
+                  WNavigator.pushNamed(WRoutes.detailsRoute, arguments: e);
+                },
               );
             })
         ],

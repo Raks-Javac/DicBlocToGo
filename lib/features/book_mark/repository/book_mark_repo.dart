@@ -1,5 +1,3 @@
-import 'package:dict_app/core/storage/local_database.dart';
-
 abstract class BookMarkRepositoryInterface {
   getAllBookMarks();
   deleteBookMarkByID(String iD);
@@ -9,8 +7,7 @@ abstract class BookMarkRepositoryInterface {
 }
 
 class BookMarkRepository implements BookMarkRepositoryInterface {
-  WLocalDatabase wLocalDatabase;
-  BookMarkRepository(this.wLocalDatabase);
+  BookMarkRepository();
   @override
   addToBookMark(bookMarkObject) {
     throw UnimplementedError();
