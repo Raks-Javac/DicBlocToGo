@@ -1,6 +1,7 @@
 import 'package:dict_app/core/network/http_helpers.dart';
 import 'package:dict_app/core/notifications/local_notifications.dart';
 import 'package:dict_app/core/storage/local_database.dart';
+import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/repository/words_repository.dart';
 import 'package:dict_app/features/onboarding/bloc/onboarding_provider.dart';
@@ -21,6 +22,7 @@ List<SingleChildWidget> blocproviders() {
       create: (BuildContext context) => DictionaryBloc(wordRepositoryInstance),
     ),
     BlocProvider(create: (BuildContext context) => ThemeBloc()),
+    BlocProvider(create: (BuildContext context) => HomeActivityBloc()),
     BlocProvider(
         create: (BuildContext context) =>
             OnBoardingCubit(localDatabaseInstance)),

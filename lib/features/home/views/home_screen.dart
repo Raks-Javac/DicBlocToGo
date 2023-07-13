@@ -2,10 +2,9 @@ import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/utils/constants.dart';
 import 'package:dict_app/core/utils/extensions.dart';
-import 'package:dict_app/core/utils/logger.dart';
+import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
-import 'package:dict_app/features/onboarding/repository/user_repo.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
 import 'package:dict_app/shared/widgets/render_assets.dart';
@@ -23,9 +22,7 @@ class DictionaryHomeView extends StatefulWidget {
 class _DictionaryHomeViewState extends State<DictionaryHomeView> {
   @override
   void initState() {
-    UserRepository().getUsers()?.listen((event) {
-      Logger.logInfo(event);
-    });
+    BlocProvider.of<HomeActivityBloc>(context).runInit();
     super.initState();
   }
 
@@ -33,7 +30,7 @@ class _DictionaryHomeViewState extends State<DictionaryHomeView> {
   Widget build(BuildContext context) {
     //dictionary cubit
     final cubit = BlocProvider.of<DictionaryBloc>(context);
-
+    final homeBloc = BlocProvider.of<HomeActivityBloc>(context, listen: true);
     return BlocConsumer<DictionaryBloc, DictionaryState>(
         listener: (context, state) {
           returnOnState(state);
@@ -44,7 +41,7 @@ class _DictionaryHomeViewState extends State<DictionaryHomeView> {
             appBarBody: Column(
               children: [
                 Text(
-                  "Hi Bossman",
+                  "Hi ${homeBloc.state.username ?? "Pal"}",
                   style: context.appTextTheme.bodyLarge!.copyWith(
                     fontFamily: WStrings.boldFontName,
                   ),
@@ -134,6 +131,7 @@ class WordsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeBloc = BlocProvider.of<HomeActivityBloc>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
       child: Column(
@@ -150,6 +148,8 @@ class WordsList extends StatelessWidget {
           ...words.map((e) {
             return PWidgetsWordTile(
                 onTap: () {
+                  homeBloc.addRecentWordToDB(e);
+
                   WNavigator.pushNamed(WRoutes.detailsRoute, arguments: e);
                 },
                 title: e.word.toString());
@@ -220,6 +220,7 @@ class NoWordsSearchedYet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeBloc = BlocProvider.of<HomeActivityBloc>(context, listen: true);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -241,27 +242,37 @@ class NoWordsSearchedYet extends StatelessWidget {
                 )
             ],
           ),
-          if (AppConstants.recentWordList.isEmpty) addVerticalSpacing(40),
-          if (AppConstants.recentWordList.isEmpty)
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  nANoWordFoundHereYet,
-                  width: 200,
-                  height: 200,
-                ),
-                addVerticalSpacing(8),
-                Text(
-                  "You have no word here yet",
-                  style: context.appTextTheme.bodyMedium?.copyWith(
-                    fontSize: 15,
-                  ),
-                )
-              ],
-            ),
-          if (AppConstants.recentWordList.isNotEmpty)
-            ...AppConstants.recentWordList.map((e) {
+          if (homeBloc.state.recentWordList == null)
+            const Center(
+                    child: SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: WWidgetsRenderLottie(
+                            lottiePath: nALoadingAnimation)))
+                .marginOnly(top: 30),
+          if (homeBloc.state.recentWordList != null)
+            homeBloc.state.recentWordList!.isEmpty
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      addVerticalSpacing(40),
+                      Image.asset(
+                        nANoWordFoundHereYet,
+                        width: 200,
+                        height: 200,
+                      ),
+                      addVerticalSpacing(8),
+                      Text(
+                        "You have no word here yet",
+                        style: context.appTextTheme.bodyMedium?.copyWith(
+                          fontSize: 15,
+                        ),
+                      )
+                    ],
+                  )
+                : const SizedBox.shrink(),
+          if (homeBloc.state.recentWordList != null)
+            ...homeBloc.state.recentWordList!.map((e) {
               return PWidgetsWordTile(
                 title: e.word.toString(),
                 onTap: () {},

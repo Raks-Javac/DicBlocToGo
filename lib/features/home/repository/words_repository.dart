@@ -2,6 +2,7 @@ import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/network/custom_error_handler.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:either_option/either_option.dart';
+import 'package:isar/isar.dart';
 
 class WordReposity {
   WordReposity._();
@@ -25,5 +26,17 @@ class WordReposity {
   }
 
 //store recent words
-  storeRecentWords() {}
+  Future<void> storeRecentWords(SearchWordModelResponse recentWord) async {
+    await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
+      await localDatabaseInstance.isarDBInstance?.searchWordModelResponses
+          .put(recentWord);
+    });
+  }
+
+//get recent words
+  Stream<List<SearchWordModelResponse>>? getRecentWords() async* {
+    yield* localDatabaseInstance.isarDBInstance!.searchWordModelResponses
+        .where()
+        .watch(fireImmediately: true);
+  }
 }
