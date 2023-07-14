@@ -21,9 +21,7 @@ class BookMarkTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (!onLongPressBool) {
-          onTap();
-        }
+        onTap();
       },
       onLongPress: () {
         onLongPress();

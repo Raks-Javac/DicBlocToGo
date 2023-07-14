@@ -1,3 +1,5 @@
+import 'package:dict_app/core/navigation/navigation_1.0.dart';
+import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
 import 'package:dict_app/features/book_mark/views/widget/book_mark_tile.dart';
@@ -53,7 +55,13 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
             if (bookMarkBloc.bookMarkList != null)
               for (int i = 0; i < bookMarkBloc.bookMarkList!.length; i++)
                 BookMarkTile(
-                  onTap: () {},
+                  onTap: () {
+                    // if (!onLongPressBool) {
+                    //   onTap();
+                    // }
+                    WNavigator.pushNamed(WRoutes.bookMarkDetailsView,
+                        arguments: bookMarkBloc.bookMarkList![i]);
+                  },
                   active: false,
                   tileTile: bookMarkBloc.bookMarkList![i].word ?? "",
                   onLongPress: () {},
