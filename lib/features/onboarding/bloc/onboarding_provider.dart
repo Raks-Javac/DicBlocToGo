@@ -75,4 +75,15 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
     emit(ExistingUser());
   }
+
+  updateUserNameToDB() async {
+    final saveUser = User()
+      ..username = userNameFieldController.text
+      ..id = 1;
+    await userRepositoryInstance.saveUsername(saveUser);
+
+    await Future.delayed(const Duration(seconds: 2));
+    localNotificationsInstance.showFlutterNotification(
+        "Profile update! 🎉📚", "You have successfully updated your username");
+  }
 }
