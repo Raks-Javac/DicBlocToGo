@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dict_app/core/navigation/routes.dart';
+import 'package:dict_app/features/book_mark/views/widget/book_mark_details.dart';
 import 'package:dict_app/features/dashboard/main_dashboard.dart';
 import 'package:dict_app/features/home/views/home_screen.dart';
 import 'package:dict_app/features/home/views/widgets/details_screen.dart';
@@ -31,6 +32,11 @@ abstract class WRouter {
         return getPageRoute(
           settings: settings,
           view: const DictionaryHomeView(),
+        );
+      case WRoutes.bookMarkDetailsView:
+        return getPageRoute(
+          settings: settings,
+          view: const BookMarkDetailsScreen(),
         );
       case WRoutes.detailsRoute:
         return getPageRoute(

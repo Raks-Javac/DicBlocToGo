@@ -24,6 +24,7 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
 
   @override
   Widget build(BuildContext context) {
+    final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context).state;
     return CustomPageWithAppBar(
       appBarBody: AppBar(
         backgroundColor: WColors.barBlackColor,
@@ -34,24 +35,30 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
           style: context.appTextTheme.titleLarge!.copyWith(
               color: WColors.white, fontFamily: WStrings.boldFontName),
         ).center,
-        actions: const [
-          WWidgetsRenderSvg(
-            svgPath: nAdeleteIcon,
-          ),
+        actions: [
+          if (bookMarkBloc.isBookMarkLoaded == true)
+            (bookMarkBloc.bookMarkList!.isNotEmpty)
+                ? const WWidgetsRenderSvg(
+                    svgPath: nAdeleteIcon,
+                  )
+                : const SizedBox.shrink(),
         ],
       ).paddingOnly(top: 29),
       extendedBody: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            for (int i = 0; i < 20; i++)
-              BookMarkTile(
-                onTap: () {},
-                active: false,
-                tileTile: 'Grace',
-                onLongPress: () {},
-                onLongPressBool: false,
-              ),
+            if (bookMarkBloc.bookMarkList == null)
+              const WWidgetsRenderLottie(lottiePath: nALoadingAnimation),
+            if (bookMarkBloc.bookMarkList != null)
+              for (int i = 0; i < bookMarkBloc.bookMarkList!.length; i++)
+                BookMarkTile(
+                  onTap: () {},
+                  active: false,
+                  tileTile: bookMarkBloc.bookMarkList![i].word ?? "",
+                  onLongPress: () {},
+                  onLongPressBool: false,
+                ),
           ],
         ),
       ).marginSymmetric(horizontal: 20, vertical: 30),

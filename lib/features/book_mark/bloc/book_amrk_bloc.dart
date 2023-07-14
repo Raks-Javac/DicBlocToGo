@@ -13,6 +13,10 @@ class BookMarkBloc extends Cubit<BookMarkState> {
     bookMarkRepositoryInstance.getAllBookMarks()?.listen((event) {
       Logger.logInfo(event);
       emit(state.copyWith(bookMarkList: event));
+
+      state.copyWith(
+          isBookMarkLoaded: state.bookMarkList == null ? false : true);
+      Logger.logInfo(state.isBookMarkLoaded);
     });
   }
 
@@ -33,8 +37,9 @@ class BookMarkBloc extends Cubit<BookMarkState> {
 
 class BookMarkState {
   List<BookMarkEntity>? bookMarkList;
+  bool? isBookMarkLoaded;
 
-  BookMarkState({this.bookMarkList});
+  BookMarkState({this.bookMarkList, this.isBookMarkLoaded = false});
 
   factory BookMarkState.initialState() {
     return BookMarkState();
@@ -42,9 +47,11 @@ class BookMarkState {
 
   BookMarkState copyWith({
     List<BookMarkEntity>? bookMarkList,
+    bool? isBookMarkLoaded,
   }) {
     return BookMarkState(
       bookMarkList: bookMarkList ?? this.bookMarkList,
+      isBookMarkLoaded: isBookMarkLoaded ?? this.isBookMarkLoaded,
     );
   }
 }
