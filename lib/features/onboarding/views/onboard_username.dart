@@ -65,7 +65,7 @@ class OnBoardUserName extends StatelessWidget {
                   ),
                 addVerticalSpacing(15),
                 PWidgetTextFieldInDarkState(
-                  maxLength: 6,
+                  maxLength: 8,
                   hintText: "Username",
                   onChanged: (val) {
                     onBoardingInstance.checkStringAndEnableButton(val);

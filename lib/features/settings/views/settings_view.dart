@@ -72,7 +72,7 @@ class SettingsMainView extends StatelessWidget {
                                           const Text("Username"),
                                           addVerticalSpacing(20),
                                           PWidgetTextFieldInDarkState(
-                                            maxLength: 6,
+                                            maxLength: 8,
                                             hintText: "Username",
                                             onChanged: (val) {
                                               onBoardingInstance
@@ -92,12 +92,17 @@ class SettingsMainView extends StatelessWidget {
                                                     .enableButton,
                                                 label: "Save",
                                                 onPressed: () {
-                                                  onBoardingInstance
-                                                      .updateUserNameToDB();
-                                                  WNavigator.pop();
-                                                  onBoardingInstance
+                                                  if (onBoardingInstance
                                                       .userNameFieldController
-                                                      .clear();
+                                                      .text
+                                                      .isNotEmpty) {
+                                                    onBoardingInstance
+                                                        .updateUserNameToDB();
+                                                    WNavigator.pop();
+                                                    onBoardingInstance
+                                                        .userNameFieldController
+                                                        .clear();
+                                                  }
                                                 }),
                                           ),
                                         ],
