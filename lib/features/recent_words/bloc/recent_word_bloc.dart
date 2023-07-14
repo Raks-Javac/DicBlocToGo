@@ -26,7 +26,13 @@ class RecentWordsBloc extends Cubit<RecentWordState> {
       ..phonetic = clickedWord.phonetic
       ..word = clickedWord.word
       ..phonetics = clickedWord.phonetics;
-    await recentWordsRepositoryInstance.storeRecentWords(recentWord);
+    List<String> words = [];
+    for (int i = 0; i < state.recentWordList!.length; i++) {
+      words.add(state.recentWordList![i].word!);
+    }
+    if (!words.contains(clickedWord.word)) {
+      await recentWordsRepositoryInstance.storeRecentWords(recentWord);
+    } else {}
   }
 
 //clear all recent words

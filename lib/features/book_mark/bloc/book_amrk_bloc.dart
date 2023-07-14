@@ -29,26 +29,32 @@ class BookMarkBloc extends Cubit<BookMarkState> {
   // add recent word to DB
 
   addBookMarkToDBFromRecent(RecentWordsEntity bookMarkedWord) async {
-    localNotificationsInstance.showFlutterNotification(
-        "New Bookmark Added! 🎉📚", "You've successfully saved a new word");
     List<String> words = [];
     for (int i = 0; i < state.bookMarkList!.length; i++) {
       words.add(state.bookMarkList![i].word!);
     }
     if (!words.contains(bookMarkedWord.word)) {
+      localNotificationsInstance.showFlutterNotification(
+          "New Bookmark Added! 🎉📚", "You've successfully saved a new word");
       await bookMarkRepositoryInstance.addToBookMarkFromRecent(bookMarkedWord);
+    } else {
+      localNotificationsInstance.showFlutterNotification(
+          "Bookmark notification", "Word already exist in bookmark");
     }
   }
 
   addBookMarkToDBFromSearch(SearchWordModelResponse bookMarkedWord) async {
-    localNotificationsInstance.showFlutterNotification(
-        "New Bookmark Added! 🎉📚", "You've successfully saved a new word");
     List<String> words = [];
     for (int i = 0; i < state.bookMarkList!.length; i++) {
       words.add(state.bookMarkList![i].word!);
     }
     if (!words.contains(bookMarkedWord.word)) {
+      localNotificationsInstance.showFlutterNotification(
+          "New Bookmark Added! 🎉📚", "You've successfully saved a new word");
       await bookMarkRepositoryInstance.addToBookMarkFromSearch(bookMarkedWord);
+    } else {
+      localNotificationsInstance.showFlutterNotification(
+          "Bookmark notification", "Word already exist in bookmark");
     }
   }
 
