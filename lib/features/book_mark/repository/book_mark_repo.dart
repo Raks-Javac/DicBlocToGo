@@ -1,9 +1,10 @@
 import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
+import 'package:isar/isar.dart';
 
 abstract class BookMarkRepositoryInterface {
-  getAllBookMarks();
+  Stream<List<BookMarkEntity>>? getAllBookMarks();
   deleteBookMarkByID(String iD);
   deletBookMarkByObject(dynamic bookMarkObject);
   filterBookMarkByName(String wordName);
@@ -43,7 +44,9 @@ class BookMarkRepository implements BookMarkRepositoryInterface {
   }
 
   @override
-  getAllBookMarks() {
-    throw UnimplementedError();
+  Stream<List<BookMarkEntity>>? getAllBookMarks() async* {
+    yield* localDatabaseInstance.isarDBInstance!.bookMarkEntitys
+        .where()
+        .watch(fireImmediately: true);
   }
 }

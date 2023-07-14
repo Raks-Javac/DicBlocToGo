@@ -1,4 +1,6 @@
 import 'package:dict_app/app_level_locator.dart';
+import 'package:dict_app/core/utils/logger.dart';
+import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,10 +10,10 @@ class BookMarkBloc extends Cubit<BookMarkState> {
   //run init
   runInit() {
     // //listen to user repository
-    // userRepositoryInstance.getUsers()?.listen((event) {
-    //   Logger.logInfo(event);
-    //   emit(state.copyWith(username: event[0].username));
-    // });
+    bookMarkRepositoryInstance.getAllBookMarks()?.listen((event) {
+      Logger.logInfo(event);
+      emit(state.copyWith(bookMarkList: event));
+    });
   }
 
   // add recent word to DB
@@ -30,19 +32,19 @@ class BookMarkBloc extends Cubit<BookMarkState> {
 }
 
 class BookMarkState {
-  List<SearchWordModelResponse>? recentWordList;
+  List<BookMarkEntity>? bookMarkList;
 
-  BookMarkState({this.recentWordList});
+  BookMarkState({this.bookMarkList});
 
   factory BookMarkState.initialState() {
     return BookMarkState();
   }
 
   BookMarkState copyWith({
-    List<SearchWordModelResponse>? recentWordList,
+    List<BookMarkEntity>? bookMarkList,
   }) {
     return BookMarkState(
-      recentWordList: recentWordList ?? this.recentWordList,
+      bookMarkList: bookMarkList ?? this.bookMarkList,
     );
   }
 }

@@ -1,12 +1,26 @@
 import 'package:dict_app/core/utils/extensions.dart';
+import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
+import 'package:dict_app/features/book_mark/views/widget/book_mark_tile.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
 import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BookMarkMainView extends StatelessWidget {
+class BookMarkMainView extends StatefulWidget {
   const BookMarkMainView({super.key});
+
+  @override
+  State<BookMarkMainView> createState() => _BookMarkMainViewState();
+}
+
+class _BookMarkMainViewState extends State<BookMarkMainView> {
+  @override
+  void initState() {
+    BlocProvider.of<BookMarkBloc>(context).runInit();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,61 +41,20 @@ class BookMarkMainView extends StatelessWidget {
         ],
       ).paddingOnly(top: 29),
       extendedBody: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            for (int i = 0; i < 20; i++) const BookMarkTile(),
-            // Align(
-            //   alignment: Alignment.center,
-            //   child: WWidgetsRenderLottie(
-            //     lottiePath: nABookMarkAnimation,
-            //     isContinous: true,
-            //   ),
-            // )
+            for (int i = 0; i < 20; i++)
+              BookMarkTile(
+                onTap: () {},
+                active: false,
+                tileTile: 'Grace',
+                onLongPress: () {},
+                onLongPressBool: false,
+              ),
           ],
         ),
       ).marginSymmetric(horizontal: 20, vertical: 30),
-    );
-  }
-}
-
-class BookMarkTile extends StatelessWidget {
-  const BookMarkTile({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 1,
-          ),
-          title: Row(
-            children: [
-              Expanded(
-                flex: 10,
-                child: Text(
-                  'Boy',
-                  style: context.appTextTheme.bodyLarge!
-                      .copyWith(fontFamily: WStrings.boldFontName),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-          trailing: Checkbox(
-            activeColor: context.appTheme.primaryColor,
-            value: false,
-            onChanged: (bool? newValue) {
-              // Implement the logic for checkbox change here
-            },
-          ),
-        ),
-        Divider(
-          color: WColors.white.withOpacity(0.4),
-        ),
-      ],
     );
   }
 }
