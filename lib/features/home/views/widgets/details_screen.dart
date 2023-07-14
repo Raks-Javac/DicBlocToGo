@@ -1,6 +1,6 @@
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
-import 'package:dict_app/features/recent_words/entitiy/recent_words_entity.dart';
+import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context);
     final wordInformation =
-        ModalRoute.of(context)!.settings.arguments as RecentWordsEntity;
+        ModalRoute.of(context)!.settings.arguments as SearchWordModelResponse;
     return CustomPageWithAppBar(
       appBarBody: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +26,7 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  wordInformation.word!.toUpperCase(),
+                  wordInformation.word.toUpperCase(),
                   style: context.appTextTheme.titleLarge!.copyWith(
                     color: context.appTheme.primaryColor,
                     fontFamily: WStrings.boldFontName,
@@ -37,7 +37,7 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // bookMarkBloc.addBookMarkToDB(wordInformation!);
+                      bookMarkBloc.addBookMarkToDBFromSearch(wordInformation);
                     },
                     child: ImageIcon(
                       const AssetImage(
@@ -60,7 +60,7 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
               color: WColors.barBlackColor,
               child: Column(
                 children: [
-                  for (int i = 0; i < wordInformation.meanings!.length; i++)
+                  for (int i = 0; i < wordInformation.meanings.length; i++)
                     Column(
                       children: [
                         Row(
@@ -68,7 +68,7 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "${i + 1}.  As a (${wordInformation.meanings![i].partOfSpeech}) ",
+                              "${i + 1}.  As a (${wordInformation.meanings[i].partOfSpeech}) ",
                               style: context.appTextTheme.titleMedium!.copyWith(
                                 color: context.appTheme.primaryColor,
                                 fontFamily: WStrings.boldFontName,
@@ -77,7 +77,7 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
                           ],
                         ).marginOnly(top: 3),
                         addVerticalSpacing(10),
-                        ...wordInformation.meanings![i].definitions!.map((e) {
+                        ...wordInformation.meanings[i].definitions!.map((e) {
                           return Align(
                             alignment: Alignment.centerLeft,
                             child: Text(

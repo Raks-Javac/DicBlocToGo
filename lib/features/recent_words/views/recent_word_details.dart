@@ -1,19 +1,19 @@
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
-import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
+import 'package:dict_app/features/recent_words/entitiy/recent_words_entity.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BookMarkDetailsScreen extends StatelessWidget {
-  const BookMarkDetailsScreen({super.key});
+class RecentWordDetailsScreen extends StatelessWidget {
+  const RecentWordDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context);
     final wordInformation =
-        ModalRoute.of(context)!.settings.arguments as BookMarkEntity;
+        ModalRoute.of(context)!.settings.arguments as RecentWordsEntity;
     return CustomPageWithAppBar(
       appBarBody: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +37,7 @@ class BookMarkDetailsScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // bookMarkBloc.addBookMarkToDBFromRecent(wordInformation);
+                      bookMarkBloc.addBookMarkToDBFromRecent(wordInformation);
                     },
                     child: ImageIcon(
                       const AssetImage(

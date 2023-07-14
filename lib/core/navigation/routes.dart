@@ -5,4 +5,5 @@ abstract class WRoutes {
   static const String detailsRoute = '/details';
   static const String mainDashBoardView = '/mainview';
   static const String bookMarkDetailsView = "/bookMarkDetails";
+  static const String recentDetailsView = "/recentDetails";
 }

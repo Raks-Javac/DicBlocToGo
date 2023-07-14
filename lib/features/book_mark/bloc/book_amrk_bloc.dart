@@ -2,6 +2,7 @@ import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/core/utils/logger.dart';
 import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
+import 'package:dict_app/features/recent_words/entitiy/recent_words_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BookMarkBloc extends Cubit<BookMarkState> {
@@ -27,10 +28,28 @@ class BookMarkBloc extends Cubit<BookMarkState> {
 
   // add recent word to DB
 
-  addBookMarkToDB(SearchWordModelResponse bookMarkedWord) async {
-    await bookMarkRepositoryInstance.addToBookMark(bookMarkedWord);
+  addBookMarkToDBFromRecent(RecentWordsEntity bookMarkedWord) async {
     localNotificationsInstance.showFlutterNotification(
         "New Bookmark Added! 🎉📚", "You've successfully saved a new word");
+    List<String> words = [];
+    for (int i = 0; i < state.bookMarkList!.length; i++) {
+      words.add(state.bookMarkList![i].word!);
+    }
+    if (!words.contains(bookMarkedWord.word)) {
+      await bookMarkRepositoryInstance.addToBookMarkFromRecent(bookMarkedWord);
+    }
+  }
+
+  addBookMarkToDBFromSearch(SearchWordModelResponse bookMarkedWord) async {
+    localNotificationsInstance.showFlutterNotification(
+        "New Bookmark Added! 🎉📚", "You've successfully saved a new word");
+    List<String> words = [];
+    for (int i = 0; i < state.bookMarkList!.length; i++) {
+      words.add(state.bookMarkList![i].word!);
+    }
+    if (!words.contains(bookMarkedWord.word)) {
+      await bookMarkRepositoryInstance.addToBookMarkFromSearch(bookMarkedWord);
+    }
   }
 
 //clear all recent words

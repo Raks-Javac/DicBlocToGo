@@ -1,6 +1,7 @@
 import 'package:dict_app/app_level_locator.dart';
 import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
+import 'package:dict_app/features/recent_words/entitiy/recent_words_entity.dart';
 import 'package:isar/isar.dart';
 
 abstract class BookMarkRepositoryInterface {
@@ -8,13 +9,14 @@ abstract class BookMarkRepositoryInterface {
   deleteBookMarkByID(String iD);
   deletBookMarkByObject(dynamic bookMarkObject);
   filterBookMarkByName(String wordName);
-  Future<void> addToBookMark(SearchWordModelResponse wordToBooKMark);
+  Future<void> addToBookMarkFromRecent(RecentWordsEntity wordToBooKMark);
+  Future<void> addToBookMarkFromSearch(SearchWordModelResponse wordToBooKMark);
 }
 
 class BookMarkRepository implements BookMarkRepositoryInterface {
   BookMarkRepository();
   @override
-  addToBookMark(SearchWordModelResponse wordToBooKMark) async {
+  addToBookMarkFromRecent(RecentWordsEntity wordToBooKMark) async {
     BookMarkEntity wordModelResponse = BookMarkEntity()
       ..meanings = wordToBooKMark.meanings
       ..phonetic = wordToBooKMark.phonetic
@@ -48,5 +50,21 @@ class BookMarkRepository implements BookMarkRepositoryInterface {
     yield* localDatabaseInstance.isarDBInstance!.bookMarkEntitys
         .where()
         .watch(fireImmediately: true);
+  }
+
+  @override
+  Future<void> addToBookMarkFromSearch(
+      SearchWordModelResponse wordToBooKMark) async {
+    BookMarkEntity wordModelResponse = BookMarkEntity()
+      ..meanings = wordToBooKMark.meanings
+      ..phonetic = wordToBooKMark.phonetic
+      ..origin = wordToBooKMark.origin
+      ..phonetics = wordToBooKMark.phonetics
+      ..word = wordToBooKMark.word;
+
+    await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
+      await localDatabaseInstance.isarDBInstance?.bookMarkEntitys
+          .put(wordModelResponse);
+    });
   }
 }
