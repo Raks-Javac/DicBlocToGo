@@ -1,14 +1,17 @@
 import 'package:dict_app/core/utils/extensions.dart';
+import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DictionaryWordDetailsScreen extends StatelessWidget {
   const DictionaryWordDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context);
     final wordInformation =
         ModalRoute.of(context)!.settings.arguments as SearchWordModelResponse;
     return CustomPageWithAppBar(
@@ -32,11 +35,16 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  ImageIcon(
-                    const AssetImage(
-                      nABookMarkIcon,
+                  GestureDetector(
+                    onTap: () {
+                      bookMarkBloc.addBookMarkToDB(wordInformation);
+                    },
+                    child: ImageIcon(
+                      const AssetImage(
+                        nABookMarkIcon,
+                      ),
+                      color: context.appTheme.primaryColor,
                     ),
-                    color: context.appTheme.primaryColor,
                   ),
                 ],
               )

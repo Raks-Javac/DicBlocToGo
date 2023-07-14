@@ -1,16 +1,30 @@
+import 'package:dict_app/app_level_locator.dart';
+import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
+import 'package:dict_app/features/home/data/models/search_word_model.dart';
+
 abstract class BookMarkRepositoryInterface {
   getAllBookMarks();
   deleteBookMarkByID(String iD);
   deletBookMarkByObject(dynamic bookMarkObject);
   filterBookMarkByName(String wordName);
-  addToBookMark(dynamic bookMarkObject);
+  Future<void> addToBookMark(SearchWordModelResponse wordToBooKMark);
 }
 
 class BookMarkRepository implements BookMarkRepositoryInterface {
   BookMarkRepository();
   @override
-  addToBookMark(bookMarkObject) {
-    throw UnimplementedError();
+  addToBookMark(SearchWordModelResponse wordToBooKMark) async {
+    BookMarkEntity wordModelResponse = BookMarkEntity()
+      ..meanings = wordToBooKMark.meanings
+      ..phonetic = wordToBooKMark.phonetic
+      ..origin = wordToBooKMark.origin
+      ..phonetics = wordToBooKMark.phonetics
+      ..word = wordToBooKMark.word;
+
+    await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
+      await localDatabaseInstance.isarDBInstance?.bookMarkEntitys
+          .put(wordModelResponse);
+    });
   }
 
   @override

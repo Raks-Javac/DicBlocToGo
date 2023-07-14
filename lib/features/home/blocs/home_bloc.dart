@@ -13,14 +13,6 @@ class HomeActivityBloc extends Cubit<HomeState> {
       Logger.logInfo(event);
       emit(state.copyWith(username: event[0].username));
     });
-
-    //listen to recent words repository
-
-    wordRepositoryInstance.getRecentWords()?.listen((event) {
-      Logger.logInfo(event);
-
-      emit(state.copyWith(recentWordList: event));
-    });
   }
 
   // add current username to DB
@@ -28,20 +20,6 @@ class HomeActivityBloc extends Cubit<HomeState> {
   addUserNameToDB() {}
 
   // add recent word to DB
-
-  addRecentWordToDB(SearchWordModelResponse recentWord) async {
-    await wordRepositoryInstance.storeRecentWords(recentWord);
-
-    // await Future.delayed(const Duration(seconds: 1));
-    // localNotificationsInstance.showFlutterNotification(
-    //     "New Bookmark Added! 🎉📚", "You've successfully saved a new word");
-  }
-
-//clear all recent words
-  clearAllRecentWords() async {
-    await wordRepositoryInstance.deleteAllRecent();
-    emit(state.copyWith(recentWordList: []));
-  }
 }
 
 class HomeState {

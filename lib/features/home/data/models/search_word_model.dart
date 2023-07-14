@@ -4,6 +4,9 @@
 
 import 'dart:convert';
 
+import 'package:dict_app/core/storage/general_entities/definitions.dart';
+import 'package:dict_app/core/storage/general_entities/meaning.dart';
+import 'package:dict_app/core/storage/general_entities/phonetics.dart';
 import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:isar/isar.dart';
 
@@ -31,7 +34,6 @@ class SearchWordModelResponse {
   List<Phonetic> phonetics;
   String? origin;
   List<Meaning> meanings;
-  final bookMark = IsarLink<BookMarkEntity>();
 
   factory SearchWordModelResponse.fromJson(Map<String, dynamic> json) =>
       SearchWordModelResponse(
@@ -50,77 +52,5 @@ class SearchWordModelResponse {
         "phonetics": List<dynamic>.from(phonetics.map((x) => x.toJson())),
         "origin": origin,
         "meanings": List<dynamic>.from(meanings.map((x) => x.toJson())),
-      };
-}
-
-@embedded
-class Meaning {
-  Meaning({
-    this.partOfSpeech,
-    this.definitions,
-  });
-
-  String? partOfSpeech;
-  List<Definition>? definitions;
-
-  factory Meaning.fromJson(Map<String, dynamic> json) => Meaning(
-        partOfSpeech: json["partOfSpeech"],
-        definitions: List<Definition>.from(
-            json["definitions"].map((x) => Definition.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "partOfSpeech": partOfSpeech,
-        "definitions": List<dynamic>.from(definitions!.map((x) => x.toJson())),
-      };
-}
-
-@embedded
-class Definition {
-  Definition({
-    this.definition,
-    this.example,
-    this.synonyms,
-    this.antonyms,
-  });
-
-  String? definition;
-  String? example;
-  List<String>? synonyms;
-  List<String>? antonyms;
-
-  factory Definition.fromJson(Map<String, dynamic> json) => Definition(
-        definition: json["definition"],
-        example: json["example"],
-        synonyms: List<String>.from(json["synonyms"].map((x) => x)),
-        antonyms: List<String>.from(json["antonyms"].map((x) => x)),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "definition": definition,
-        "example": example,
-        "synonyms": List<dynamic>.from(synonyms!.map((x) => x)),
-        "antonyms": List<dynamic>.from(antonyms!.map((x) => x)),
-      };
-}
-
-@embedded
-class Phonetic {
-  Phonetic({
-    this.text,
-    this.audio,
-  });
-
-  String? text;
-  String? audio;
-
-  factory Phonetic.fromJson(Map<String, dynamic> json) => Phonetic(
-        text: json["text"],
-        audio: json["audio"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "text": text,
-        "audio": audio,
       };
 }

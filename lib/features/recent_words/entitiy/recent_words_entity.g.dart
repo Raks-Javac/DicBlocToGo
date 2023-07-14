@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'bookmark_entity.dart';
+part of 'recent_words_entity.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -9,13 +9,13 @@ part of 'bookmark_entity.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetBookMarkEntityCollection on Isar {
-  IsarCollection<BookMarkEntity> get bookMarkEntitys => this.collection();
+extension GetRecentWordsEntityCollection on Isar {
+  IsarCollection<RecentWordsEntity> get recentWordsEntitys => this.collection();
 }
 
-const BookMarkEntitySchema = CollectionSchema(
-  name: r'BookMarkEntity',
-  id: -4122907229797768104,
+CollectionSchema<RecentWordsEntity> RecentWordsEntitySchema = CollectionSchema(
+  name: r'RecentWordsEntity',
+  id: 7470081406845447189,
   properties: {
     r'meanings': PropertySchema(
       id: 0,
@@ -45,10 +45,10 @@ const BookMarkEntitySchema = CollectionSchema(
       type: IsarType.string,
     )
   },
-  estimateSize: _bookMarkEntityEstimateSize,
-  serialize: _bookMarkEntitySerialize,
-  deserialize: _bookMarkEntityDeserialize,
-  deserializeProp: _bookMarkEntityDeserializeProp,
+  estimateSize: _recentWordsEntityEstimateSize,
+  serialize: _recentWordsEntitySerialize,
+  deserialize: _recentWordsEntityDeserialize,
+  deserializeProp: _recentWordsEntityDeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
@@ -57,14 +57,14 @@ const BookMarkEntitySchema = CollectionSchema(
     r'Meaning': MeaningSchema,
     r'Definition': DefinitionSchema
   },
-  getId: _bookMarkEntityGetId,
-  getLinks: _bookMarkEntityGetLinks,
-  attach: _bookMarkEntityAttach,
+  getId: _recentWordsEntityGetId,
+  getLinks: _recentWordsEntityGetLinks,
+  attach: _recentWordsEntityAttach,
   version: '3.1.0+1',
 );
 
-int _bookMarkEntityEstimateSize(
-  BookMarkEntity object,
+int _recentWordsEntityEstimateSize(
+  RecentWordsEntity object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -116,8 +116,8 @@ int _bookMarkEntityEstimateSize(
   return bytesCount;
 }
 
-void _bookMarkEntitySerialize(
-  BookMarkEntity object,
+void _recentWordsEntitySerialize(
+  RecentWordsEntity object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
@@ -139,13 +139,13 @@ void _bookMarkEntitySerialize(
   writer.writeString(offsets[4], object.word);
 }
 
-BookMarkEntity _bookMarkEntityDeserialize(
+RecentWordsEntity _recentWordsEntityDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = BookMarkEntity();
+  final object = RecentWordsEntity();
   object.id = id;
   object.meanings = reader.readObjectList<Meaning>(
     offsets[0],
@@ -165,7 +165,7 @@ BookMarkEntity _bookMarkEntityDeserialize(
   return object;
 }
 
-P _bookMarkEntityDeserializeProp<P>(
+P _recentWordsEntityDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -197,32 +197,33 @@ P _bookMarkEntityDeserializeProp<P>(
   }
 }
 
-Id _bookMarkEntityGetId(BookMarkEntity object) {
+Id _recentWordsEntityGetId(RecentWordsEntity object) {
   return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _bookMarkEntityGetLinks(BookMarkEntity object) {
+List<IsarLinkBase<dynamic>> _recentWordsEntityGetLinks(
+    RecentWordsEntity object) {
   return [];
 }
 
-void _bookMarkEntityAttach(
-    IsarCollection<dynamic> col, Id id, BookMarkEntity object) {
+void _recentWordsEntityAttach(
+    IsarCollection<dynamic> col, Id id, RecentWordsEntity object) {
   object.id = id;
 }
 
-extension BookMarkEntityQueryWhereSort
-    on QueryBuilder<BookMarkEntity, BookMarkEntity, QWhere> {
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterWhere> anyId() {
+extension RecentWordsEntityQueryWhereSort
+    on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QWhere> {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension BookMarkEntityQueryWhere
-    on QueryBuilder<BookMarkEntity, BookMarkEntity, QWhereClause> {
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterWhereClause> idEqualTo(
-      Id id) {
+extension RecentWordsEntityQueryWhere
+    on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QWhereClause> {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterWhereClause>
+      idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -231,8 +232,8 @@ extension BookMarkEntityQueryWhere
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterWhereClause> idNotEqualTo(
-      Id id) {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterWhereClause>
+      idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -254,9 +255,8 @@ extension BookMarkEntityQueryWhere
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterWhereClause> idGreaterThan(
-      Id id,
-      {bool include = false}) {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterWhereClause>
+      idGreaterThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.greaterThan(lower: id, includeLower: include),
@@ -264,9 +264,8 @@ extension BookMarkEntityQueryWhere
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterWhereClause> idLessThan(
-      Id id,
-      {bool include = false}) {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterWhereClause>
+      idLessThan(Id id, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
         IdWhereClause.lessThan(upper: id, includeUpper: include),
@@ -274,7 +273,8 @@ extension BookMarkEntityQueryWhere
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterWhereClause> idBetween(
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterWhereClause>
+      idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -291,10 +291,10 @@ extension BookMarkEntityQueryWhere
   }
 }
 
-extension BookMarkEntityQueryFilter
-    on QueryBuilder<BookMarkEntity, BookMarkEntity, QFilterCondition> {
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition> idEqualTo(
-      Id value) {
+extension RecentWordsEntityQueryFilter
+    on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QFilterCondition> {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
+      idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -303,7 +303,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       idGreaterThan(
     Id value, {
     bool include = false,
@@ -317,7 +317,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       idLessThan(
     Id value, {
     bool include = false,
@@ -331,7 +331,8 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition> idBetween(
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
+      idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -348,7 +349,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       meaningsIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -357,7 +358,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       meaningsIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -366,7 +367,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       meaningsLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -379,7 +380,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       meaningsIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -392,7 +393,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       meaningsIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -405,7 +406,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       meaningsLengthLessThan(
     int length, {
     bool include = false,
@@ -421,7 +422,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       meaningsLengthGreaterThan(
     int length, {
     bool include = false,
@@ -437,7 +438,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       meaningsLengthBetween(
     int lower,
     int upper, {
@@ -455,7 +456,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -464,7 +465,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -473,7 +474,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -487,7 +488,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originGreaterThan(
     String? value, {
     bool include = false,
@@ -503,7 +504,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originLessThan(
     String? value, {
     bool include = false,
@@ -519,7 +520,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originBetween(
     String? lower,
     String? upper, {
@@ -539,7 +540,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -553,7 +554,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -567,7 +568,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -578,7 +579,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -589,7 +590,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -599,7 +600,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       originIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -609,7 +610,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -618,7 +619,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -627,7 +628,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -641,7 +642,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticGreaterThan(
     String? value, {
     bool include = false,
@@ -657,7 +658,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticLessThan(
     String? value, {
     bool include = false,
@@ -673,7 +674,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticBetween(
     String? lower,
     String? upper, {
@@ -693,7 +694,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -707,7 +708,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -721,7 +722,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -732,7 +733,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -743,7 +744,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -753,7 +754,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -763,7 +764,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticsIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -772,7 +773,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticsIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -781,7 +782,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticsLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -794,7 +795,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticsIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -807,7 +808,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticsIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -820,7 +821,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticsLengthLessThan(
     int length, {
     bool include = false,
@@ -836,7 +837,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticsLengthGreaterThan(
     int length, {
     bool include = false,
@@ -852,7 +853,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticsLengthBetween(
     int lower,
     int upper, {
@@ -870,7 +871,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -879,7 +880,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -888,7 +889,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordEqualTo(
     String? value, {
     bool caseSensitive = true,
@@ -902,7 +903,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordGreaterThan(
     String? value, {
     bool include = false,
@@ -918,7 +919,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordLessThan(
     String? value, {
     bool include = false,
@@ -934,7 +935,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordBetween(
     String? lower,
     String? upper, {
@@ -954,7 +955,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -968,7 +969,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -982,7 +983,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -993,7 +994,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -1004,7 +1005,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1014,7 +1015,7 @@ extension BookMarkEntityQueryFilter
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       wordIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -1025,16 +1026,16 @@ extension BookMarkEntityQueryFilter
   }
 }
 
-extension BookMarkEntityQueryObject
-    on QueryBuilder<BookMarkEntity, BookMarkEntity, QFilterCondition> {
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+extension RecentWordsEntityQueryObject
+    on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QFilterCondition> {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       meaningsElement(FilterQuery<Meaning> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'meanings');
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
       phoneticsElement(FilterQuery<Phonetic> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'phonetics');
@@ -1042,120 +1043,129 @@ extension BookMarkEntityQueryObject
   }
 }
 
-extension BookMarkEntityQueryLinks
-    on QueryBuilder<BookMarkEntity, BookMarkEntity, QFilterCondition> {}
+extension RecentWordsEntityQueryLinks
+    on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QFilterCondition> {}
 
-extension BookMarkEntityQuerySortBy
-    on QueryBuilder<BookMarkEntity, BookMarkEntity, QSortBy> {
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> sortByOrigin() {
+extension RecentWordsEntityQuerySortBy
+    on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QSortBy> {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      sortByOrigin() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'origin', Sort.asc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
       sortByOriginDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'origin', Sort.desc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> sortByPhonetic() {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      sortByPhonetic() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phonetic', Sort.asc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
       sortByPhoneticDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phonetic', Sort.desc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> sortByWord() {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      sortByWord() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'word', Sort.asc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> sortByWordDesc() {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      sortByWordDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'word', Sort.desc);
     });
   }
 }
 
-extension BookMarkEntityQuerySortThenBy
-    on QueryBuilder<BookMarkEntity, BookMarkEntity, QSortThenBy> {
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> thenById() {
+extension RecentWordsEntityQuerySortThenBy
+    on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QSortThenBy> {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> thenByOrigin() {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      thenByOrigin() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'origin', Sort.asc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
       thenByOriginDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'origin', Sort.desc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> thenByPhonetic() {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      thenByPhonetic() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phonetic', Sort.asc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
       thenByPhoneticDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phonetic', Sort.desc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> thenByWord() {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      thenByWord() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'word', Sort.asc);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> thenByWordDesc() {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      thenByWordDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'word', Sort.desc);
     });
   }
 }
 
-extension BookMarkEntityQueryWhereDistinct
-    on QueryBuilder<BookMarkEntity, BookMarkEntity, QDistinct> {
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QDistinct> distinctByOrigin(
-      {bool caseSensitive = true}) {
+extension RecentWordsEntityQueryWhereDistinct
+    on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QDistinct> {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QDistinct>
+      distinctByOrigin({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'origin', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QDistinct> distinctByPhonetic(
-      {bool caseSensitive = true}) {
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QDistinct>
+      distinctByPhonetic({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'phonetic', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QDistinct> distinctByWord(
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QDistinct> distinctByWord(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'word', caseSensitive: caseSensitive);
@@ -1163,41 +1173,42 @@ extension BookMarkEntityQueryWhereDistinct
   }
 }
 
-extension BookMarkEntityQueryProperty
-    on QueryBuilder<BookMarkEntity, BookMarkEntity, QQueryProperty> {
-  QueryBuilder<BookMarkEntity, int, QQueryOperations> idProperty() {
+extension RecentWordsEntityQueryProperty
+    on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QQueryProperty> {
+  QueryBuilder<RecentWordsEntity, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<BookMarkEntity, List<Meaning>?, QQueryOperations>
+  QueryBuilder<RecentWordsEntity, List<Meaning>?, QQueryOperations>
       meaningsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'meanings');
     });
   }
 
-  QueryBuilder<BookMarkEntity, String?, QQueryOperations> originProperty() {
+  QueryBuilder<RecentWordsEntity, String?, QQueryOperations> originProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'origin');
     });
   }
 
-  QueryBuilder<BookMarkEntity, String?, QQueryOperations> phoneticProperty() {
+  QueryBuilder<RecentWordsEntity, String?, QQueryOperations>
+      phoneticProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phonetic');
     });
   }
 
-  QueryBuilder<BookMarkEntity, List<Phonetic>?, QQueryOperations>
+  QueryBuilder<RecentWordsEntity, List<Phonetic>?, QQueryOperations>
       phoneticsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phonetics');
     });
   }
 
-  QueryBuilder<BookMarkEntity, String?, QQueryOperations> wordProperty() {
+  QueryBuilder<RecentWordsEntity, String?, QQueryOperations> wordProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'word');
     });
