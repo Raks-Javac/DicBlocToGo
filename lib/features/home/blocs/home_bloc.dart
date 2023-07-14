@@ -1,4 +1,5 @@
 import 'package:dict_app/app_level_locator.dart';
+import 'package:dict_app/core/utils/helper_functions.dart';
 import 'package:dict_app/core/utils/logger.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,18 +9,13 @@ class HomeActivityBloc extends Cubit<HomeState> {
 
   //run init
   runInit() {
+    dissmissKeyboard();
     //listen to user repository
     userRepositoryInstance.getUsers()?.listen((event) {
       Logger.logInfo(event);
       emit(state.copyWith(username: event[0].username));
     });
   }
-
-  // add current username to DB
-
-  addUserNameToDB() {}
-
-  // add recent word to DB
 }
 
 class HomeState {

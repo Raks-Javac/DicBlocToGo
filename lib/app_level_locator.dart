@@ -8,6 +8,7 @@ import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/repository/words_repository.dart';
 import 'package:dict_app/features/onboarding/bloc/onboarding_provider.dart';
 import 'package:dict_app/features/onboarding/repository/user_repo.dart';
+import 'package:dict_app/features/recent_words/bloc/recent_word_bloc.dart';
 import 'package:dict_app/features/recent_words/repository/recent_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,7 @@ List<SingleChildWidget> blocproviders() {
     BlocProvider(create: (BuildContext context) => ThemeBloc()),
     BlocProvider(create: (BuildContext context) => HomeActivityBloc()),
     BlocProvider(create: (BuildContext context) => BookMarkBloc()),
+    BlocProvider(create: (BuildContext context) => RecentWordsBloc()),
     BlocProvider(
         create: (BuildContext context) =>
             OnBoardingCubit(localDatabaseInstance)),

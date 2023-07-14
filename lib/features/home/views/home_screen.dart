@@ -25,6 +25,7 @@ class _DictionaryHomeViewState extends State<DictionaryHomeView> {
   @override
   void initState() {
     BlocProvider.of<HomeActivityBloc>(context).runInit();
+    BlocProvider.of<RecentWordsBloc>(context).runInit();
     super.initState();
   }
 

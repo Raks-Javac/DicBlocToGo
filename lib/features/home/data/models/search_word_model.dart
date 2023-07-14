@@ -4,13 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:dict_app/core/storage/general_entities/definitions.dart';
 import 'package:dict_app/core/storage/general_entities/meaning.dart';
 import 'package:dict_app/core/storage/general_entities/phonetics.dart';
-import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
-import 'package:isar/isar.dart';
-
-part 'search_word_model.g.dart';
 
 List<SearchWordModelResponse> searchWordModelResponseFromJson(String str) =>
     List<SearchWordModelResponse>.from(
@@ -19,7 +14,6 @@ List<SearchWordModelResponse> searchWordModelResponseFromJson(String str) =>
 String searchWordModelResponseToJson(List<SearchWordModelResponse> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-@collection
 class SearchWordModelResponse {
   SearchWordModelResponse({
     required this.word,
@@ -28,7 +22,7 @@ class SearchWordModelResponse {
     required this.origin,
     required this.meanings,
   });
-  Id id = Isar.autoIncrement;
+
   String word;
   String? phonetic;
   List<Phonetic> phonetics;

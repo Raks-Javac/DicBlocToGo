@@ -1,8 +1,10 @@
 import 'package:dict_app/core/utils/extensions.dart';
+import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
 import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsMainView extends StatelessWidget {
   const SettingsMainView({super.key});
@@ -38,7 +40,8 @@ class SettingsMainView extends StatelessWidget {
                     iconPathSvg: nAUsernameIcon,
                     onTap: () {},
                     tileTitle: 'Username',
-                    preText: "Boxsmann",
+                    preText:
+                        context.watch<HomeActivityBloc>().state.username ?? "",
                   ),
                   addVerticalSpacing(5),
                   Divider(

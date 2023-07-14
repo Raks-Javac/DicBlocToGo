@@ -13,7 +13,8 @@ class RecentSearchedViewedWords extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeBloc = BlocProvider.of<RecentWordsBloc>(context, listen: true);
+    final recentWordBloc =
+        BlocProvider.of<RecentWordsBloc>(context, listen: true);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -22,8 +23,8 @@ class RecentSearchedViewedWords extends StatelessWidget {
           Row(
             children: [
               const Expanded(child: Text("Recent words")),
-              if (homeBloc.state.recentWordList != null)
-                homeBloc.state.recentWordList!.isNotEmpty
+              if (recentWordBloc.state.recentWordList != null)
+                recentWordBloc.state.recentWordList!.isNotEmpty
                     ? TextButton(
                         onPressed: () {
                           context.read<RecentWordsBloc>().clearAllRecentWords();
@@ -39,7 +40,7 @@ class RecentSearchedViewedWords extends StatelessWidget {
                     : const SizedBox.shrink()
             ],
           ),
-          if (homeBloc.state.recentWordList == null)
+          if (recentWordBloc.state.recentWordList == null)
             const Center(
                     child: SizedBox(
                         width: 100,
@@ -47,8 +48,8 @@ class RecentSearchedViewedWords extends StatelessWidget {
                         child: WWidgetsRenderLottie(
                             lottiePath: nALoadingAnimation)))
                 .marginOnly(top: 100),
-          if (homeBloc.state.recentWordList != null)
-            homeBloc.state.recentWordList!.isEmpty
+          if (recentWordBloc.state.recentWordList != null)
+            recentWordBloc.state.recentWordList!.isEmpty
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -68,8 +69,8 @@ class RecentSearchedViewedWords extends StatelessWidget {
                     ],
                   )
                 : const SizedBox.shrink(),
-          if (homeBloc.state.recentWordList != null)
-            ...homeBloc.state.recentWordList!.map((e) {
+          if (recentWordBloc.state.recentWordList != null)
+            ...recentWordBloc.state.recentWordList!.map((e) {
               return PWidgetsWordTile(
                 title: e.word.toString(),
                 onTap: () {
