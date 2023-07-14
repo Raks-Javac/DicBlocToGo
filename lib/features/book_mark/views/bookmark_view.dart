@@ -26,7 +26,7 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
 
   @override
   Widget build(BuildContext context) {
-    final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context);
+    final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context, listen: true);
     return CustomPageWithAppBar(
       appBarBody: AppBar(
         backgroundColor: WColors.barBlackColor,

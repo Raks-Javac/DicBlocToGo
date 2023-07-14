@@ -12,8 +12,9 @@ class BookMarkBloc extends Cubit<BookMarkState> {
     // //listen to user repository
     bookMarkRepositoryInstance.getAllBookMarks()?.listen((event) {
       Logger.logInfo(event);
-      emit(state.copyWith(bookMarkList: event));
 
+      emit(state.copyWith(bookMarkList: event));
+      Logger.logInfo("for safe keeping ${state.bookMarkList}");
       if (state.bookMarkList == null) {
         state.copyWith(isBookMarkLoaded: false);
       } else {
