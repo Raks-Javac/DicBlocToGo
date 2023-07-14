@@ -13,7 +13,7 @@ extension GetRecentWordsEntityCollection on Isar {
   IsarCollection<RecentWordsEntity> get recentWordsEntitys => this.collection();
 }
 
-CollectionSchema<RecentWordsEntity> RecentWordsEntitySchema = CollectionSchema(
+const RecentWordsEntitySchema = CollectionSchema(
   name: r'RecentWordsEntity',
   id: 7470081406845447189,
   properties: {

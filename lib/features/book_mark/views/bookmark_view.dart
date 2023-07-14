@@ -26,7 +26,7 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
 
   @override
   Widget build(BuildContext context) {
-    final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context).state;
+    final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context);
     return CustomPageWithAppBar(
       appBarBody: AppBar(
         backgroundColor: WColors.barBlackColor,
@@ -38,8 +38,8 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
               color: WColors.white, fontFamily: WStrings.boldFontName),
         ).center,
         actions: [
-          if (bookMarkBloc.isBookMarkLoaded == true)
-            (bookMarkBloc.bookMarkList!.isNotEmpty)
+          if (bookMarkBloc.state.isBookMarkLoaded == true)
+            (bookMarkBloc.state.bookMarkList!.isNotEmpty)
                 ? const WWidgetsRenderSvg(
                     svgPath: nAdeleteIcon,
                   )
@@ -50,22 +50,59 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            if (bookMarkBloc.bookMarkList == null)
-              const WWidgetsRenderLottie(lottiePath: nALoadingAnimation),
-            if (bookMarkBloc.bookMarkList != null)
-              for (int i = 0; i < bookMarkBloc.bookMarkList!.length; i++)
+            if (bookMarkBloc.state.bookMarkList == null)
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: Center(
+                        child: WWidgetsRenderLottie(
+                      lottiePath: nABookMarkAnimation,
+                      isContinous: true,
+                    )),
+                  ).center.paddingOnly(top: 100),
+                  addVerticalSpacing(20),
+                  const Text(
+                    "Loading Bookmarks",
+                  )
+                ],
+              ),
+            if (bookMarkBloc.state.bookMarkList != null)
+              for (int i = 0; i < bookMarkBloc.state.bookMarkList!.length; i++)
                 BookMarkTile(
                   onTap: () {
                     // if (!onLongPressBool) {
                     //   onTap();
                     // }
                     WNavigator.pushNamed(WRoutes.bookMarkDetailsView,
-                        arguments: bookMarkBloc.bookMarkList![i]);
+                        arguments: bookMarkBloc.state.bookMarkList![i]);
                   },
-                  active: false,
-                  tileTile: bookMarkBloc.bookMarkList![i].word ?? "",
+                  active: bookMarkBloc.state.bookMarkList![i].selected ?? false,
+                  tileTile:
+                      bookMarkBloc.state.bookMarkList![i].word?.capitalize() ??
+                          "",
                   onLongPress: () {},
                   onLongPressBool: false,
+                ),
+            if (bookMarkBloc.state.bookMarkList != null)
+              if (bookMarkBloc.state.bookMarkList!.isEmpty)
+                Column(
+                  children: [
+                    const SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: Center(
+                          child: WWidgetsRenderLottie(
+                        lottiePath: nABookMarkAnimation,
+                        isContinous: false,
+                      )),
+                    ).center.paddingOnly(top: 100),
+                    addVerticalSpacing(20),
+                    const Text(
+                      "You have no bookmarks yet.",
+                    )
+                  ],
                 ),
           ],
         ),

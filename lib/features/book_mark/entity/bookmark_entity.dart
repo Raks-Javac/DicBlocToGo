@@ -13,4 +13,5 @@ class BookMarkEntity {
   List<Phonetic>? phonetics;
   String? origin;
   List<Meaning>? meanings;
+  bool? selected = false;
 }

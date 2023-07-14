@@ -39,8 +39,13 @@ const BookMarkEntitySchema = CollectionSchema(
       type: IsarType.objectList,
       target: r'Phonetic',
     ),
-    r'word': PropertySchema(
+    r'selected': PropertySchema(
       id: 4,
+      name: r'selected',
+      type: IsarType.bool,
+    ),
+    r'word': PropertySchema(
+      id: 5,
       name: r'word',
       type: IsarType.string,
     )
@@ -136,7 +141,8 @@ void _bookMarkEntitySerialize(
     PhoneticSchema.serialize,
     object.phonetics,
   );
-  writer.writeString(offsets[4], object.word);
+  writer.writeBool(offsets[4], object.selected);
+  writer.writeString(offsets[5], object.word);
 }
 
 BookMarkEntity _bookMarkEntityDeserialize(
@@ -161,7 +167,8 @@ BookMarkEntity _bookMarkEntityDeserialize(
     allOffsets,
     Phonetic(),
   );
-  object.word = reader.readStringOrNull(offsets[4]);
+  object.selected = reader.readBoolOrNull(offsets[4]);
+  object.word = reader.readStringOrNull(offsets[5]);
   return object;
 }
 
@@ -191,6 +198,8 @@ P _bookMarkEntityDeserializeProp<P>(
         Phonetic(),
       )) as P;
     case 4:
+      return (reader.readBoolOrNull(offset)) as P;
+    case 5:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -871,6 +880,34 @@ extension BookMarkEntityQueryFilter
   }
 
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      selectedIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'selected',
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      selectedIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'selected',
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      selectedEqualTo(bool? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'selected',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
       wordIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1073,6 +1110,19 @@ extension BookMarkEntityQuerySortBy
     });
   }
 
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> sortBySelected() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'selected', Sort.asc);
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+      sortBySelectedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'selected', Sort.desc);
+    });
+  }
+
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> sortByWord() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'word', Sort.asc);
@@ -1126,6 +1176,19 @@ extension BookMarkEntityQuerySortThenBy
     });
   }
 
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> thenBySelected() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'selected', Sort.asc);
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+      thenBySelectedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'selected', Sort.desc);
+    });
+  }
+
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> thenByWord() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'word', Sort.asc);
@@ -1152,6 +1215,12 @@ extension BookMarkEntityQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'phonetic', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QDistinct> distinctBySelected() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'selected');
     });
   }
 
@@ -1194,6 +1263,12 @@ extension BookMarkEntityQueryProperty
       phoneticsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phonetics');
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, bool?, QQueryOperations> selectedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'selected');
     });
   }
 

@@ -14,8 +14,12 @@ class BookMarkBloc extends Cubit<BookMarkState> {
       Logger.logInfo(event);
       emit(state.copyWith(bookMarkList: event));
 
-      state.copyWith(
-          isBookMarkLoaded: state.bookMarkList == null ? false : true);
+      if (state.bookMarkList == null) {
+        state.copyWith(isBookMarkLoaded: false);
+      } else {
+        state.copyWith(isBookMarkLoaded: true);
+      }
+
       Logger.logInfo(state.isBookMarkLoaded);
     });
   }
@@ -38,8 +42,13 @@ class BookMarkBloc extends Cubit<BookMarkState> {
 class BookMarkState {
   List<BookMarkEntity>? bookMarkList;
   bool? isBookMarkLoaded;
+  bool? onLongPressBool;
 
-  BookMarkState({this.bookMarkList, this.isBookMarkLoaded = false});
+  BookMarkState({
+    this.bookMarkList,
+    this.isBookMarkLoaded = false,
+    this.onLongPressBool = false,
+  });
 
   factory BookMarkState.initialState() {
     return BookMarkState();
@@ -48,10 +57,11 @@ class BookMarkState {
   BookMarkState copyWith({
     List<BookMarkEntity>? bookMarkList,
     bool? isBookMarkLoaded,
+    bool? onLongPressBool,
   }) {
     return BookMarkState(
-      bookMarkList: bookMarkList ?? this.bookMarkList,
-      isBookMarkLoaded: isBookMarkLoaded ?? this.isBookMarkLoaded,
-    );
+        bookMarkList: bookMarkList ?? this.bookMarkList,
+        isBookMarkLoaded: isBookMarkLoaded ?? this.isBookMarkLoaded,
+        onLongPressBool: onLongPressBool ?? this.onLongPressBool);
   }
 }

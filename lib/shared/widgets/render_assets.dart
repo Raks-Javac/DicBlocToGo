@@ -83,7 +83,9 @@ class _WWidgetsRenderLottieState extends State<WWidgetsRenderLottie>
       _lottieController.forward();
       _lottieController.addStatusListener((status) async {
         if (status == AnimationStatus.completed) {
-          _lottieController.repeat();
+          if (widget.isContinous == true) {
+            _lottieController.repeat();
+          }
         }
       });
     });
