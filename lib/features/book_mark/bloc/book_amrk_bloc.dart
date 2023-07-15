@@ -65,14 +65,16 @@ class BookMarkBloc extends Cubit<BookMarkState> {
   toggleBookMarkState(int index) {
     emit(state.copyWith(t: ""));
     state.bookMarkList![index].selected = !state.bookMarkList![index].selected;
-    List<BookMarkEntity> booksMarkToDelete = [];
+    Logger.logInfo(index);
+    List<BookMarkEntity> booksMarkToDelete = state.bookMarkToDelete ?? [];
     if (state.bookMarkList![index].selected == true) {
       booksMarkToDelete.add(state.bookMarkList![index]);
       emit(state.copyWith(bookMarkToDelete: booksMarkToDelete));
     } else {
-      booksMarkToDelete.remove(state.bookMarkList![index]);
+      booksMarkToDelete.removeLast();
       emit(state.copyWith(bookMarkToDelete: booksMarkToDelete));
     }
+    Logger.logInfo(state.bookMarkToDelete);
   }
 
 //clear all recent words

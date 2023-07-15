@@ -38,12 +38,11 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
               color: WColors.white, fontFamily: WStrings.boldFontName),
         ).center,
         actions: [
-          if (bookMarkBloc.state.isBookMarkLoaded == true)
-            (bookMarkBloc.state.bookMarkList!.isNotEmpty)
-                ? const WWidgetsRenderSvg(
-                    svgPath: nAdeleteIcon,
-                  )
-                : const SizedBox.shrink(),
+          (bookMarkBloc.state.onLongPressBool == true)
+              ? const WWidgetsRenderSvg(
+                  svgPath: nAdeleteIcon,
+                )
+              : const SizedBox.shrink(),
         ],
       ).paddingOnly(top: 29),
       extendedBody: SingleChildScrollView(
@@ -83,7 +82,9 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
                     context.read<BookMarkBloc>().onLongPressBookMark();
                   },
                   onLongPressBool: bookMarkBloc.state.onLongPressBool!,
-                  onChange: (bool value) {},
+                  onChange: (bool value) {
+                    context.read<BookMarkBloc>().toggleBookMarkState(i);
+                  },
                   onHightLightOnTap: () {
                     context.read<BookMarkBloc>().toggleBookMarkState(i);
                   },
