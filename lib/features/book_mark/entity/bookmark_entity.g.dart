@@ -167,7 +167,7 @@ BookMarkEntity _bookMarkEntityDeserialize(
     allOffsets,
     Phonetic(),
   );
-  object.selected = reader.readBoolOrNull(offsets[4]);
+  object.selected = reader.readBool(offsets[4]);
   object.word = reader.readStringOrNull(offsets[5]);
   return object;
 }
@@ -198,7 +198,7 @@ P _bookMarkEntityDeserializeProp<P>(
         Phonetic(),
       )) as P;
     case 4:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 5:
       return (reader.readStringOrNull(offset)) as P;
     default:
@@ -880,25 +880,7 @@ extension BookMarkEntityQueryFilter
   }
 
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
-      selectedIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'selected',
-      ));
-    });
-  }
-
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
-      selectedIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'selected',
-      ));
-    });
-  }
-
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
-      selectedEqualTo(bool? value) {
+      selectedEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'selected',
@@ -1266,7 +1248,7 @@ extension BookMarkEntityQueryProperty
     });
   }
 
-  QueryBuilder<BookMarkEntity, bool?, QQueryOperations> selectedProperty() {
+  QueryBuilder<BookMarkEntity, bool, QQueryOperations> selectedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'selected');
     });

@@ -26,6 +26,10 @@ class BookMarkBloc extends Cubit<BookMarkState> {
     });
   }
 
+  onLongPressBookMark() {
+    emit(state.copyWith(onLongPressBool: !state.onLongPressBool!));
+  }
+
   // add recent word to DB
 
   addBookMarkToDBFromRecent(RecentWordsEntity bookMarkedWord) async {
@@ -58,6 +62,19 @@ class BookMarkBloc extends Cubit<BookMarkState> {
     }
   }
 
+  toggleBookMarkState(int index) {
+    emit(state.copyWith(t: ""));
+    state.bookMarkList![index].selected = !state.bookMarkList![index].selected;
+    List<BookMarkEntity> booksMarkToDelete = [];
+    if (state.bookMarkList![index].selected == true) {
+      booksMarkToDelete.add(state.bookMarkList![index]);
+      emit(state.copyWith(bookMarkToDelete: booksMarkToDelete));
+    } else {
+      booksMarkToDelete.remove(state.bookMarkList![index]);
+      emit(state.copyWith(bookMarkToDelete: booksMarkToDelete));
+    }
+  }
+
 //clear all recent words
   clearAllBookMarkedWords() async {
     // await bookMarkRepositoryInstance.deleteAllRecent();
@@ -69,12 +86,16 @@ class BookMarkState {
   List<BookMarkEntity>? bookMarkList;
   bool? isBookMarkLoaded;
   bool? onLongPressBool;
+  String? t;
 
-  BookMarkState({
-    this.bookMarkList,
-    this.isBookMarkLoaded = false,
-    this.onLongPressBool = false,
-  });
+  List<BookMarkEntity>? bookMarkToDelete;
+
+  BookMarkState(
+      {this.bookMarkList,
+      this.isBookMarkLoaded = false,
+      this.onLongPressBool = false,
+      this.bookMarkToDelete,
+      this.t = ""});
 
   factory BookMarkState.initialState() {
     return BookMarkState();
@@ -84,10 +105,14 @@ class BookMarkState {
     List<BookMarkEntity>? bookMarkList,
     bool? isBookMarkLoaded,
     bool? onLongPressBool,
+    List<BookMarkEntity>? bookMarkToDelete,
+    String? t,
   }) {
     return BookMarkState(
         bookMarkList: bookMarkList ?? this.bookMarkList,
         isBookMarkLoaded: isBookMarkLoaded ?? this.isBookMarkLoaded,
-        onLongPressBool: onLongPressBool ?? this.onLongPressBool);
+        onLongPressBool: onLongPressBool ?? this.onLongPressBool,
+        bookMarkToDelete: bookMarkToDelete ?? this.bookMarkToDelete,
+        t: t ?? this.t);
   }
 }

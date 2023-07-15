@@ -2,6 +2,7 @@ import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/core/utils/helper_functions.dart';
+import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
 import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
@@ -26,6 +27,7 @@ class _DictionaryHomeViewState extends State<DictionaryHomeView> {
   void initState() {
     BlocProvider.of<HomeActivityBloc>(context).runInit();
     BlocProvider.of<RecentWordsBloc>(context).runInit();
+    BlocProvider.of<BookMarkBloc>(context).runInit();
     super.initState();
   }
 

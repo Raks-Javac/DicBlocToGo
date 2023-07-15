@@ -72,18 +72,22 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
               for (int i = 0; i < bookMarkBloc.state.bookMarkList!.length; i++)
                 BookMarkTile(
                   onTap: () {
-                    // if (!onLongPressBool) {
-                    //   onTap();
-                    // }
                     WNavigator.pushNamed(WRoutes.bookMarkDetailsView,
                         arguments: bookMarkBloc.state.bookMarkList![i]);
                   },
-                  active: bookMarkBloc.state.bookMarkList![i].selected ?? false,
+                  active: bookMarkBloc.state.bookMarkList![i].selected,
                   tileTile:
                       bookMarkBloc.state.bookMarkList![i].word?.capitalize() ??
                           "",
-                  onLongPress: () {},
-                  onLongPressBool: false,
+                  onLongPress: () {
+                    context.read<BookMarkBloc>().onLongPressBookMark();
+                  },
+                  onLongPressBool: bookMarkBloc.state.onLongPressBool!,
+                  onChange: (bool value) {},
+                  onHightLightOnTap: () {
+                    context.read<BookMarkBloc>().toggleBookMarkState(i);
+                  },
+                  onTapBool: bookMarkBloc.state.bookMarkList![i].selected,
                 ),
             if (bookMarkBloc.state.bookMarkList != null)
               if (bookMarkBloc.state.bookMarkList!.isEmpty)

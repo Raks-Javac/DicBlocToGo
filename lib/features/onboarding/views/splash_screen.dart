@@ -15,6 +15,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
     BlocProvider.of<OnBoardingCubit>(context).runInit();
+
     super.initState();
   }
 

@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 class BookMarkTile extends StatelessWidget {
   final String tileTile;
   final Function() onTap;
+  final Function() onHightLightOnTap;
   final bool active;
   final bool onLongPressBool;
   final Function() onLongPress;
+  final bool onTapBool;
+  final Function(bool value) onChange;
 
   const BookMarkTile(
       {super.key,
@@ -15,13 +18,20 @@ class BookMarkTile extends StatelessWidget {
       required this.onTap,
       required this.active,
       required this.onLongPress,
-      required this.onLongPressBool});
+      required this.onHightLightOnTap,
+      required this.onTapBool,
+      required this.onLongPressBool,
+      required this.onChange});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onTap();
+        if (onLongPressBool == false) {
+          onTap();
+        } else {
+          onHightLightOnTap();
+        }
       },
       onLongPress: () {
         onLongPress();
@@ -49,9 +59,9 @@ class BookMarkTile extends StatelessWidget {
                 ? const SizedBox.shrink()
                 : Checkbox(
                     activeColor: context.appTheme.primaryColor,
-                    value: false,
+                    value: onTapBool,
                     onChanged: (bool? newValue) {
-                      // Implement the logic for checkbox change here
+                      onChange(newValue!);
                     },
                   ),
           ),
