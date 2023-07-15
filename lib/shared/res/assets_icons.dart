@@ -30,3 +30,5 @@ const String nASarchNotFound = "assets/animation/search_not_found.json";
 const String nABookMarkAnimation = "assets/animation/book_mark_animation.json";
 const String nAPrivacyPolicyIcon = "assets/icons/privacy_policy_icon.svg";
 const String nALoadingAnimation = "assets/animation/loading_state.json";
+const String nAActiveBookMarkIcon = "assets/icons/activeBookMark.svg";
+const String nAPauseIcon = "assets/icons/pause_icon.svg";

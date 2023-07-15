@@ -71,14 +71,16 @@ class _DictionaryHomeViewState extends State<DictionaryHomeView> {
                     suffixIcon: UnconstrainedBox(
                       child: Row(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              cubit.clearTextField();
-                            },
-                            child: const WWidgetsRenderSvg(
-                              svgPath: nACancelIcon,
+                          if (cubit
+                              .wordSearchTextFieldController.text.isNotEmpty)
+                            GestureDetector(
+                              onTap: () {
+                                cubit.clearTextField();
+                              },
+                              child: const WWidgetsRenderSvg(
+                                svgPath: nACancelIcon,
+                              ),
                             ),
-                          ),
                           addHorizontalSpacing(10),
                           GestureDetector(
                             onTap: () {
