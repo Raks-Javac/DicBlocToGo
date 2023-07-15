@@ -14,4 +14,5 @@ class BookMarkEntity {
   String? origin;
   List<Meaning>? meanings;
   bool selected = false;
+  bool isBookMarked = true;
 }

@@ -17,30 +17,35 @@ const RecentWordsEntitySchema = CollectionSchema(
   name: r'RecentWordsEntity',
   id: 7470081406845447189,
   properties: {
-    r'meanings': PropertySchema(
+    r'isBookMarked': PropertySchema(
       id: 0,
+      name: r'isBookMarked',
+      type: IsarType.bool,
+    ),
+    r'meanings': PropertySchema(
+      id: 1,
       name: r'meanings',
       type: IsarType.objectList,
       target: r'Meaning',
     ),
     r'origin': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'origin',
       type: IsarType.string,
     ),
     r'phonetic': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'phonetic',
       type: IsarType.string,
     ),
     r'phonetics': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'phonetics',
       type: IsarType.objectList,
       target: r'Phonetic',
     ),
     r'word': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'word',
       type: IsarType.string,
     )
@@ -122,21 +127,22 @@ void _recentWordsEntitySerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
+  writer.writeBool(offsets[0], object.isBookMarked);
   writer.writeObjectList<Meaning>(
-    offsets[0],
+    offsets[1],
     allOffsets,
     MeaningSchema.serialize,
     object.meanings,
   );
-  writer.writeString(offsets[1], object.origin);
-  writer.writeString(offsets[2], object.phonetic);
+  writer.writeString(offsets[2], object.origin);
+  writer.writeString(offsets[3], object.phonetic);
   writer.writeObjectList<Phonetic>(
-    offsets[3],
+    offsets[4],
     allOffsets,
     PhoneticSchema.serialize,
     object.phonetics,
   );
-  writer.writeString(offsets[4], object.word);
+  writer.writeString(offsets[5], object.word);
 }
 
 RecentWordsEntity _recentWordsEntityDeserialize(
@@ -147,21 +153,22 @@ RecentWordsEntity _recentWordsEntityDeserialize(
 ) {
   final object = RecentWordsEntity();
   object.id = id;
+  object.isBookMarked = reader.readBool(offsets[0]);
   object.meanings = reader.readObjectList<Meaning>(
-    offsets[0],
+    offsets[1],
     MeaningSchema.deserialize,
     allOffsets,
     Meaning(),
   );
-  object.origin = reader.readStringOrNull(offsets[1]);
-  object.phonetic = reader.readStringOrNull(offsets[2]);
+  object.origin = reader.readStringOrNull(offsets[2]);
+  object.phonetic = reader.readStringOrNull(offsets[3]);
   object.phonetics = reader.readObjectList<Phonetic>(
-    offsets[3],
+    offsets[4],
     PhoneticSchema.deserialize,
     allOffsets,
     Phonetic(),
   );
-  object.word = reader.readStringOrNull(offsets[4]);
+  object.word = reader.readStringOrNull(offsets[5]);
   return object;
 }
 
@@ -173,24 +180,26 @@ P _recentWordsEntityDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
+      return (reader.readBool(offset)) as P;
+    case 1:
       return (reader.readObjectList<Meaning>(
         offset,
         MeaningSchema.deserialize,
         allOffsets,
         Meaning(),
       )) as P;
-    case 1:
-      return (reader.readStringOrNull(offset)) as P;
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
+      return (reader.readStringOrNull(offset)) as P;
+    case 4:
       return (reader.readObjectList<Phonetic>(
         offset,
         PhoneticSchema.deserialize,
         allOffsets,
         Phonetic(),
       )) as P;
-    case 4:
+    case 5:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -345,6 +354,16 @@ extension RecentWordsEntityQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterFilterCondition>
+      isBookMarkedEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isBookMarked',
+        value: value,
       ));
     });
   }
@@ -1049,6 +1068,20 @@ extension RecentWordsEntityQueryLinks
 extension RecentWordsEntityQuerySortBy
     on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QSortBy> {
   QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      sortByIsBookMarked() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isBookMarked', Sort.asc);
+    });
+  }
+
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      sortByIsBookMarkedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isBookMarked', Sort.desc);
+    });
+  }
+
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
       sortByOrigin() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'origin', Sort.asc);
@@ -1107,6 +1140,20 @@ extension RecentWordsEntityQuerySortThenBy
   }
 
   QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      thenByIsBookMarked() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isBookMarked', Sort.asc);
+    });
+  }
+
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
+      thenByIsBookMarkedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isBookMarked', Sort.desc);
+    });
+  }
+
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QAfterSortBy>
       thenByOrigin() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'origin', Sort.asc);
@@ -1152,6 +1199,13 @@ extension RecentWordsEntityQuerySortThenBy
 extension RecentWordsEntityQueryWhereDistinct
     on QueryBuilder<RecentWordsEntity, RecentWordsEntity, QDistinct> {
   QueryBuilder<RecentWordsEntity, RecentWordsEntity, QDistinct>
+      distinctByIsBookMarked() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isBookMarked');
+    });
+  }
+
+  QueryBuilder<RecentWordsEntity, RecentWordsEntity, QDistinct>
       distinctByOrigin({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'origin', caseSensitive: caseSensitive);
@@ -1178,6 +1232,13 @@ extension RecentWordsEntityQueryProperty
   QueryBuilder<RecentWordsEntity, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<RecentWordsEntity, bool, QQueryOperations>
+      isBookMarkedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isBookMarked');
     });
   }
 

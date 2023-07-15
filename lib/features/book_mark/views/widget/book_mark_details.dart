@@ -3,6 +3,7 @@ import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
 import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
+import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +12,7 @@ class BookMarkDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context);
+    final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context, listen: false);
     final wordInformation =
         ModalRoute.of(context)!.settings.arguments as BookMarkEntity;
     return CustomPageWithAppBar(
@@ -37,14 +38,18 @@ class BookMarkDetailsScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // bookMarkBloc.addBookMarkToDBFromRecent(wordInformation);
+                      bookMarkBloc.removeFromBookMark(wordInformation);
                     },
-                    child: ImageIcon(
-                      const AssetImage(
-                        nABookMarkIcon,
-                      ),
-                      color: context.appTheme.primaryColor,
-                    ),
+                    child:
+                        context.watch<BookMarkBloc>().state.bookMarkRemoved ==
+                                false
+                            ? const WWidgetsRenderSvg(
+                                svgPath: nAActiveBookMarkIcon,
+                              )
+                            : const ImageIcon(
+                                AssetImage(nABookMarkIcon),
+                                color: WColors.primaryColor,
+                              ),
                   ),
                 ],
               )

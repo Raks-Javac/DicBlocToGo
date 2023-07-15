@@ -6,8 +6,9 @@ import 'package:isar/isar.dart';
 
 abstract class BookMarkRepositoryInterface {
   Stream<List<BookMarkEntity>>? getAllBookMarks();
-  deleteBookMarkByID(String iD);
-  deletBookMarkByObject(dynamic bookMarkObject);
+  // deleteBookMarkByID(String iD);
+  Future<void> removeBookMarkByIDFromBookMark(int bookMarkObjectID);
+  Future<void> removeBookMarkByIDFromRecent(int bookMarkObjectID);
   filterBookMarkByName(String wordName);
   Future<void> addToBookMarkFromRecent(RecentWordsEntity wordToBooKMark);
   Future<void> addToBookMarkFromSearch(SearchWordModelResponse wordToBooKMark);
@@ -31,13 +32,19 @@ class BookMarkRepository implements BookMarkRepositoryInterface {
   }
 
   @override
-  deletBookMarkByObject(bookMarkObject) {
-    throw UnimplementedError();
+  removeBookMarkByIDFromBookMark(int bookMatkID) async {
+    await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
+      await localDatabaseInstance.isarDBInstance?.bookMarkEntitys
+          .delete(bookMatkID);
+    });
   }
 
   @override
-  deleteBookMarkByID(String iD) {
-    throw UnimplementedError();
+  removeBookMarkByIDFromRecent(int bookMatkID) async {
+    await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
+      await localDatabaseInstance.isarDBInstance?.bookMarkEntitys
+          .delete(bookMatkID);
+    });
   }
 
   @override
