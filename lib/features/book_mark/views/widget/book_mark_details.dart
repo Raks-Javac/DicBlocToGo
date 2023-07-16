@@ -3,7 +3,6 @@ import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
 import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
-import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,21 +36,21 @@ class BookMarkDetailsScreen extends StatelessWidget {
                 ),
               ),
               Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      bookMarkBloc.removeFromBookMark(
-                          wordInformation, isBookMarked);
-                    },
-                    child: isBookMarked == false
-                        ? const WWidgetsRenderSvg(
-                            svgPath: nAActiveBookMarkIcon,
-                          )
-                        : const ImageIcon(
-                            AssetImage(nABookMarkIcon),
-                            color: WColors.primaryColor,
-                          ),
-                  ),
+                children: const [
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     bookMarkBloc.removeFromBookMark(
+                  //         wordInformation, isBookMarked);
+                  //   },
+                  //   child: isBookMarked == false
+                  //       ? const WWidgetsRenderSvg(
+                  //           svgPath: nAActiveBookMarkIcon,
+                  //         )
+                  //       : const ImageIcon(
+                  //           AssetImage(nABookMarkIcon),
+                  //           color: WColors.primaryColor,
+                  //         ),
+                  // ),
                 ],
               )
             ],

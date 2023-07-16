@@ -81,11 +81,9 @@ class BookMarkBloc extends Cubit<BookMarkState> {
   removeBookMarkFromRecent(
       RecentWordsEntity recentWord, bool isBookMarkRemoved) async {
     if (recentWord.isBookMarked == false) {
-      Logger.logInfo("removing");
       await bookMarkRepositoryInstance
           .removeBookMarkByIDFromBookMark(recentWord.id);
     } else {
-      Logger.logInfo("adding and modifying");
       addBookMarkToDBFromRecent(recentWord);
     }
     await recentWordsRepositoryInstance.storeRecentWords(recentWord);

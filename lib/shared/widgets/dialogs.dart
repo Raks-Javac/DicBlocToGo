@@ -65,5 +65,59 @@ class WDialogs {
 
   //show deleteDialog
 
-  static showDeleteDialog() {}
+  static showDeleteDialog(BuildContext context) {
+    showDialog(
+        barrierColor: WColors.barBlackColor.withOpacity(0.5),
+        context: context,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: WColors.barBlackColor,
+            child: Container(
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(70)),
+              height: 140.h,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Delete bookmarks",
+                        style: context.appTextTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      addVerticalSpacing(20),
+                      Text(
+                        "Are you sure you want to delet all?",
+                        style: context.appTextTheme.bodySmall,
+                      ),
+                      addVerticalSpacing(20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Cancel",
+                            style: context.appTextTheme.bodySmall?.copyWith(),
+                          ),
+                          addHorizontalSpacing(20),
+                          Text(
+                            "Delete",
+                            style: context.appTextTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: WColors.redAccent,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ).paddingAll(20),
+          );
+        });
+  }
 }

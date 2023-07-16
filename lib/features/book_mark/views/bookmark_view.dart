@@ -5,6 +5,7 @@ import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
 import 'package:dict_app/features/book_mark/views/widget/book_mark_tile.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
+import 'package:dict_app/shared/widgets/dialogs.dart';
 import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,11 +39,16 @@ class _BookMarkMainViewState extends State<BookMarkMainView> {
               color: WColors.white, fontFamily: WStrings.boldFontName),
         ).center,
         actions: [
-          (bookMarkBloc.state.onLongPressBool == true)
-              ? const WWidgetsRenderSvg(
-                  svgPath: nAdeleteIcon,
-                )
-              : const SizedBox.shrink(),
+          InkWell(
+            onTap: () {
+              WDialogs.showDeleteDialog(context);
+            },
+            child: (bookMarkBloc.state.onLongPressBool == true)
+                ? const WWidgetsRenderSvg(
+                    svgPath: nAdeleteIcon,
+                  )
+                : const SizedBox.shrink(),
+          )
         ],
       ).paddingOnly(top: 29),
       extendedBody: SingleChildScrollView(
