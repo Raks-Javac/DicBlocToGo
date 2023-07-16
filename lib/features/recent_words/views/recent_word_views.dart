@@ -74,6 +74,7 @@ class RecentSearchedViewedWords extends StatelessWidget {
               return PWidgetsWordTile(
                 title: e.word.toString(),
                 onTap: () {
+                  recentWordBloc.selectedRecentWord(e);
                   WNavigator.pushNamed(WRoutes.recentDetailsView, arguments: e);
                 },
               );

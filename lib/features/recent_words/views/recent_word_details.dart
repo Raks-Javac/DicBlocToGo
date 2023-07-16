@@ -1,5 +1,7 @@
 import 'package:dict_app/core/utils/extensions.dart';
+import 'package:dict_app/core/utils/logger.dart';
 import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
+import 'package:dict_app/features/recent_words/bloc/recent_word_bloc.dart';
 import 'package:dict_app/features/recent_words/entitiy/recent_words_entity.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
@@ -16,10 +18,25 @@ class RecentWordDetailsScreen extends StatefulWidget {
 }
 
 class _RecentWordDetailsScreenState extends State<RecentWordDetailsScreen> {
+  @override
+  void initState() {
+    final recentWordBloc = BlocProvider.of<RecentWordsBloc>(context);
+    BlocProvider.of<BookMarkBloc>(context)
+        .runRecentInt(recentWordBloc.state.selectedRecentWord!, (p0) {
+      Logger.logInfo(p0);
+      setState(() {
+        isBookMarked = p0;
+      });
+    });
+    super.initState();
+  }
+
   bool isBookMarked = false;
   @override
   Widget build(BuildContext context) {
     final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context);
+    final recentWordBloc =
+        BlocProvider.of<RecentWordsBloc>(context, listen: true);
     final wordInformation =
         ModalRoute.of(context)!.settings.arguments as RecentWordsEntity;
     return CustomPageWithAppBar(
@@ -45,18 +62,23 @@ class _RecentWordDetailsScreenState extends State<RecentWordDetailsScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      bookMarkBloc.removeBookMarkFromRecent(wordInformation);
+                      recentWordBloc.selectedRecentWordBool(wordInformation);
+
+                      bookMarkBloc.removeBookMarkFromRecent(
+                          recentWordBloc.state.selectedRecentWord!,
+                          isBookMarked);
+                      setState(() {
+                        isBookMarked = !isBookMarked;
+                      });
                     },
-                    child:
-                        context.watch<BookMarkBloc>().state.bookMarkRemoved ==
-                                false
-                            ? const WWidgetsRenderSvg(
-                                svgPath: nAActiveBookMarkIcon,
-                              )
-                            : const ImageIcon(
-                                AssetImage(nABookMarkIcon),
-                                color: WColors.primaryColor,
-                              ),
+                    child: isBookMarked == true
+                        ? const WWidgetsRenderSvg(
+                            svgPath: nAActiveBookMarkIcon,
+                          )
+                        : const ImageIcon(
+                            AssetImage(nABookMarkIcon),
+                            color: WColors.primaryColor,
+                          ),
                   ),
                 ],
               )

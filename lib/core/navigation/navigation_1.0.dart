@@ -9,6 +9,8 @@ class WNavigator {
   static GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
 
+  static BuildContext appContext = navigatorKey!.currentContext!;
+
   void dismissKeyboard_1() {
     FocusManager.instance.primaryFocus?.unfocus();
   }

@@ -1,4 +1,5 @@
 import 'package:dict_app/app_level_locator.dart';
+import 'package:dict_app/core/utils/logger.dart';
 import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/features/recent_words/entitiy/recent_words_entity.dart';
@@ -8,7 +9,7 @@ abstract class BookMarkRepositoryInterface {
   Stream<List<BookMarkEntity>>? getAllBookMarks();
   // deleteBookMarkByID(String iD);
   Future<void> removeBookMarkByIDFromBookMark(int bookMarkObjectID);
-  Future<void> removeBookMarkByIDFromRecent(int bookMarkObjectID);
+
   filterBookMarkByName(String wordName);
   Future<void> addToBookMarkFromRecent(RecentWordsEntity wordToBooKMark);
   Future<void> addToBookMarkFromSearch(SearchWordModelResponse wordToBooKMark);
@@ -23,7 +24,8 @@ class BookMarkRepository implements BookMarkRepositoryInterface {
       ..phonetic = wordToBooKMark.phonetic
       ..origin = wordToBooKMark.origin
       ..phonetics = wordToBooKMark.phonetics
-      ..word = wordToBooKMark.word;
+      ..word = wordToBooKMark.word
+      ..id = wordToBooKMark.id;
 
     await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
       await localDatabaseInstance.isarDBInstance?.bookMarkEntitys
@@ -33,14 +35,7 @@ class BookMarkRepository implements BookMarkRepositoryInterface {
 
   @override
   removeBookMarkByIDFromBookMark(int bookMatkID) async {
-    await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
-      await localDatabaseInstance.isarDBInstance?.bookMarkEntitys
-          .delete(bookMatkID);
-    });
-  }
-
-  @override
-  removeBookMarkByIDFromRecent(int bookMatkID) async {
+    Logger.logInfo(bookMatkID);
     await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
       await localDatabaseInstance.isarDBInstance?.bookMarkEntitys
           .delete(bookMatkID);

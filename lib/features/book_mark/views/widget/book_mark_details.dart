@@ -7,9 +7,11 @@ import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ignore: must_be_immutable
 class BookMarkDetailsScreen extends StatelessWidget {
-  const BookMarkDetailsScreen({super.key});
+  bool isBookMarked = true;
 
+  BookMarkDetailsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context, listen: false);
@@ -38,18 +40,17 @@ class BookMarkDetailsScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      bookMarkBloc.removeFromBookMark(wordInformation);
+                      bookMarkBloc.removeFromBookMark(
+                          wordInformation, isBookMarked);
                     },
-                    child:
-                        context.watch<BookMarkBloc>().state.bookMarkRemoved ==
-                                false
-                            ? const WWidgetsRenderSvg(
-                                svgPath: nAActiveBookMarkIcon,
-                              )
-                            : const ImageIcon(
-                                AssetImage(nABookMarkIcon),
-                                color: WColors.primaryColor,
-                              ),
+                    child: isBookMarked == false
+                        ? const WWidgetsRenderSvg(
+                            svgPath: nAActiveBookMarkIcon,
+                          )
+                        : const ImageIcon(
+                            AssetImage(nABookMarkIcon),
+                            color: WColors.primaryColor,
+                          ),
                   ),
                 ],
               )

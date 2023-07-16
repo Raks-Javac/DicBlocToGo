@@ -26,6 +26,10 @@ class BookMarkBloc extends Cubit<BookMarkState> {
     });
   }
 
+  runRecentInt(RecentWordsEntity entity, Function(bool)? isBookMarkedFunction) {
+    isBookMarkedFunction!(entity.isBookMarked);
+  }
+
   onLongPressBookMark() {
     emit(state.copyWith(onLongPressBool: !state.onLongPressBool!));
   }
@@ -40,6 +44,7 @@ class BookMarkBloc extends Cubit<BookMarkState> {
     if (!words.contains(bookMarkedWord.word)) {
       localNotificationsInstance.showFlutterNotification(
           "New Bookmark Added! 🎉📚", "You've successfully saved a new word");
+
       await bookMarkRepositoryInstance.addToBookMarkFromRecent(bookMarkedWord);
     } else {
       localNotificationsInstance.showFlutterNotification(
@@ -63,28 +68,27 @@ class BookMarkBloc extends Cubit<BookMarkState> {
   }
 
   // remove bookamrk
-  removeFromBookMark(BookMarkEntity removeBoookMark) async {
+  removeFromBookMark(
+      BookMarkEntity removeBoookMark, bool isBookMarkRemoved) async {
     Logger.logInfo("hi");
-    Logger.logInfo(state.bookMarkRemoved);
-    if (state.bookMarkRemoved == true) {
+    if (isBookMarkRemoved == true) {
       await bookMarkRepositoryInstance
           .removeBookMarkByIDFromBookMark(removeBoookMark.id);
-      emit(state.copyWith(bookMarkRemoved: false));
-    } else {
-      emit(state.copyWith(bookMarkRemoved: true));
-    }
+    } else {}
   }
 
   // remove bookamrk from Recent
-  removeBookMarkFromRecent(RecentWordsEntity recentWord) async {
-    if (state.bookMarkRemoved == true) {
+  removeBookMarkFromRecent(
+      RecentWordsEntity recentWord, bool isBookMarkRemoved) async {
+    if (recentWord.isBookMarked == false) {
+      Logger.logInfo("removing");
       await bookMarkRepositoryInstance
           .removeBookMarkByIDFromBookMark(recentWord.id);
-      emit(state.copyWith(bookMarkRemoved: false));
     } else {
-      emit(state.copyWith(bookMarkRemoved: true));
+      Logger.logInfo("adding and modifying");
       addBookMarkToDBFromRecent(recentWord);
     }
+    await recentWordsRepositoryInstance.storeRecentWords(recentWord);
   }
 
   toggleBookMarkState(int index) {
@@ -114,7 +118,6 @@ class BookMarkState {
   bool? isBookMarkLoaded;
   bool? onLongPressBool;
   String? t;
-  bool? bookMarkRemoved;
 
   List<BookMarkEntity>? bookMarkToDelete;
 
@@ -124,7 +127,6 @@ class BookMarkState {
     this.onLongPressBool = false,
     this.bookMarkToDelete,
     this.t = "",
-    this.bookMarkRemoved = false,
   });
 
   factory BookMarkState.initialState() {
@@ -137,7 +139,6 @@ class BookMarkState {
     bool? onLongPressBool,
     List<BookMarkEntity>? bookMarkToDelete,
     String? t,
-    bool? bookMarkRemoved,
   }) {
     return BookMarkState(
       bookMarkList: bookMarkList ?? this.bookMarkList,
@@ -145,7 +146,6 @@ class BookMarkState {
       onLongPressBool: onLongPressBool ?? this.onLongPressBool,
       bookMarkToDelete: bookMarkToDelete ?? this.bookMarkToDelete,
       t: t ?? this.t,
-      bookMarkRemoved: bookMarkRemoved ?? this.bookMarkRemoved,
     );
   }
 }

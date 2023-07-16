@@ -37,7 +37,7 @@ abstract class WRouter {
       case WRoutes.bookMarkDetailsView:
         return getPageRoute(
           settings: settings,
-          view: const BookMarkDetailsScreen(),
+          view: BookMarkDetailsScreen(),
         );
       case WRoutes.recentDetailsView:
         return getPageRoute(

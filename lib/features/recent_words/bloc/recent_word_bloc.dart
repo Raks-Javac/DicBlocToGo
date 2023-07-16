@@ -26,6 +26,7 @@ class RecentWordsBloc extends Cubit<RecentWordState> {
       ..phonetic = clickedWord.phonetic
       ..word = clickedWord.word
       ..phonetics = clickedWord.phonetics;
+
     List<String> words = [];
     for (int i = 0; i < state.recentWordList!.length; i++) {
       words.add(state.recentWordList![i].word!);
@@ -39,5 +40,24 @@ class RecentWordsBloc extends Cubit<RecentWordState> {
   clearAllRecentWords() async {
     await recentWordsRepositoryInstance.deleteAllRecent();
     emit(state.copyWith(recentWordList: []));
+  }
+
+  //change selected recent word state
+
+  selectedRecentWord(RecentWordsEntity selected) {
+    emit(state.copyWith(selectedRecentWord: selected));
+  }
+
+  //change selected to bool
+  selectedRecentWordBool(RecentWordsEntity selected) {
+    if (state.selectedRecentWord!.isBookMarked == true) {
+      final newForm = selected..isBookMarked = false;
+      emit(state.copyWith(selectedRecentWord: newForm));
+    } else {
+      final newForm = selected..isBookMarked = true;
+      emit(state.copyWith(selectedRecentWord: newForm));
+    }
+
+    Logger.logInfo(state.selectedRecentWord!.isBookMarked);
   }
 }
