@@ -71,7 +71,7 @@ class SettingsMainView extends StatelessWidget {
                     SettingsTile(
                       iconPathSvg: nAAboutIcon,
                       onTap: () async {
-                        // showAboutDialog(context: context);
+                        WUrls.lauchUrl(UrlType.web, WUrls.aboutUsUrl);
                       },
                       tileTitle: 'About',
                       preText: "",

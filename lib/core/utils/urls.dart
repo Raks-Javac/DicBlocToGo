@@ -8,6 +8,8 @@ class WUrls {
   static const privacyPolicyUrl =
       "https://github.com/Raks-Javac/DicBlocToGo/blob/main/word_wise_privacy_policy.md";
   static const emailUrl = "rufaikudus2014@gmail.com";
+  static const aboutUsUrl =
+      "https://github.com/Raks-Javac/DicBlocToGo/blob/main/about_app_section.md";
   static const phoneNumber = "+2349071018065";
 
   static lauchUrl(UrlType lauchType, String path,
