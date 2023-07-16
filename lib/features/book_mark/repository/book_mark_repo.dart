@@ -13,6 +13,7 @@ abstract class BookMarkRepositoryInterface {
   filterBookMarkByName(String wordName);
   Future<void> addToBookMarkFromRecent(RecentWordsEntity wordToBooKMark);
   Future<void> addToBookMarkFromSearch(SearchWordModelResponse wordToBooKMark);
+  Future<void> deleteSelectedBook(List<BookMarkEntity> selected);
 }
 
 class BookMarkRepository implements BookMarkRepositoryInterface {
@@ -67,6 +68,18 @@ class BookMarkRepository implements BookMarkRepositoryInterface {
     await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
       await localDatabaseInstance.isarDBInstance?.bookMarkEntitys
           .put(wordModelResponse);
+    });
+  }
+
+  @override
+  Future<void> deleteSelectedBook(List<BookMarkEntity> selected) async {
+    await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
+      List<int> listOfID = [];
+      for (var i in selected) {
+        listOfID.add(i.id);
+      }
+      await localDatabaseInstance.isarDBInstance?.bookMarkEntitys
+          .deleteAll(listOfID);
     });
   }
 }

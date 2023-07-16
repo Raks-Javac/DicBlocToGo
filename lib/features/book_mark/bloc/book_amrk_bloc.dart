@@ -109,6 +109,10 @@ class BookMarkBloc extends Cubit<BookMarkState> {
     // await bookMarkRepositoryInstance.deleteAllRecent();
     // emit(state.copyWith(recentWordList: []));
   }
+
+  void deleteBookMarks(List<BookMarkEntity>? bookMarksToDelete) async {
+    await bookMarkRepositoryInstance.deleteSelectedBook(bookMarksToDelete!);
+  }
 }
 
 class BookMarkState {

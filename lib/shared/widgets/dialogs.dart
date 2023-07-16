@@ -1,5 +1,6 @@
 import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/utils/extensions.dart';
+import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
 import 'package:dict_app/features/onboarding/bloc/onboarding_provider.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/widgets.dart';
@@ -70,6 +71,7 @@ class WDialogs {
         barrierColor: WColors.barBlackColor.withOpacity(0.5),
         context: context,
         builder: (context) {
+          final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context);
           return Dialog(
             backgroundColor: WColors.barBlackColor,
             child: Container(
@@ -98,16 +100,28 @@ class WDialogs {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
-                            "Cancel",
-                            style: context.appTextTheme.bodySmall?.copyWith(),
+                          TextButton(
+                            onPressed: () {
+                              if (WNavigator.canPop) WNavigator.pop();
+                            },
+                            child: Text(
+                              "Cancel",
+                              style: context.appTextTheme.bodySmall?.copyWith(),
+                            ),
                           ),
                           addHorizontalSpacing(20),
-                          Text(
-                            "Delete",
-                            style: context.appTextTheme.bodySmall?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: WColors.redAccent,
+                          TextButton(
+                            onPressed: () {
+                              if (WNavigator.canPop) WNavigator.pop();
+                              bookMarkBloc.deleteBookMarks(
+                                  bookMarkBloc.state.bookMarkToDelete);
+                            },
+                            child: Text(
+                              "Delete",
+                              style: context.appTextTheme.bodySmall?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: WColors.redAccent,
+                              ),
                             ),
                           ),
                         ],
