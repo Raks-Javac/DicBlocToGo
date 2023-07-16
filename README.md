@@ -1,4 +1,4 @@
-# Minimalistic Dictionary App with Bloc,EitherOp and GoRouter
+# Minimalistic Dictionary App with Bloc,Isar DB and Lottie.
 This is a minimalistic dictionary app built using the bloc pattern, clean architecture, either_options, and go_router in Flutter framework. The app allows users to search for a word and get its meaning along with an example sentence.
 
 ## Architecture
