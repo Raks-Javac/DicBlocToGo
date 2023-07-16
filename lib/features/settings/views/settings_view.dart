@@ -60,7 +60,9 @@ class SettingsMainView extends StatelessWidget {
                     addVerticalSpacing(20),
                     SettingsTile(
                       iconPathSvg: nAPrivacyPolicyIcon,
-                      onTap: () {},
+                      onTap: () {
+                        WUrls.lauchUrl(UrlType.web, WUrls.privacyPolicyUrl);
+                      },
                       tileTitle: 'Privacy policy',
                       preText: "",
                     ),
