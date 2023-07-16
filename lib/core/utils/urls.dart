@@ -5,6 +5,9 @@ enum UrlType { phone, web, email }
 
 class WUrls {
   static const String baseUrl = "https://api.dictionaryapi.dev/api/v2/entries";
+  static const privacyPolicyUrl = "";
+  static const emailUrl = "rufaikudus2014@gmail.com";
+  static const phoneNumber = "+2349071018065";
 
   static lauchUrl(UrlType lauchType, String path,
       {Map<String, String>? emailSchema}) async {

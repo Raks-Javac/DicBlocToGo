@@ -1,5 +1,6 @@
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/core/utils/helper_functions.dart';
+import 'package:dict_app/core/utils/urls.dart';
 import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
@@ -69,7 +70,9 @@ class SettingsMainView extends StatelessWidget {
                     addVerticalSpacing(20),
                     SettingsTile(
                       iconPathSvg: nAAboutIcon,
-                      onTap: () {},
+                      onTap: () async {
+                        // showAboutDialog(context: context);
+                      },
                       tileTitle: 'About',
                       preText: "",
                     ),
@@ -100,7 +103,13 @@ class SettingsMainView extends StatelessWidget {
                   children: [
                     SettingsTile(
                       iconPathSvg: nAEmailIcon,
-                      onTap: () {},
+                      onTap: () {
+                        WUrls.lauchUrl(UrlType.email, WUrls.emailUrl,
+                            emailSchema: {
+                              'subject': "WordWise App",
+                              'body': ""
+                            });
+                      },
                       tileTitle: 'Email',
                       preText: "rufaikudus2014@gmail.com",
                     ),
@@ -111,7 +120,9 @@ class SettingsMainView extends StatelessWidget {
                     addVerticalSpacing(20),
                     SettingsTile(
                       iconPathSvg: nAPhoneNumber,
-                      onTap: () {},
+                      onTap: () {
+                        WUrls.lauchUrl(UrlType.phone, WUrls.phoneNumber);
+                      },
                       tileTitle: 'Phone',
                       preText: "+234 9071018065",
                     ),
