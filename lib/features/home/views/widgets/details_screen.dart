@@ -3,11 +3,27 @@ import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
+import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DictionaryWordDetailsScreen extends StatelessWidget {
+class DictionaryWordDetailsScreen extends StatefulWidget {
   const DictionaryWordDetailsScreen({super.key});
+
+  @override
+  State<DictionaryWordDetailsScreen> createState() =>
+      _DictionaryWordDetailsScreenState();
+}
+
+class _DictionaryWordDetailsScreenState
+    extends State<DictionaryWordDetailsScreen> {
+  bool isBookMarked = false;
+
+  changeBookMarkState() {
+    setState(() {
+      isBookMarked = !isBookMarked;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +52,18 @@ class DictionaryWordDetailsScreen extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      bookMarkBloc.addBookMarkToDBFromSearch(wordInformation);
-                    },
-                    child: ImageIcon(
-                      const AssetImage(
-                        nABookMarkIcon,
-                      ),
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
+                      onTap: () {
+                        changeBookMarkState();
+                        bookMarkBloc.addBookMarkToDBFromSearch(wordInformation);
+                      },
+                      child: isBookMarked == true
+                          ? const WWidgetsRenderSvg(
+                              svgPath: nAActiveBookMarkIcon,
+                            )
+                          : const ImageIcon(
+                              AssetImage(nABookMarkIcon),
+                              color: WColors.primaryColor,
+                            )),
                 ],
               )
             ],
