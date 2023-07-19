@@ -63,7 +63,8 @@ class BookMarkRepository implements BookMarkRepositoryInterface {
       ..phonetic = wordToBooKMark.phonetic
       ..origin = wordToBooKMark.origin
       ..phonetics = wordToBooKMark.phonetics
-      ..word = wordToBooKMark.word;
+      ..word = wordToBooKMark.word
+      ..searchWordBookMarked = wordToBooKMark.word;
 
     await localDatabaseInstance.isarDBInstance?.writeTxn(() async {
       await localDatabaseInstance.isarDBInstance?.bookMarkEntitys

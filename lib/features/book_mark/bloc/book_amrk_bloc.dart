@@ -1,4 +1,5 @@
 import 'package:dict_app/app_level_locator.dart';
+import 'package:dict_app/core/utils/helper_functions.dart';
 import 'package:dict_app/core/utils/logger.dart';
 import 'package:dict_app/features/book_mark/entity/bookmark_entity.dart';
 import 'package:dict_app/features/home/data/models/search_word_model.dart';
@@ -26,8 +27,10 @@ class BookMarkBloc extends Cubit<BookMarkState> {
     });
   }
 
-  runRecentInt(RecentWordsEntity entity, Function(bool)? isBookMarkedFunction) {
-    isBookMarkedFunction!(entity.isBookMarked);
+  runRecentInt(
+      RecentWordsEntity entity, Function(bool, String)? isBookMarkedFunction) {
+    isBookMarkedFunction!(entity.isBookMarked,
+        loopThroughPhoneticsAndGetAvailableAudio(entity.phonetics!) ?? "");
   }
 
   onLongPressBookMark() {

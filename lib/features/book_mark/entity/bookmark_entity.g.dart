@@ -44,13 +44,18 @@ const BookMarkEntitySchema = CollectionSchema(
       type: IsarType.objectList,
       target: r'Phonetic',
     ),
-    r'selected': PropertySchema(
+    r'searchWordBookMarked': PropertySchema(
       id: 5,
+      name: r'searchWordBookMarked',
+      type: IsarType.string,
+    ),
+    r'selected': PropertySchema(
+      id: 6,
       name: r'selected',
       type: IsarType.bool,
     ),
     r'word': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'word',
       type: IsarType.string,
     )
@@ -118,6 +123,12 @@ int _bookMarkEntityEstimateSize(
     }
   }
   {
+    final value = object.searchWordBookMarked;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.word;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -147,8 +158,9 @@ void _bookMarkEntitySerialize(
     PhoneticSchema.serialize,
     object.phonetics,
   );
-  writer.writeBool(offsets[5], object.selected);
-  writer.writeString(offsets[6], object.word);
+  writer.writeString(offsets[5], object.searchWordBookMarked);
+  writer.writeBool(offsets[6], object.selected);
+  writer.writeString(offsets[7], object.word);
 }
 
 BookMarkEntity _bookMarkEntityDeserialize(
@@ -174,8 +186,9 @@ BookMarkEntity _bookMarkEntityDeserialize(
     allOffsets,
     Phonetic(),
   );
-  object.selected = reader.readBool(offsets[5]);
-  object.word = reader.readStringOrNull(offsets[6]);
+  object.searchWordBookMarked = reader.readStringOrNull(offsets[5]);
+  object.selected = reader.readBool(offsets[6]);
+  object.word = reader.readStringOrNull(offsets[7]);
   return object;
 }
 
@@ -207,8 +220,10 @@ P _bookMarkEntityDeserializeProp<P>(
         Phonetic(),
       )) as P;
     case 5:
-      return (reader.readBool(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 6:
+      return (reader.readBool(offset)) as P;
+    case 7:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -899,6 +914,160 @@ extension BookMarkEntityQueryFilter
   }
 
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'searchWordBookMarked',
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'searchWordBookMarked',
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'searchWordBookMarked',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'searchWordBookMarked',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'searchWordBookMarked',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'searchWordBookMarked',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'searchWordBookMarked',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'searchWordBookMarked',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'searchWordBookMarked',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'searchWordBookMarked',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'searchWordBookMarked',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
+      searchWordBookMarkedIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'searchWordBookMarked',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
       selectedEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1125,6 +1294,20 @@ extension BookMarkEntityQuerySortBy
     });
   }
 
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+      sortBySearchWordBookMarked() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchWordBookMarked', Sort.asc);
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+      sortBySearchWordBookMarkedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchWordBookMarked', Sort.desc);
+    });
+  }
+
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> sortBySelected() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'selected', Sort.asc);
@@ -1205,6 +1388,20 @@ extension BookMarkEntityQuerySortThenBy
     });
   }
 
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+      thenBySearchWordBookMarked() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchWordBookMarked', Sort.asc);
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy>
+      thenBySearchWordBookMarkedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'searchWordBookMarked', Sort.desc);
+    });
+  }
+
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterSortBy> thenBySelected() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'selected', Sort.asc);
@@ -1251,6 +1448,14 @@ extension BookMarkEntityQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'phonetic', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, BookMarkEntity, QDistinct>
+      distinctBySearchWordBookMarked({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'searchWordBookMarked',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -1305,6 +1510,13 @@ extension BookMarkEntityQueryProperty
       phoneticsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phonetics');
+    });
+  }
+
+  QueryBuilder<BookMarkEntity, String?, QQueryOperations>
+      searchWordBookMarkedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'searchWordBookMarked');
     });
   }
 

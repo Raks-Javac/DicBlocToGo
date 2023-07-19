@@ -5,12 +5,15 @@ import 'package:dict_app/features/recent_words/bloc/recent_word_bloc.dart';
 import 'package:dict_app/features/recent_words/entitiy/recent_words_entity.dart';
 import 'package:dict_app/shared/res/res.dart';
 import 'package:dict_app/shared/widgets/custom_page_with_app_bar.dart';
+import 'package:dict_app/shared/widgets/play_pause_audio.dart';
 import 'package:dict_app/shared/widgets/render_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RecentWordDetailsScreen extends StatefulWidget {
-  const RecentWordDetailsScreen({super.key});
+  final bool? isBookMarkedConstrcutor;
+  const RecentWordDetailsScreen(
+      {super.key, this.isBookMarkedConstrcutor = false});
 
   @override
   State<RecentWordDetailsScreen> createState() =>
@@ -22,16 +25,18 @@ class _RecentWordDetailsScreenState extends State<RecentWordDetailsScreen> {
   void initState() {
     final recentWordBloc = BlocProvider.of<RecentWordsBloc>(context);
     BlocProvider.of<BookMarkBloc>(context)
-        .runRecentInt(recentWordBloc.state.selectedRecentWord!, (p0) {
+        .runRecentInt(recentWordBloc.state.selectedRecentWord!, (p0, audio) {
       Logger.logInfo(p0);
       setState(() {
-        isBookMarked = p0;
+        isBookMarked = widget.isBookMarkedConstrcutor!;
+        audioUrl = audio;
       });
     });
     super.initState();
   }
 
   bool isBookMarked = false;
+  String audioUrl = "";
   @override
   Widget build(BuildContext context) {
     final bookMarkBloc = BlocProvider.of<BookMarkBloc>(context);
@@ -80,6 +85,10 @@ class _RecentWordDetailsScreenState extends State<RecentWordDetailsScreen> {
                             color: WColors.primaryColor,
                           ),
                   ),
+                  if (audioUrl.isNotEmpty)
+                    AudioPlayerWidget(
+                      audioUrl: audioUrl,
+                    )
                 ],
               )
             ],
@@ -101,11 +110,14 @@ class _RecentWordDetailsScreenState extends State<RecentWordDetailsScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "${i + 1}.  As a (${wordInformation.meanings![i].partOfSpeech}) ",
-                              style: context.appTextTheme.titleMedium!.copyWith(
-                                color: context.appTheme.primaryColor,
-                                fontFamily: WStrings.boldFontName,
+                            Expanded(
+                              child: Text(
+                                "${i + 1}.  As a (${wordInformation.meanings![i].partOfSpeech}) ",
+                                style:
+                                    context.appTextTheme.titleMedium!.copyWith(
+                                  color: context.appTheme.primaryColor,
+                                  fontFamily: WStrings.boldFontName,
+                                ),
                               ),
                             ),
                           ],

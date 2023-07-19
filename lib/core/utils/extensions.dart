@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+int amount = 8;
+
 extension AppTheme on BuildContext {
   ThemeData get appTheme => Theme.of(this);
   Size get appScreenSize => MediaQuery.of(this).size;

@@ -39,6 +39,7 @@ class KnowMoreApp extends StatelessWidget {
                 theme: theme == DictTheme.lightMode
                     ? DictTheme.lightMode
                     : DictTheme.darkMode,
+                darkTheme: DictTheme.darkMode,
                 navigatorKey: WNavigator.navigatorKey,
               );
             }),

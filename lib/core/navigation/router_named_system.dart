@@ -7,6 +7,7 @@ import 'package:dict_app/features/home/views/home_screen.dart';
 import 'package:dict_app/features/home/views/widgets/details_screen.dart';
 import 'package:dict_app/features/onboarding/views/onboard_username.dart';
 import 'package:dict_app/features/onboarding/views/splash_screen.dart';
+import 'package:dict_app/features/recent_words/entitiy/recent_words_entity.dart';
 import 'package:dict_app/features/recent_words/views/recent_word_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +41,11 @@ abstract class WRouter {
           view: BookMarkDetailsScreen(),
         );
       case WRoutes.recentDetailsView:
+        final setingsArg = settings.arguments as RecentWordsEntity;
         return getPageRoute(
           settings: settings,
-          view: const RecentWordDetailsScreen(),
+          view: RecentWordDetailsScreen(
+              isBookMarkedConstrcutor: setingsArg.isBookMarked),
         );
       case WRoutes.detailsRoute:
         return getPageRoute(

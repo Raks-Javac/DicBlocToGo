@@ -2,7 +2,6 @@ import 'package:dict_app/core/navigation/navigation_1.0.dart';
 import 'package:dict_app/core/navigation/routes.dart';
 import 'package:dict_app/core/utils/extensions.dart';
 import 'package:dict_app/core/utils/helper_functions.dart';
-import 'package:dict_app/core/utils/logger.dart';
 import 'package:dict_app/features/book_mark/bloc/book_amrk_bloc.dart';
 import 'package:dict_app/features/home/blocs/home_bloc.dart';
 import 'package:dict_app/features/home/blocs/words_bloc.dart';
