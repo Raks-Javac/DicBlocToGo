@@ -122,12 +122,7 @@ int _bookMarkEntityEstimateSize(
       }
     }
   }
-  {
-    final value = object.searchWordBookMarked;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
+  bytesCount += 3 + object.searchWordBookMarked.length * 3;
   {
     final value = object.word;
     if (value != null) {
@@ -186,7 +181,7 @@ BookMarkEntity _bookMarkEntityDeserialize(
     allOffsets,
     Phonetic(),
   );
-  object.searchWordBookMarked = reader.readStringOrNull(offsets[5]);
+  object.searchWordBookMarked = reader.readString(offsets[5]);
   object.selected = reader.readBool(offsets[6]);
   object.word = reader.readStringOrNull(offsets[7]);
   return object;
@@ -220,7 +215,7 @@ P _bookMarkEntityDeserializeProp<P>(
         Phonetic(),
       )) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 6:
       return (reader.readBool(offset)) as P;
     case 7:
@@ -914,26 +909,8 @@ extension BookMarkEntityQueryFilter
   }
 
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
-      searchWordBookMarkedIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'searchWordBookMarked',
-      ));
-    });
-  }
-
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
-      searchWordBookMarkedIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'searchWordBookMarked',
-      ));
-    });
-  }
-
-  QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
       searchWordBookMarkedEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -947,7 +924,7 @@ extension BookMarkEntityQueryFilter
 
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
       searchWordBookMarkedGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -963,7 +940,7 @@ extension BookMarkEntityQueryFilter
 
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
       searchWordBookMarkedLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -979,8 +956,8 @@ extension BookMarkEntityQueryFilter
 
   QueryBuilder<BookMarkEntity, BookMarkEntity, QAfterFilterCondition>
       searchWordBookMarkedBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -1513,7 +1490,7 @@ extension BookMarkEntityQueryProperty
     });
   }
 
-  QueryBuilder<BookMarkEntity, String?, QQueryOperations>
+  QueryBuilder<BookMarkEntity, String, QQueryOperations>
       searchWordBookMarkedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'searchWordBookMarked');

@@ -15,5 +15,5 @@ class BookMarkEntity {
   List<Meaning>? meanings;
   bool selected = false;
   bool isBookMarked = true;
-  String? searchWordBookMarked;
+  String searchWordBookMarked = "";
 }
